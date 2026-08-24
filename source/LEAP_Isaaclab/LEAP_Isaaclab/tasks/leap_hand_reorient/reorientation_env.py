@@ -55,14 +55,14 @@ class ReorientationEnv(DirectRLEnv):
         self.num_fingertips = len(self.finger_bodies)
         
         # joint limits
-        joint_pos_limits = self.hand.root_physx_view.get_dof_limits().to(self.device)
+        joint_pos_limits = self.hand.data.joint_pos_limits.torch.to(self.device)
         self.hand_dof_lower_limits = joint_pos_limits[..., 0]
         self.hand_dof_upper_limits = joint_pos_limits[..., 1]
 
         # track goal resets
         self.reset_goal_buf = torch.zeros(self.num_envs, dtype=torch.bool, device=self.device)
         # used to compare object position
-        self.in_hand_pos = self.object.data.default_root_state[:, 0:3].clone()
+        self.in_hand_pos = self.object.data.default_root_pose.torch[:, 0:3].clone()
         self.in_hand_pos[:, 2] += 0.01
         
         # continuous z-axis rotation parameters
@@ -70,7 +70,7 @@ class ReorientationEnv(DirectRLEnv):
         
         # default goal positions and rotations
         self.goal_rot = torch.zeros((self.num_envs, 4), dtype=torch.float, device=self.device)
-        self.goal_rot[:, 0] = 1.0  # Identity quaternion
+        self.goal_rot[:, 3] = 1.0  # Identity quaternion
         self.goal_pos = torch.zeros((self.num_envs, 3), dtype=torch.float, device=self.device)
         self.goal_pos[:, :] = torch.tensor([-0.2, -0.45, 0.68], device=self.device)
         
@@ -90,7 +90,7 @@ class ReorientationEnv(DirectRLEnv):
         self.object_linvel = torch.zeros((self.num_envs, 3), dtype=torch.float, device=self.device)
         self.object_angvel = torch.zeros((self.num_envs, 3), dtype=torch.float, device=self.device)
         self.object_rot = torch.zeros((self.num_envs, 4), dtype=torch.float, device=self.device)
-        self.object_rot[:, 0] = 1.0 
+        self.object_rot[:, 3] = 1.0 
 
         # initialize history tensor
         self.obs_hist_buf = torch.zeros((self.num_envs, self.cfg.observation_space // self.cfg.hist_len, self.cfg.hist_len), device=self.device, dtype=torch.double)            
@@ -100,6 +100,13 @@ class ReorientationEnv(DirectRLEnv):
         self.x_unit_tensor = torch.tensor([1, 0, 0], dtype=torch.float, device=self.device).repeat((self.num_envs, 1))
         self.y_unit_tensor = torch.tensor([0, 1, 0], dtype=torch.float, device=self.device).repeat((self.num_envs, 1))
         self.z_unit_tensor = torch.tensor([0, 0, 1], dtype=torch.float, device=self.device).repeat((self.num_envs, 1))
+
+        # Isaac Lab 3.0 indexed write APIs
+        self._set_joint_pos_target = self.hand.set_joint_position_target_index
+        self._write_obj_root_pose = self.object.write_root_pose_to_sim_index
+        self._write_obj_root_vel = self.object.write_root_velocity_to_sim_index
+        self._write_hand_joint_pos = self.hand.write_joint_position_to_sim_index
+        self._write_hand_joint_vel = self.hand.write_joint_velocity_to_sim_index
 
         self.randomized_episode_lengths = torch.randint(int(self.cfg.min_episode_length_s / (self.cfg.sim.dt * self.cfg.decimation)), self.max_episode_length + 1, (self.num_envs,), dtype=torch.int32, device=self.device)
 
@@ -187,8 +194,9 @@ class ReorientationEnv(DirectRLEnv):
         if self.cfg.enable_adr:
             adr_utils.apply_object_wrench(self, self.object, "object")
 
-        self.hand.set_joint_position_target(
-            self.cur_targets[:, self.actuated_dof_indices], joint_ids=self.actuated_dof_indices
+        self._set_joint_pos_target(
+            target=self.cur_targets[:, self.actuated_dof_indices],
+            joint_ids=self.actuated_dof_indices,
         )
 
     def _update_continuous_z_rotation(self, goal_env_ids):        
@@ -215,7 +223,7 @@ class ReorientationEnv(DirectRLEnv):
     def _get_rewards(self) -> torch.Tensor:
 
         pose_diff_penalty = ((self.cur_targets[:, self.actuated_dof_indices] - self.override_default_joint_pos) ** 2).sum(-1)
-        torque_penalty = (self.hand.data.computed_torque ** 2).sum(-1)
+        torque_penalty = (self.hand.data.computed_torque.torch ** 2).sum(-1)
 
         (
             total_reward,
@@ -295,7 +303,7 @@ class ReorientationEnv(DirectRLEnv):
 
     def _reset_idx(self, env_ids: Sequence[int] | None):
         if env_ids is None:
-            env_ids = self.hand._ALL_INDICES
+            env_ids = torch.arange(self.num_envs, device=self.device, dtype=torch.long)
 
         if self.cfg.enable_adr:
             adr_criteria = ((self.consecutive_successes.float().mean() / self.cfg.z_rotation_steps) / (self.randomized_episode_lengths.float().mean() * self.cfg.sim.dt * self.cfg.decimation)).float().mean()
@@ -312,12 +320,14 @@ class ReorientationEnv(DirectRLEnv):
         )
 
         # reset object
-        object_default_state = self.object.data.default_root_state.clone()[env_ids]
-        dof_pos = self.override_default_joint_pos[env_ids] 
-        dof_vel = self.hand.data.default_joint_vel[env_ids] 
-        
-        object_default_state[:, 0:3] += self.scene.env_origins[env_ids]
-        object_default_state[:, 7:] = torch.zeros_like(self.object.data.default_root_state[env_ids, 7:])
+        object_default_pose = self.object.data.default_root_pose.torch.clone()[env_ids]
+        object_default_vel = self.object.data.default_root_vel.torch.clone()[env_ids]
+
+        dof_pos = self.override_default_joint_pos[env_ids].clone()
+        dof_vel = self.hand.data.default_joint_vel.torch[env_ids].clone()
+
+        object_default_pose[:, 0:3] += self.scene.env_origins[env_ids]
+        object_default_vel[:] = 0.0
 
         if self.cfg.enable_adr:
             x_width = self.leap_adr.get_custom_param_value("object_spawn", "x_width_spawn")
@@ -329,23 +339,23 @@ class ReorientationEnv(DirectRLEnv):
             # Apply randomization
             if x_width > 0 or y_width > 0:
                 pos_noise = sample_uniform(-1.0, 1.0, (len(env_ids), 2), device=self.device)
-                object_default_state[:, 0] += pos_noise[:, 0] * x_width
-                object_default_state[:, 1] += pos_noise[:, 1] * y_width
+                object_default_pose[:, 0] += pos_noise[:, 0] * x_width
+                object_default_pose[:, 1] += pos_noise[:, 1] * y_width
             
             if x_rot > 0:
                 x_rot_noise = sample_uniform(-1.0, 1.0, (len(env_ids),), device=self.device)
                 x_rot_quat = quat_from_angle_axis(x_rot_noise * x_rot, self.x_unit_tensor[env_ids])
-                object_default_state[:, 3:7] = quat_mul(x_rot_quat, object_default_state[:, 3:7])
+                object_default_pose[:, 3:7] = quat_mul(x_rot_quat, object_default_pose[:, 3:7])
                 
             if y_rot > 0:
                 y_rot_noise = sample_uniform(-1.0, 1.0, (len(env_ids),), device=self.device)
                 y_rot_quat = quat_from_angle_axis(y_rot_noise * y_rot, self.y_unit_tensor[env_ids])
-                object_default_state[:, 3:7] = quat_mul(y_rot_quat, object_default_state[:, 3:7])
+                object_default_pose[:, 3:7] = quat_mul(y_rot_quat, object_default_pose[:, 3:7])
                 
             if z_rot > 0:
                 z_rot_noise = sample_uniform(-1.0, 1.0, (len(env_ids),), device=self.device)
                 z_rot_quat = quat_from_angle_axis(z_rot_noise * z_rot, self.z_unit_tensor[env_ids])
-                object_default_state[:, 3:7] = quat_mul(z_rot_quat, object_default_state[:, 3:7])
+                object_default_pose[:, 3:7] = quat_mul(z_rot_quat, object_default_pose[:, 3:7])
 
             joint_pos_noise_width = self.leap_adr.get_custom_param_value("robot_spawn", "joint_pos_noise")
             joint_vel_noise_width = self.leap_adr.get_custom_param_value("robot_spawn", "joint_vel_noise")
@@ -358,8 +368,14 @@ class ReorientationEnv(DirectRLEnv):
                 joint_vel_noise = sample_uniform(-1.0, 1.0, (len(env_ids), self.num_hand_dofs), device=self.device)
                 dof_vel += joint_vel_noise * joint_vel_noise_width
 
-        self.object.write_root_pose_to_sim(object_default_state[:, :7], env_ids)
-        self.object.write_root_velocity_to_sim(object_default_state[:, 7:], env_ids)
+        self._write_obj_root_pose(
+            root_pose=object_default_pose,
+            env_ids=env_ids,
+        )        
+        self._write_obj_root_vel(
+            root_velocity=object_default_vel,
+            env_ids=env_ids,
+        )
 
         # reset hand
         self.prev_targets[env_ids] = dof_pos
@@ -367,8 +383,20 @@ class ReorientationEnv(DirectRLEnv):
         self.hand_dof_targets[env_ids] = dof_pos
         self.successes[env_ids] = 0
 
-        self.hand.set_joint_position_target(dof_pos, env_ids=env_ids)
-        self.hand.write_joint_state_to_sim(dof_pos, dof_vel, env_ids=env_ids)
+        self._set_joint_pos_target(
+            target=dof_pos,
+            env_ids=env_ids,
+        )
+        
+        self._write_hand_joint_pos(
+            position=dof_pos,
+            env_ids=env_ids,
+        )
+        
+        self._write_hand_joint_vel(
+            velocity=dof_vel,
+            env_ids=env_ids,
+        )        
 
         if self.cfg.enable_adr and len(env_ids) > 0:
             adr_utils.update_adr_obs_act_noise(self, env_ids)
@@ -393,7 +421,7 @@ class ReorientationEnv(DirectRLEnv):
                 self.step_since_last_dr_change += 1
 
             # update whether to apply wrench for the episode
-            self.object_mass = self.object.root_physx_view.get_masses().to(device=self.device) 
+            self.object_mass = self.object.data.body_mass.torch.clone() 
             self.apply_wrench = torch.where(
                 torch.rand(self.num_envs, device=self.device) <= self.cfg.wrench_prob_per_rollout,
                 True,
@@ -410,22 +438,27 @@ class ReorientationEnv(DirectRLEnv):
 
     def _compute_intermediate_values(self):
         # data for hand
-        self.fingertip_pos = self.hand.data.body_pos_w[:, self.finger_bodies]
-        self.fingertip_rot = self.hand.data.body_quat_w[:, self.finger_bodies]
-        self.fingertip_pos -= self.scene.env_origins.repeat((1, self.num_fingertips)).reshape(
-            self.num_envs, self.num_fingertips, 3
+        self.fingertip_pos = self.hand.data.body_pos_w.torch[:, self.finger_bodies]
+        self.fingertip_rot = self.hand.data.body_quat_w.torch[:, self.finger_bodies]
+        
+        self.fingertip_pos -= self.scene.env_origins.repeat(
+            (1, self.num_fingertips)
+        ).reshape(
+            self.num_envs,
+            self.num_fingertips,
+            3,
         )
-        self.fingertip_velocities = self.hand.data.body_vel_w[:, self.finger_bodies]
-
-        self.hand_dof_pos = self.hand.data.joint_pos
-        self.hand_dof_vel = self.hand.data.joint_vel 
-
-        # data for object
-        self.object_pos = self.object.data.root_pos_w - self.scene.env_origins
-        self.object_rot = self.object.data.root_quat_w #w,x,y,z
-        self.object_velocities = self.object.data.root_vel_w
-        self.object_linvel = self.object.data.root_lin_vel_w
-        self.object_angvel = self.object.data.root_ang_vel_w 
+        
+        self.fingertip_velocities = self.hand.data.body_vel_w.torch[:, self.finger_bodies]
+        
+        self.hand_dof_pos = self.hand.data.joint_pos.torch
+        self.hand_dof_vel = self.hand.data.joint_vel.torch
+        
+        self.object_pos = self.object.data.root_pos_w.torch - self.scene.env_origins
+        self.object_rot = self.object.data.root_quat_w.torch
+        self.object_velocities = self.object.data.root_vel_w.torch
+        self.object_linvel = self.object.data.root_lin_vel_w.torch
+        self.object_angvel = self.object.data.root_ang_vel_w.torch 
             
     def sim_real_indices(self):
         sim2real_idx_16, _ = self.hand.find_joints(self.cfg.actuated_joint_names, preserve_order=True)
@@ -450,7 +483,7 @@ def unscale(x, lower, upper):
 def rotation_distance(object_rot, target_rot):
     # Orientation alignment for the cube in hand and goal cube
     quat_diff = quat_mul(object_rot, quat_conjugate(target_rot))
-    return 2.0 * torch.asin(torch.clamp(torch.norm(quat_diff[:, 1:4], p=2, dim=-1), max=1.0))  # changed quat convention
+    return 2.0 * torch.asin(torch.clamp(torch.norm(quat_diff[:, :3], p=2, dim=-1), max=1.0))  # changed quat convention
 
 @torch.jit.script
 def compute_rewards(

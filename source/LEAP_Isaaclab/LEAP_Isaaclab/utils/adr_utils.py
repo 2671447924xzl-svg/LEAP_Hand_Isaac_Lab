@@ -92,11 +92,12 @@ def apply_object_wrench(env, object, object_name):
         torch.zeros_like(env.wrench_object_applied_torque[object_name])
     )
     
-    object.set_external_force_and_torque(
+    object.permanent_wrench_composer.set_forces_and_torques_index(
         forces=env.wrench_object_applied_force[object_name],
         torques=env.wrench_object_applied_torque[object_name],
         body_ids = body_ids,
-        env_ids = env_ids
+        env_ids = env_ids,
+        is_global=False,
     )
     object.write_data_to_sim()
     
