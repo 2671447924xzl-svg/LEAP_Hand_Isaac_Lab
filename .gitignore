@@ -38,3 +38,31 @@ _build
 source/LEAP_Isaaclab/LEAP_Isaaclab/tasks/leap_crawler/*
 source/LEAP_Isaaclab/LEAP_Isaaclab/deployment_scripts/leap_crawler.py
 source/LEAP_Isaaclab/LEAP_Isaaclab/tasks/leap_three_axis_reorient/*
+
+# ============================================================
+# CHD secondary development - generated training artifacts
+# ============================================================
+
+# RL-Games generated experiments
+logs/rl_games/leap_hand_reorient/*/
+
+# Keep official pretrained baseline
+!logs/rl_games/leap_hand_reorient/pretrained/
+!logs/rl_games/leap_hand_reorient/pretrained/**
+
+# Local checkpoints
+checkpoints/
+*.pth
+*.pt
+*.ckpt
+
+# TensorBoard / experiment outputs
+events.out.tfevents.*
+runs/
+wandb/
+videos/
+recordings/
+
+# Local temporary experiment files
+*.log
+*.tmp
