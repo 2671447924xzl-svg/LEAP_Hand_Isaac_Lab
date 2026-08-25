@@ -12,6 +12,7 @@ author = "Kenneth Shaw, Sri Anumakonda"
 maintainer = "Isaac Lab Project Developers"
 description="Extension Template for Isaac Lab"
 repository = "https://github.com/srianumakonda/LEAP-Isaaclab.git"
+keywords = ["leap", "isaaclab", "dexterous-hand"]
 
 [dependencies]
 "isaaclab" = {}
