@@ -58,6 +58,7 @@ class EventCfg:
             "asset_cfg": SceneEntityCfg("robot"),  
             "stiffness_distribution_params":(3.0, 3.0), 
             "damping_distribution_params": (0.1, 0.1),  
+            "operation": "abs",
             "distribution": "uniform",
         },
     )
