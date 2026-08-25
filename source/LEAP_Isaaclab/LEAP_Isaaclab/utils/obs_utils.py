@@ -21,6 +21,8 @@ def create_obs_with_history_latency(env, curr_obs):
     return env.output_obs_hist_buf.transpose(2,1).flatten(start_dim=1, end_dim=2).clone()
 
 def create_action_latency(env, curr_act):
+    if curr_act.ndim == 1:
+        curr_act = curr_act.unsqueeze(0)  # 兼容 RL-Games 单环境传入的无 batch 维动作。
     idx_restarted = (env.episode_length_buf == 0)
     env.act_hist_buf[idx_restarted,:,:] = torch.zeros_like(curr_act[idx_restarted, :].unsqueeze(-1)).to(torch.float)
     
