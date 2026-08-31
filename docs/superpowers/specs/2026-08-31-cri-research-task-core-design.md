@@ -35,6 +35,8 @@ The bit order is `[mass, friction, motor_capacity]`.
 
 All sixteen LEAP joints share the same motor-capacity scale. Kp, Kd, action scale, target range, action mapping, timing, dt, and decimation remain unchanged.
 
+Factor codes come only from an explicit per-environment assignment buffer/config. The CRI task defaults every environment to `000`; the four-environment smoke test explicitly supplies `[000, 100, 010, 001]`. Reset never samples or silently changes a factor code.
+
 ## Friction semantics
 
 `CRI_FACTOR_SCHEMA_V1` defines friction as object-side material uncertainty:
@@ -53,7 +55,7 @@ The CRI configuration sets `events=None` and `enable_adr=False`. This removes th
 ## Reset-time data flow
 
 1. The inherited baseline reset restores object and articulation state.
-2. The CRI reset resolves each reset environment's canonical factor code.
+2. The CRI reset reads each reset environment's canonical factor code from the explicit assignment buffer without random sampling.
 3. Requested mass is computed from a captured nominal PhysX mass and written with `set_masses_index`.
 4. Requested inertia is computed from the captured nominal PhysX inertia using the same mass ratio and written with `set_inertias_index`.
 5. Object material static/dynamic friction is written through the PhysX material tensor API for only the selected environment indices.
@@ -77,7 +79,7 @@ Requested values are computed only from the canonical condition table. Actual va
 
 ## Error handling
 
-Construction or reset fails explicitly if a factor code is unsupported, condition assignment length is incompatible with `num_envs`, body/joint/material shapes are unexpected, hand or object material is not uniform where required, a PhysX getter is unavailable, or requested and read-back values disagree beyond the smoke-test tolerance. No fallback changes controller gains, action semantics, or the baseline task.
+Construction or reset fails explicitly if a factor code is unsupported, condition assignment length is incompatible with `num_envs`, the assignment buffer changes unexpectedly, body/joint/material shapes are unexpected, hand or object material is not uniform where required, a PhysX getter is unavailable, or requested and read-back values disagree beyond the smoke-test tolerance. No fallback randomly samples factor codes or changes controller gains, action semantics, or the baseline task.
 
 ## Verification
 
@@ -89,6 +91,7 @@ The authorized smoke test runs four environments with `[000, 100, 010, 001]`, ze
 - only the intended primary factor changes in each environment;
 - resetting or assigning one environment does not alter the other three;
 - factor values remain constant during the smoke episode;
+- reset leaves hand/object initial state valid and finite, returns a finite observation of the declared shape, preserves normal termination output, and correctly resets/increments episode bookkeeping despite `events=None`;
 - the original baseline task remains registered and its source/checkpoint files are unmodified.
 
 The smoke test does not evaluate reward, rotation, slip, drops, saturation behavior, or policy performance.
