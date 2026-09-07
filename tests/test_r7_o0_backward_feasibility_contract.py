@@ -9,7 +9,10 @@ import json
 import tempfile
 import unittest
 from argparse import Namespace
+from contextlib import nullcontext
 from pathlib import Path
+
+import psutil
 
 
 SCRIPT = Path(__file__).resolve().parents[1] / "scripts/r7_o0_backward_feasibility.py"
@@ -17,6 +20,81 @@ SPEC = importlib.util.spec_from_file_location("r7_o0_backward_feasibility", SCRI
 assert SPEC is not None and SPEC.loader is not None
 feasibility = importlib.util.module_from_spec(SPEC)
 SPEC.loader.exec_module(feasibility)
+
+
+def controlled_invocation() -> dict[str, object]:  # 构造 Windows launch ownership 合同。
+    return {
+        "script_path": str(SCRIPT),
+        "repo_root": str(SCRIPT.parents[1]),
+        "output_root": r"C:\evidence\fresh_r1",
+        "branch": "history_only",
+        "seed": 7100,
+    }
+
+
+def launch_record(
+    pid: int,
+    ppid: int,
+    name: str,
+    mode: str,
+    create_time: float,
+    ancestors: list[int],
+    *,
+    project_related: bool = True,
+    current: bool = False,
+) -> dict[str, object]:  # 构造含 ancestry 与 invocation identity 的进程证据。
+    identity = controlled_invocation()
+    script = identity["script_path"]
+    common = (
+        f"--branch {identity['branch']} --seed {identity['seed']} "
+        f"--repo-root {identity['repo_root']} --output-root {identity['output_root']}"
+    )
+    if mode == "parent":
+        command = f"python scripts\\{Path(str(script)).name} --launch-branch --branch {identity['branch']}"
+    elif mode == "cli":
+        command = f"cmd /c isaaclab.bat -p {script} --worker {common}"
+    elif mode == "kit":
+        command = f'kit.exe -c "from isaaclab.cli import cli; cli()" -p {script} --worker {common}'
+    elif mode == "venv_cli":
+        command = f'python.exe -c "from isaaclab.cli import cli; cli()" -p {script} --worker {common}'
+    elif mode == "worker":
+        command = f"python {script} --worker {common}"
+    else:
+        command = f"python {identity['repo_root']}\\child.py"
+    return {
+        "inspection_available": True,
+        "pid": pid,
+        "ppid": ppid,
+        "name": name,
+        "command_line": command,
+        "executable": name,
+        "working_directory": str(identity["repo_root"]),
+        "create_time": create_time,
+        "ancestor_pids": ancestors,
+        "is_current_worker": current,
+        "project_related": project_related,
+    }
+
+
+def valid_launch_records() -> list[dict[str, object]]:  # parent→CLI→kit→worker 的有效链。
+    return [
+        launch_record(100, 50, "python.exe", "parent", 1000.0, [50]),
+        launch_record(101, 100, "cmd.exe", "cli", 1000.1, [100, 50]),
+        launch_record(102, 101, "kit.exe", "kit", 1000.2, [101, 100, 50]),
+        launch_record(103, 102, "python.exe", "worker", 1000.3, [102, 101, 100, 50], current=True),
+    ]
+
+
+def audit_records(records: list[dict[str, object]]) -> dict[str, object]:  # 统一调用待实现的纯 ownership 审计。
+    return feasibility.audit_controlled_launch(
+        records,
+        expected_parent_pid=100,
+        expected_parent_create_time=1000.0,
+        current_worker_pid=103,
+        current_worker_ancestor_pids={102, 101, 100, 50},
+        launch_started_at_epoch=1000.05,
+        invocation=controlled_invocation(),
+    )
 
 
 def passing_result(branch: str, process_id: int) -> dict[str, object]:  # 构造最小公平性 PASS 记录。
@@ -35,6 +113,7 @@ def passing_result(branch: str, process_id: int) -> dict[str, object]:  # 构造
         "seed": 7100,
         "git_commit": "abc",
         "process_id": process_id,
+        "run_id": "a" * 32,
         "num_envs": 6144,
         "factor_counts": {"000": 2048, "010": 2048, "100": 2048},
         "model_hash_before": "initial",
@@ -113,6 +192,7 @@ def write_governed_history(root: Path, record: dict[str, object]) -> None:  # �
                     "token_sha256": token_digest,
                     "token_persisted_in_command_line": False,
                 },
+                "run_id": record["run_id"],
                 "clean_process_gate": {
                     "pass": True,
                     "expected_parent_pid": 700,
@@ -348,20 +428,195 @@ class BackwardFeasibilityContractTest(unittest.TestCase):
     def test_worker_cli_does_not_accept_capture_secret(self) -> None:
         self.assertNotIn("capture-token", inspect.getsource(feasibility.build_parser))
 
-    def test_clean_process_gate_requires_exact_controlled_parent_pid(self) -> None:
-        records = [
+    def test_controlled_parent_launcher_is_allowed(self) -> None:
+        audit = audit_records(valid_launch_records())
+        self.assertTrue(audit["pass"])
+        self.assertEqual(audit["owned_roles"]["controlled_parent"], [100])
+
+    def test_controlled_parent_may_use_default_or_relative_arguments(self) -> None:
+        parent = valid_launch_records()[0]
+        self.assertNotIn("--repo-root", parent["command_line"])
+        self.assertNotIn("--output-root", parent["command_line"])
+        self.assertTrue(audit_records(valid_launch_records())["parent_identity_pass"])
+
+    def test_isaaclab_cli_child_is_allowed(self) -> None:
+        audit = audit_records(valid_launch_records())
+        self.assertEqual(audit["owned_roles"]["cli_shim"], [101])
+
+    def test_kit_controlled_child_is_allowed(self) -> None:
+        audit = audit_records(valid_launch_records())
+        self.assertEqual(audit["owned_roles"]["kit_launcher"], [102])
+
+    def test_virtualenv_python_isaac_cli_launcher_is_allowed(self) -> None:
+        records = valid_launch_records()
+        records[2] = launch_record(102, 101, "python.exe", "venv_cli", 1000.2, [101, 100, 50])
+        audit = audit_records(records)
+        self.assertTrue(audit["pass"])
+        self.assertEqual(audit["owned_roles"]["kit_launcher"], [102])
+
+    def test_python_worker_is_allowed(self) -> None:
+        audit = audit_records(valid_launch_records())
+        self.assertEqual(audit["owned_roles"]["current_worker"], [103])
+
+    def test_same_launch_tree_grandchild_is_allowed(self) -> None:
+        records = valid_launch_records()
+        records.append(launch_record(104, 103, "python.exe", "grandchild", 1000.4, [103, 102, 101, 100, 50]))
+        audit = audit_records(records)
+        self.assertTrue(audit["pass"])
+        self.assertNotIn("--branch", records[-1]["command_line"])
+        self.assertEqual(audit["owned_roles"]["controlled_descendant"], [104])
+
+    def test_unrelated_old_kit_is_rejected(self) -> None:
+        records = valid_launch_records()
+        records.append(launch_record(200, 9, "kit.exe", "kit", 900.0, [9]))
+        audit = audit_records(records)
+        self.assertFalse(audit["pass"])
+        self.assertEqual([item["pid"] for item in audit["residuals"]], [200])
+
+    def test_unrelated_project_python_residual_is_rejected(self) -> None:
+        records = valid_launch_records()
+        records.append(launch_record(201, 9, "python.exe", "grandchild", 1000.4, [9]))
+        audit = audit_records(records)
+        self.assertFalse(audit["pass"])
+        self.assertEqual([item["pid"] for item in audit["residuals"]], [201])
+
+    def test_non_project_python_is_ignored(self) -> None:
+        records = valid_launch_records()
+        record = launch_record(202, 9, "python.exe", "grandchild", 1000.4, [9], project_related=False)
+        record["command_line"] = "python unrelated_tool.py"
+        records.append(record)
+        audit = audit_records(records)
+        self.assertTrue(audit["pass"])
+        self.assertIn(202, audit["ignored_pids"])
+
+    def test_uninspectable_python_kit_or_isaac_candidate_fails_closed(self) -> None:
+        records = valid_launch_records()
+        records.append(
             {
-                "pid": 41,
-                "command_line": f"python {feasibility.SCRIPT_PATH if hasattr(feasibility, 'SCRIPT_PATH') else feasibility.__file__} --launch-branch",
-                "inspection_available": True,
-                "project_related": True,
-                "is_current_worker": False,
-                "is_current_launch_ancestor": False,
+                "inspection_available": False,
+                "inspection_error_kind": "AccessDenied",
+                "pid": 203,
+                "name": "kit.exe",
             }
-        ]
-        accepted = feasibility.audit_controlled_parent(records, expected_parent_pid=41, ancestor_pids={41})
-        self.assertTrue(accepted["pass"])
-        self.assertFalse(feasibility.audit_controlled_parent(records, expected_parent_pid=99, ancestor_pids={41})["pass"])
+        )
+        audit = audit_records(records)
+        self.assertFalse(audit["pass"])
+        self.assertEqual(audit["uncertain_process_pids"], [203])
+
+    def test_cwd_access_denied_propagates_to_fail_closed_census(self) -> None:
+        class FakeProcess:
+            pid = 205
+
+            def oneshot(self):
+                return nullcontext()
+
+            def cmdline(self):
+                return ["python", "scripts\\project_worker.py"]
+
+            def exe(self):
+                return r"D:\Python\python.exe"
+
+            def cwd(self):
+                raise psutil.AccessDenied(pid=self.pid)
+
+            def parents(self):
+                return []
+
+            def ppid(self):
+                return 1
+
+            def name(self):
+                return "python.exe"
+
+            def create_time(self):
+                return 1000.0
+
+        with self.assertRaises(psutil.AccessDenied):
+            feasibility._live_process_record(
+                FakeProcess(),
+                Path(r"D:\Research\LEAP\LEAP_Hand_Isaac_Lab"),
+                Path(r"C:\evidence\fresh_r1"),
+            )
+
+    def test_process_that_vanished_during_census_does_not_block(self) -> None:
+        records = valid_launch_records()
+        records.append(
+            {
+                "inspection_available": False,
+                "inspection_error_kind": "NoSuchProcess",
+                "pid": 204,
+                "name": "python.exe",
+            }
+        )
+        audit = audit_records(records)
+        self.assertTrue(audit["pass"])
+        self.assertEqual(audit["vanished_process_pids"], [204])
+
+    def test_pid_reuse_does_not_grant_parent_ownership(self) -> None:
+        records = valid_launch_records()
+        records[0]["create_time"] = 800.0
+        audit = audit_records(records)
+        self.assertFalse(audit["pass"])
+        self.assertFalse(audit["parent_identity_pass"])
+
+    def test_creation_time_mismatch_does_not_allow_controlled_kit(self) -> None:
+        records = valid_launch_records()
+        records[2]["create_time"] = 900.0
+        audit = audit_records(records)
+        self.assertFalse(audit["pass"])
+        self.assertEqual([item["pid"] for item in audit["residuals"]], [102])
+
+    def test_wrong_working_directory_does_not_grant_parent_or_worker_ownership(self) -> None:
+        records = valid_launch_records()
+        records[0]["working_directory"] = r"C:\unrelated"
+        records[3]["working_directory"] = r"C:\unrelated"
+        audit = audit_records(records)
+        self.assertFalse(audit["pass"])
+        self.assertFalse(audit["parent_identity_pass"])
+        self.assertFalse(audit["worker_identity_pass"])
+
+    def test_fake_kit_command_on_same_spine_is_rejected(self) -> None:
+        records = valid_launch_records()
+        records[2]["command_line"] = str(records[2]["command_line"]).replace(
+            'from isaaclab.cli import cli; cli()',
+            "print('not the Isaac Lab CLI')",
+        )
+        audit = audit_records(records)
+        self.assertFalse(audit["pass"])
+        self.assertEqual([item["pid"] for item in audit["residuals"]], [102])
+
+    def test_complete_parent_cli_kit_worker_chain_is_required(self) -> None:
+        without_cli = [record for record in valid_launch_records() if record["pid"] != 101]
+        without_kit = [record for record in valid_launch_records() if record["pid"] != 102]
+        self.assertFalse(audit_records(without_cli)["role_completeness_pass"])
+        self.assertFalse(audit_records(without_kit)["role_completeness_pass"])
+
+    def test_formal_5000_epoch_authorization_path_remains_unreachable(self) -> None:
+        self.assertNotIn("authorization", inspect.getsource(feasibility.build_launch_parser))
+        self.assertNotIn("agent.train()", inspect.getsource(feasibility.run_branch_epoch))
+        self.assertEqual(inspect.getsource(feasibility.run_branch_epoch).count("agent.train_epoch()"), 1)
+
+    def test_history_requires_a_completely_fresh_output_root(self) -> None:
+        with tempfile.TemporaryDirectory() as temp_dir:
+            root = Path(temp_dir) / "fresh_run"
+            feasibility.validate_output_root_freshness(root, "history_only")
+            root.mkdir()
+            (root / "oracle").mkdir()
+            (root / "oracle" / "result.json").write_text("{}", encoding="utf-8")
+            with self.assertRaises(RuntimeError):
+                feasibility.validate_output_root_freshness(root, "history_only")
+
+    def test_oracle_requires_existing_root_and_empty_oracle_slot(self) -> None:
+        with tempfile.TemporaryDirectory() as temp_dir:
+            root = Path(temp_dir) / "run"
+            with self.assertRaises(RuntimeError):
+                feasibility.validate_output_root_freshness(root, "oracle")
+            root.mkdir()
+            feasibility.validate_output_root_freshness(root, "oracle")
+            (root / "oracle").mkdir()
+            (root / "oracle" / "console.log").write_text("old", encoding="utf-8")
+            with self.assertRaises(RuntimeError):
+                feasibility.validate_output_root_freshness(root, "oracle")
 
     def test_fairness_pass_requires_two_real_updates_and_oracle_context_gradient(self) -> None:
         results = {
@@ -372,6 +627,73 @@ class BackwardFeasibilityContractTest(unittest.TestCase):
         self.assertTrue(report["overall_pass"])
         results["oracle"]["training_counters"]["context_column_nonzero_gradient_calls"] = 0  # type: ignore[index]
         self.assertFalse(feasibility.build_fairness_report(results)["overall_pass"])
+
+    def test_fairness_rejects_cross_run_branch_mix(self) -> None:
+        results = {
+            "history_only": passing_result("history_only", 12),
+            "oracle": passing_result("oracle", 34),
+        }
+        results["oracle"]["run_id"] = "b" * 32
+        report = feasibility.build_fairness_report(results)
+        self.assertFalse(report["overall_pass"])
+        self.assertFalse(report["checks"]["same_run_id"])
+
+    def test_fairness_requires_lowercase_hex_run_id_and_records_it(self) -> None:
+        results = {
+            "history_only": passing_result("history_only", 12),
+            "oracle": passing_result("oracle", 34),
+        }
+        results["history_only"]["run_id"] = results["oracle"]["run_id"] = "z" * 32
+        report = feasibility.build_fairness_report(results)
+        self.assertFalse(report["checks"]["same_run_id"])
+        self.assertEqual(report["run_id"], "z" * 32)
+
+    def test_finalizer_rejects_result_preflight_session_mixing(self) -> None:
+        with tempfile.TemporaryDirectory() as temp_dir:
+            root = Path(temp_dir)
+            branch_dir = root / "history_only"
+            branch_dir.mkdir(parents=True)
+            record = passing_result("history_only", 12)
+            record["status"] = "PENDING_CONSOLE_FINALIZATION"
+            (branch_dir / "result.json").write_text(json.dumps(record), encoding="utf-8")
+            token = "capture-token"
+            token_digest = hashlib.sha256(token.encode("utf-8")).hexdigest()
+            (branch_dir / "preflight_system_state.json").write_text(
+                json.dumps(
+                    {
+                        "run_id": "b" * 32,
+                        "console_capture_admission": {"token_sha256": token_digest},
+                        "clean_process_gate": {"current_worker_pid": 12},
+                    }
+                ),
+                encoding="utf-8",
+            )
+            console = branch_dir / "console.log"
+            console.write_text(
+                f"R7_PHASE42B_PARENT_CAPTURE_START token_sha256={token_digest}\n"
+                f"R7_PHASE42B_PARENT_CAPTURE_COMPLETE token_sha256={token_digest} exit_code=0\n",
+                encoding="utf-8",
+            )
+            finalized = feasibility.finalize_console_evidence(root, "history_only", console, 0, token)
+            self.assertEqual(finalized["status"], "BLOCKED")
+            self.assertFalse(finalized["checks"]["result_preflight_lineage"])
+
+    def test_later_minibatch_oom_uses_backward_capacity_stage_hint(self) -> None:
+        with tempfile.TemporaryDirectory() as temp_dir:
+            timeline = feasibility.BackwardResourceTimeline(
+                Path(temp_dir) / "timeline.json",
+                "history_only",
+                snapshot_provider=lambda: {"resource": "snapshot"},
+            )
+            for stage_id in feasibility.BACKWARD_STAGES:
+                timeline.record(stage_id)
+            timeline.set_failure_hint("B3")
+            timeline.fail(RuntimeError("CUDA out of memory in later minibatch"))
+            self.assertEqual(timeline.failed_stage_id, "B3")
+            self.assertEqual(
+                feasibility.classify_failure(timeline.failed_stage_id, "CUDA out of memory"),
+                ["FORMAL_6144_BACKWARD_CAPACITY_BLOCKED", "HARDWARE_OR_PROTOCOL_REVISION_REQUIRED"],
+            )
 
     def test_pass_decision_requires_both_branches(self) -> None:
         results = {

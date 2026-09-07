@@ -41,6 +41,8 @@ BACKWARD_STAGES = {
     "B3": "immediately_after_first_backward",
     "B4": "after_first_optimizer_step",
 }  # 用户冻结的资源边界。
+PARENT_CREATE_TIME_TOLERANCE_SECONDS = 0.01  # PID reuse 防护使用精确进程出生时间。
+LAUNCH_TIME_TOLERANCE_SECONDS = 1.0  # 允许 Windows 进程时间戳的亚秒量化误差。
 RESOURCE_SIGNATURES = (
     "out of memory",
     "cuda error: out of memory",
@@ -126,6 +128,7 @@ class BackwardResourceTimeline:  # B0–B4 完成后立即原子落盘。
         self.started = time.perf_counter()
         self.stages: list[dict[str, Any]] = []
         self.active_stage_id: str | None = None
+        self.failure_stage_hint: str | None = None
         self._write()
 
     @property
@@ -150,6 +153,7 @@ class BackwardResourceTimeline:  # B0–B4 完成后立即原子落盘。
                 "schema_version": 1,
                 "branch": self.branch,
                 "active_stage_id": self.active_stage_id,
+                "failure_stage_hint": self.failure_stage_hint,
                 "stages": self.stages,
                 "elapsed_seconds": time.perf_counter() - self.started,
                 "scientific_conclusion_generated": False,
@@ -184,8 +188,16 @@ class BackwardResourceTimeline:  # B0–B4 完成后立即原子落盘。
         self.active_stage_id = None
         self._write()
 
+    def set_failure_hint(self, stage_id: str) -> None:  # 后续 minibatch 仍保留真实 backward/optimizer 阶段。
+        if stage_id not in BACKWARD_STAGES:
+            raise ValueError(f"非法 backward stage: {stage_id}")
+        self.failure_stage_hint = stage_id
+
+    def clear_failure_hint(self) -> None:  # 完整 train_epoch 返回后退出容量敏感区。
+        self.failure_stage_hint = None
+
     def fail(self, exc: BaseException) -> None:  # 将异常绑定到首个未完成边界。
-        stage_id = self.active_stage_id
+        stage_id = self.active_stage_id or self.failure_stage_hint
         self.stages.append(
             {
                 "stage_id": stage_id,
@@ -197,6 +209,7 @@ class BackwardResourceTimeline:  # B0–B4 完成后立即原子落盘。
             }
         )
         self.active_stage_id = None
+        self.failure_stage_hint = None
         self._write()
 
 
@@ -225,6 +238,7 @@ def validate_oracle_precondition(output_root: Path, current_commit: str, current
     console_capture = history.get("console_capture", {})
     capture_admission = preflight.get("console_capture_admission", {})
     clean_process_gate = preflight.get("clean_process_gate", {})
+    history_run_id = history.get("run_id")
     token_digest = str(console_capture.get("token_sha256", ""))
     process_exit_code = history.get("process_exit_code")
     start_sentinel = f"R7_PHASE42B_PARENT_CAPTURE_START token_sha256={token_digest}"
@@ -252,6 +266,10 @@ def validate_oracle_precondition(output_root: Path, current_commit: str, current
         and history.get("feasibility_id") == FEASIBILITY_ID,
         "same_git_commit": history.get("git_commit") == current_commit,
         "different_process": int(history.get("process_id", pid)) != int(pid),
+        "run_id_bound": isinstance(history_run_id, str)
+        and len(history_run_id) == 32
+        and all(character in "0123456789abcdef" for character in history_run_id)
+        and preflight.get("run_id") == history_run_id,
         "frozen_contract": history.get("frozen_contract") == frozen_contract_record(),
         "checkpoint_identity": checkpoint_identity,
         "committed_config_only": history.get("config_source", {}).get("working_tree_consumed_as_config") is False
@@ -291,56 +309,343 @@ def validate_oracle_precondition(output_root: Path, current_commit: str, current
     }
     if not all(checks.values()):
         raise RuntimeError(f"ORACLE_BLOCKED_HISTORY_PRECONDITION: {checks}")
-    return {"pass": True, "checks": checks, "history_result": str(history_path)}
+    return {"pass": True, "checks": checks, "history_result": str(history_path), "run_id": history_run_id}
 
 
-def audit_controlled_parent(
-    records: list[dict[str, Any]],
-    expected_parent_pid: int,
-    ancestor_pids: set[int],
-) -> dict[str, Any]:  # 仅豁免且强制存在唯一、PID 绑定的受控 launcher。
-    script_token = str(Path(__file__).resolve()).lower()
-    controlled: list[dict[str, Any]] = []
-    residuals: list[dict[str, Any]] = []
-    for item in records:
-        command = str(item.get("command_line") or "").lower()
-        is_controlled_parent = (
-            int(item.get("pid", -1)) == int(expected_parent_pid)
-            and int(item.get("pid", -1)) in ancestor_pids
-            and script_token in command
-            and "--launch-branch" in command
-        )
-        item["is_controlled_capture_parent"] = is_controlled_parent
-        if is_controlled_parent:
-            controlled.append(item)
-        if (
-            item.get("inspection_available", True)
-            and item.get("project_related")
-            and not item.get("is_current_worker")
-            and not item.get("is_current_launch_ancestor")
-            and not is_controlled_parent
-        ):
-            residuals.append(item)
-    parent_identity_pass = len(controlled) == 1
+def controlled_launch_invocation(
+    repo_root: Path,
+    output_root: Path,
+    branch: str,
+    seed: int,
+) -> dict[str, Any]:  # 构造不含 secret 的 invocation identity。
     return {
-        "pass": parent_identity_pass and not residuals,
-        "expected_parent_pid": int(expected_parent_pid),
-        "controlled_parent_count": len(controlled),
-        "controlled_parent": controlled[0] if parent_identity_pass else None,
-        "processes": records,
-        "residuals": residuals,
+        "script_path": str(Path(__file__).resolve()),
+        "repo_root": str(repo_root.resolve()),
+        "output_root": str(output_root.resolve()),
+        "branch": branch,
+        "seed": int(seed),
     }
 
 
-def feasibility_clean_process_gate(repo_root: Path, expected_parent_pid: int) -> dict[str, Any]:  # 允许当前受控 parent launcher 祖先进程。
-    records = formal.formal_process_records(repo_root)
-    try:
-        import psutil
+def controlled_launch_invocation_sha256(invocation: dict[str, Any]) -> str:  # 绑定 parent 与 worker 参数。
+    payload = json.dumps(invocation, sort_keys=True, separators=(",", ":"))
+    return hashlib.sha256(payload.encode("utf-8")).hexdigest()
 
-        ancestor_pids = {parent.pid for parent in psutil.Process(os.getpid()).parents()}
-    except Exception:
-        ancestor_pids = set()
-    return audit_controlled_parent(records, expected_parent_pid, ancestor_pids)
+
+def _normalized_command(value: Any) -> str:  # 统一 Windows 路径与大小写以做 provenance 匹配。
+    return str(value or "").replace("/", "\\").lower()
+
+
+def _invocation_matches(command: str, invocation: dict[str, Any], require_script: bool = True) -> bool:  # 核对当前 branch/seed/path 身份。
+    normalized = _normalized_command(command)
+    required = [
+        f"--branch {str(invocation['branch']).lower()}",
+        f"--seed {int(invocation['seed'])}",
+        _normalized_command(invocation["repo_root"]),
+        _normalized_command(invocation["output_root"]),
+    ]
+    if require_script:
+        required.append(Path(str(invocation["script_path"])).name.lower())
+    return all(token in normalized for token in required)
+
+
+def _parent_invocation_matches(command: str, invocation: dict[str, Any]) -> bool:  # parent 可合法省略 parser 默认参数。
+    normalized = _normalized_command(command)
+    return (
+        Path(str(invocation["script_path"])).name.lower() in normalized
+        and "--launch-branch" in normalized
+        and f"--branch {str(invocation['branch']).lower()}" in normalized
+    )
+
+
+def _working_directory_matches(item: dict[str, Any], invocation: dict[str, Any]) -> bool:  # 核对当前项目 cwd，而非只看进程名。
+    working_directory = _normalized_command(item.get("working_directory")).rstrip("\\")
+    repo_root = _normalized_command(invocation["repo_root"]).rstrip("\\")
+    return bool(working_directory) and working_directory == repo_root
+
+
+def audit_controlled_launch(
+    records: list[dict[str, Any]],
+    expected_parent_pid: int,
+    expected_parent_create_time: float,
+    current_worker_pid: int,
+    current_worker_ancestor_pids: set[int],
+    launch_started_at_epoch: float,
+    invocation: dict[str, Any],
+) -> dict[str, Any]:  # 以 PID+出生时间+ancestry+invocation 识别本次 Windows launch tree。
+    owned_roles: dict[str, list[int]] = {
+        "controlled_parent": [],
+        "cli_shim": [],
+        "kit_launcher": [],
+        "controlled_intermediate": [],
+        "current_worker": [],
+        "controlled_descendant": [],
+    }
+    audited_records: list[dict[str, Any]] = []
+    residuals: list[dict[str, Any]] = []
+    ignored_pids: list[int] = []
+    uncertain_process_pids: list[int] = []
+    vanished_process_pids: list[int] = []
+    for source in records:
+        item = dict(source)
+        pid = int(item.get("pid", -1))
+        if not item.get("inspection_available", True):
+            if item.get("inspection_error_kind") in ("NoSuchProcess", "ZombieProcess"):
+                vanished_process_pids.append(pid)
+            else:
+                uncertain_process_pids.append(pid)
+            audited_records.append(item)
+            continue
+        create_time = float(item.get("create_time") or 0.0)
+        command = str(item.get("command_line") or "")
+        name = str(item.get("name") or "").lower()
+        ancestors = {int(value) for value in item.get("ancestor_pids", [])}
+        parent_identity = (
+            pid == int(expected_parent_pid)
+            and pid in current_worker_ancestor_pids
+            and abs(create_time - float(expected_parent_create_time)) <= PARENT_CREATE_TIME_TOLERANCE_SECONDS
+            and "python" in name
+            and _working_directory_matches(item, invocation)
+            and _parent_invocation_matches(command, invocation)
+        )
+        within_launch_time = (
+            create_time >= float(expected_parent_create_time) - PARENT_CREATE_TIME_TOLERANCE_SECONDS
+            and create_time >= float(launch_started_at_epoch) - LAUNCH_TIME_TOLERANCE_SECONDS
+        )
+        worker_identity = (
+            pid == int(current_worker_pid)
+            and int(expected_parent_pid) in ancestors
+            and within_launch_time
+            and "python" in name
+            and _working_directory_matches(item, invocation)
+            and "--worker" in command.lower()
+            and _invocation_matches(command, invocation)
+        )
+        on_worker_spine = (
+            pid in current_worker_ancestor_pids
+            and pid != int(expected_parent_pid)
+            and int(expected_parent_pid) in ancestors
+        )
+        common_spine_identity = (
+            on_worker_spine
+            and within_launch_time
+            and _working_directory_matches(item, invocation)
+            and _invocation_matches(command, invocation)
+            and ("--worker" in command.lower() or "isaaclab.bat" in command.lower())
+        )
+        cli_identity = common_spine_identity and "cmd" in name and "isaaclab.bat" in command.lower()
+        kit_identity = (
+            common_spine_identity
+            and ("kit" in name or "python" in name)
+            and "from isaaclab.cli import cli; cli()" in command.lower()
+        )
+        intermediate_identity = common_spine_identity and "python" in name
+        controlled_descendant = (
+            int(current_worker_pid) in ancestors
+            and int(expected_parent_pid) in ancestors
+            and within_launch_time
+            and item.get("project_related") is True
+            and _working_directory_matches(item, invocation)
+        )
+        role = None
+        if parent_identity:
+            role = "controlled_parent"
+        elif worker_identity:
+            role = "current_worker"
+        elif kit_identity:
+            role = "kit_launcher"
+        elif cli_identity:
+            role = "cli_shim"
+        elif intermediate_identity:
+            role = "controlled_intermediate"
+        elif controlled_descendant:
+            role = "controlled_descendant"
+        owned = role is not None
+        item["controlled_launch_role"] = role
+        item["owned_by_current_invocation"] = owned
+        item["is_controlled_capture_parent"] = role == "controlled_parent"
+        if role is not None:
+            owned_roles[role].append(pid)
+        if (
+            item.get("inspection_available", True)
+            and item.get("project_related")
+            and not owned
+        ):
+            residuals.append(item)
+        elif not item.get("project_related"):
+            ignored_pids.append(pid)
+        audited_records.append(item)
+    controlled_parents = [item for item in audited_records if item.get("controlled_launch_role") == "controlled_parent"]
+    parent_identity_pass = len(controlled_parents) == 1
+    worker_identity_pass = owned_roles["current_worker"] == [int(current_worker_pid)]
+    role_completeness_pass = (
+        len(owned_roles["controlled_parent"]) == 1
+        and len(owned_roles["cli_shim"]) == 1
+        and len(owned_roles["kit_launcher"]) == 1
+        and len(owned_roles["current_worker"]) == 1
+    )
+    return {
+        "pass": parent_identity_pass
+        and worker_identity_pass
+        and role_completeness_pass
+        and not residuals
+        and not uncertain_process_pids,
+        "expected_parent_pid": int(expected_parent_pid),
+        "expected_parent_create_time": float(expected_parent_create_time),
+        "current_worker_pid": int(current_worker_pid),
+        "launch_started_at_epoch": float(launch_started_at_epoch),
+        "invocation": invocation,
+        "invocation_sha256": controlled_launch_invocation_sha256(invocation),
+        "parent_identity_pass": parent_identity_pass,
+        "worker_identity_pass": worker_identity_pass,
+        "role_completeness_pass": role_completeness_pass,
+        "controlled_parent_count": len(controlled_parents),
+        "controlled_parent": controlled_parents[0] if parent_identity_pass else None,
+        "owned_roles": owned_roles,
+        "processes": audited_records,
+        "residuals": residuals,
+        "ignored_pids": ignored_pids,
+        "uncertain_process_pids": uncertain_process_pids,
+        "vanished_process_pids": vanished_process_pids,
+    }
+
+
+def _live_process_record(process: Any, repo_root: Path, output_root: Path) -> dict[str, Any]:  # 补采 PPID、ancestry 与 cwd。
+    import psutil
+
+    with process.oneshot():
+        command_line = " ".join(process.cmdline())
+        executable = process.exe()
+        working_directory = process.cwd()
+        ancestors = [parent.pid for parent in process.parents()]
+        combined = _normalized_command(f"{command_line} {executable} {working_directory or ''}")
+        project_tokens = (
+            _normalized_command(repo_root),
+            Path(__file__).name.lower(),
+            _normalized_command(output_root),
+        )
+        return {
+            "inspection_available": True,
+            "pid": process.pid,
+            "ppid": process.ppid(),
+            "name": process.name(),
+            "command_line": command_line,
+            "executable": executable,
+            "working_directory": working_directory,
+            "create_time": process.create_time(),
+            "ancestor_pids": ancestors,
+            "is_current_worker": process.pid == os.getpid(),
+            "project_related": any(token in combined for token in project_tokens),
+        }
+
+
+def controlled_launch_process_records(
+    repo_root: Path,
+    output_root: Path,
+    expected_parent_pid: int,
+) -> tuple[list[dict[str, Any]], set[int]]:  # 在 formal records 上补齐 parent→worker spine 的 cmd/kit 节点。
+    import psutil
+
+    records = formal.formal_process_records(repo_root)
+    current = psutil.Process(os.getpid())
+    parents = current.parents()
+    ancestor_pids = {parent.pid for parent in parents}
+    by_pid = {int(item["pid"]): dict(item) for item in records if item.get("inspection_available") and "pid" in item}
+    for pid in list(by_pid):
+        try:
+            by_pid[pid].update(_live_process_record(psutil.Process(pid), repo_root, output_root))
+        except psutil.AccessDenied as exc:
+            by_pid[pid] = {
+                "inspection_available": False,
+                "inspection_error_kind": type(exc).__name__,
+                "pid": pid,
+                "name": by_pid[pid].get("name"),
+                "error": str(exc),
+            }
+        except (psutil.NoSuchProcess, psutil.ZombieProcess) as exc:
+            by_pid[pid] = {
+                "inspection_available": False,
+                "inspection_error_kind": type(exc).__name__,
+                "pid": pid,
+                "name": by_pid[pid].get("name"),
+                "error": str(exc),
+            }
+    for process in psutil.process_iter(["pid", "name"]):
+        name = str(process.info.get("name") or "")
+        if not any(token in name.lower() for token in ("python", "kit", "isaac")) or process.pid in by_pid:
+            continue
+        try:
+            by_pid[process.pid] = _live_process_record(process, repo_root, output_root)
+        except psutil.AccessDenied as exc:
+            by_pid[process.pid] = {
+                "inspection_available": False,
+                "inspection_error_kind": type(exc).__name__,
+                "pid": process.pid,
+                "name": name,
+                "error": str(exc),
+            }
+        except (psutil.NoSuchProcess, psutil.ZombieProcess) as exc:
+            by_pid[process.pid] = {
+                "inspection_available": False,
+                "inspection_error_kind": type(exc).__name__,
+                "pid": process.pid,
+                "name": name,
+                "error": str(exc),
+            }
+    spine = [current]
+    for parent in parents:
+        spine.append(parent)
+        if parent.pid == int(expected_parent_pid):
+            break
+    for process in spine:
+        if process.pid in by_pid:
+            continue
+        try:
+            by_pid[process.pid] = _live_process_record(process, repo_root, output_root)
+        except psutil.AccessDenied as exc:
+            by_pid[process.pid] = {
+                "inspection_available": False,
+                "inspection_error_kind": type(exc).__name__,
+                "pid": process.pid,
+                "name": process.name(),
+                "error": str(exc),
+            }
+        except (psutil.NoSuchProcess, psutil.ZombieProcess) as exc:
+            by_pid[process.pid] = {
+                "inspection_available": False,
+                "inspection_error_kind": type(exc).__name__,
+                "pid": process.pid,
+                "name": None,
+                "error": str(exc),
+            }
+    unavailable = [item for item in records if not item.get("inspection_available", True)]
+    return unavailable + list(by_pid.values()), ancestor_pids
+
+
+def feasibility_clean_process_gate(
+    repo_root: Path,
+    output_root: Path,
+    branch: str,
+    seed: int,
+    expected_parent_pid: int,
+    expected_parent_create_time: float,
+    launch_started_at_epoch: float,
+    expected_invocation_sha256: str,
+) -> dict[str, Any]:  # 允许当前受控 parent/CLI/kit/worker launch tree。
+    invocation = controlled_launch_invocation(repo_root, output_root, branch, seed)
+    actual_invocation_sha256 = controlled_launch_invocation_sha256(invocation)
+    if actual_invocation_sha256 != expected_invocation_sha256:
+        raise RuntimeError("WORKER_CONTROLLED_INVOCATION_IDENTITY_MISMATCH")
+    records, ancestor_pids = controlled_launch_process_records(repo_root, output_root, expected_parent_pid)
+    return audit_controlled_launch(
+        records,
+        expected_parent_pid=expected_parent_pid,
+        expected_parent_create_time=expected_parent_create_time,
+        current_worker_pid=os.getpid(),
+        current_worker_ancestor_pids=ancestor_pids,
+        launch_started_at_epoch=launch_started_at_epoch,
+        invocation=invocation,
+    )
 
 
 def _synchronize_and_record(torch_module: Any, timeline: BackwardResourceTimeline, stage_id: str, details: dict[str, Any] | None = None) -> None:  # 对齐异步 CUDA 边界。
@@ -439,12 +744,14 @@ def run_branch_epoch(
             return measured_rollout
 
         def measured_calc_gradients(*call_args: Any, **call_kwargs: Any):  # 首个 loss/backward 入口。
+            resource_timeline.set_failure_hint("B2")
             _synchronize_and_record(torch, resource_timeline, "B2")
             if "B3" not in resource_timeline.completed_ids:
                 resource_timeline.begin("B3")
             return original_calc_gradients(*call_args, **call_kwargs)
 
         def measured_truncate_and_step(*call_args: Any, **call_kwargs: Any):  # 入口位于 backward 返回之后。
+            resource_timeline.set_failure_hint("B3")
             _synchronize_and_record(
                 torch,
                 resource_timeline,
@@ -460,6 +767,7 @@ def run_branch_epoch(
             return original_truncate_and_step(*call_args, **call_kwargs)
 
         def measured_optimizer_step(*call_args: Any, **call_kwargs: Any):  # 真实 optimizer 返回后计数。
+            resource_timeline.set_failure_hint("B4")
             result = original_optimizer_step(*call_args, **call_kwargs)
             counters["optimizer_step_count"] += 1
             _synchronize_and_record(
@@ -480,6 +788,7 @@ def run_branch_epoch(
         agent.update_epoch()
         counters["train_epoch_calls"] += 1
         agent.train_epoch()
+        resource_timeline.clear_failure_hint()
         agent.dataset.update_values_dict(None)
         frames = int(agent.curr_frames * agent.world_size if agent.multi_gpu else agent.curr_frames)
         agent.frame += frames
@@ -540,6 +849,7 @@ def run_branch_epoch(
             "status": status,
             "branch": args.branch,
             "seed": args.seed,
+            "run_id": args.run_id,
             "process_id": os.getpid(),
             "timestamp_utc": utc_now(),
             "git_commit": formal.audit.git_text(args.repo_root, "rev-parse", "HEAD"),
@@ -595,6 +905,11 @@ def build_fairness_report(results: dict[str, dict[str, Any]]) -> dict[str, Any]:
         "both_branches_pass": complete and all(results[branch].get("status") == "PASS" for branch in formal.BRANCHES),
         "history_first": complete and history.get("branch") == "history_only" and oracle.get("branch") == "oracle",
         "fresh_processes": complete and history.get("process_id") != oracle.get("process_id"),
+        "same_run_id": complete
+        and isinstance(history.get("run_id"), str)
+        and len(history.get("run_id", "")) == 32
+        and all(character in "0123456789abcdef" for character in history.get("run_id", ""))
+        and history.get("run_id") == oracle.get("run_id"),
         "same_seed": complete and history.get("seed") == oracle.get("seed") == SEED,
         "same_git_commit": complete and history.get("git_commit") == oracle.get("git_commit"),
         "same_frozen_contract": complete and history.get("frozen_contract") == oracle.get("frozen_contract") == frozen_contract_record(),
@@ -655,11 +970,24 @@ def build_fairness_report(results: dict[str, dict[str, Any]]) -> dict[str, Any]:
         "fairness_schema": FAIRNESS_SCHEMA,
         "feasibility_id": FEASIBILITY_ID,
         "schema_version": 1,
+        "run_id": history.get("run_id") if complete else None,
         "overall_pass": all(checks.values()),
         "checks": checks,
         "branch_result_paths": {branch: f"{branch}/result.json" for branch in results},
         "scientific_conclusion_generated": False,
     }
+
+
+def validate_output_root_freshness(output_root: Path, branch: str) -> None:  # 禁止跨 run 混入旧 branch artifact。
+    if branch == "history_only":
+        if output_root.exists():
+            raise RuntimeError(f"HISTORY_REQUIRES_ABSENT_FRESH_OUTPUT_ROOT: {output_root}")
+        return
+    if not output_root.is_dir():
+        raise RuntimeError(f"ORACLE_REQUIRES_EXISTING_HISTORY_OUTPUT_ROOT: {output_root}")
+    oracle_dir = output_root / "oracle"
+    if oracle_dir.exists():
+        raise RuntimeError(f"ORACLE_REQUIRES_EMPTY_BRANCH_SLOT: {oracle_dir}")
 
 
 def _console_failure_excerpt(text: str) -> list[str]:  # 保留原生 CUDA/PhysX/内存错误行。
@@ -710,6 +1038,16 @@ def finalize_console_evidence(
             "resource_state_provenance": "finalizer_process_after_worker_exit",
             "scientific_conclusion_generated": False,
         }
+    preflight_path = branch_dir / "preflight_system_state.json"
+    preflight = json.loads(preflight_path.read_text(encoding="utf-8")) if preflight_path.is_file() else {}
+    capture_admission = preflight.get("console_capture_admission", {})
+    clean_process_gate = preflight.get("clean_process_gate", {})
+    result_preflight_lineage = (
+        bool(preflight)
+        and result.get("run_id") == preflight.get("run_id")
+        and result.get("process_id") == clean_process_gate.get("current_worker_pid")
+        and capture_admission.get("token_sha256") == token_sha256
+    )
     result_error_text = json.dumps(result.get("error") or {}, sort_keys=True, default=str)
     combined_error = f"{result_error_text}\n{console_text}"
     signatures = failure_signature_record(combined_error)
@@ -734,6 +1072,7 @@ def finalize_console_evidence(
             "no_articulation_failure": not signatures["articulation"],
             "no_resource_allocation_failure": not signatures["resource_allocation"],
             "no_trained_checkpoint_retained": not list(branch_dir.rglob("*.pth")),
+            "result_preflight_lineage": result_preflight_lineage,
         }
     )
     runtime_eligible = result.get("status") in ("PASS", "PENDING_CONSOLE_FINALIZATION")
@@ -872,18 +1211,34 @@ def launch_branch_process(args: argparse.Namespace) -> int:  # 父进程独占 w
     repo_root = args.repo_root.expanduser().resolve(strict=True)
     output_root = args.output_root.expanduser().resolve(strict=False)
     isaaclab_bat = args.isaaclab_bat.expanduser().resolve(strict=True)
-    output_root.mkdir(parents=True, exist_ok=True)
+    validate_output_root_freshness(output_root, args.branch)
+    current_commit = formal.audit.git_text(repo_root, "rev-parse", "HEAD")
+    if args.branch == "oracle":
+        oracle_precondition = validate_oracle_precondition(output_root, current_commit)
+        run_id = str(oracle_precondition["run_id"])
+    else:
+        run_id = secrets.token_hex(16)
     branch_dir = output_root / args.branch
-    branch_dir.mkdir(parents=True, exist_ok=True)
+    if args.branch == "history_only":
+        output_root.mkdir(parents=True, exist_ok=False)
+        branch_dir.mkdir(exist_ok=False)
+    else:
+        branch_dir.mkdir(exist_ok=False)
     result_path = branch_dir / "result.json"
     console_path = branch_dir / "console.log"
     if result_path.exists() or console_path.exists():
         raise RuntimeError(f"拒绝覆盖既有 branch artifact: {branch_dir}")
-    current_commit = formal.audit.git_text(repo_root, "rev-parse", "HEAD")
-    if args.branch == "oracle":
-        validate_oracle_precondition(output_root, current_commit)
     capture_token = secrets.token_hex(32)
     token_sha256 = hashlib.sha256(capture_token.encode("utf-8")).hexdigest()
+    try:
+        import psutil
+
+        parent_create_time = psutil.Process(os.getpid()).create_time()
+    except Exception as exc:
+        raise RuntimeError(f"CONTROLLED_PARENT_IDENTITY_UNAVAILABLE: {type(exc).__name__}: {exc}") from exc
+    launch_started_at_epoch = time.time()
+    invocation = controlled_launch_invocation(repo_root, output_root, args.branch, args.seed)
+    invocation_sha256 = controlled_launch_invocation_sha256(invocation)
     worker_command = [
         str(isaaclab_bat),
         "-p",
@@ -902,6 +1257,10 @@ def launch_branch_process(args: argparse.Namespace) -> int:  # 父进程独占 w
     environment = os.environ.copy()
     environment["R7_PHASE42B_CAPTURE_TOKEN"] = capture_token
     environment["R7_PHASE42B_CAPTURE_PARENT_PID"] = str(os.getpid())
+    environment["R7_PHASE42B_CAPTURE_PARENT_CREATE_TIME"] = repr(parent_create_time)
+    environment["R7_PHASE42B_CAPTURE_STARTED_AT_EPOCH"] = repr(launch_started_at_epoch)
+    environment["R7_PHASE42B_CAPTURE_INVOCATION_SHA256"] = invocation_sha256
+    environment["R7_PHASE42B_RUN_ID"] = run_id
     with console_path.open("w", encoding="utf-8", errors="replace") as console_stream:
         console_stream.write(f"R7_PHASE42B_PARENT_CAPTURE_START token_sha256={token_sha256}\n")
         console_stream.flush()
@@ -948,14 +1307,32 @@ def main(argv: Sequence[str] | None = None) -> int:  # 每个进程只执行一�
         validate_cli_contract(args)
         capture_token = os.environ.get("R7_PHASE42B_CAPTURE_TOKEN")
         capture_parent_pid_text = os.environ.get("R7_PHASE42B_CAPTURE_PARENT_PID")
-        if not capture_token or not capture_parent_pid_text:
+        capture_parent_create_time_text = os.environ.get("R7_PHASE42B_CAPTURE_PARENT_CREATE_TIME")
+        capture_started_at_text = os.environ.get("R7_PHASE42B_CAPTURE_STARTED_AT_EPOCH")
+        capture_invocation_sha256 = os.environ.get("R7_PHASE42B_CAPTURE_INVOCATION_SHA256")
+        capture_run_id = os.environ.get("R7_PHASE42B_RUN_ID")
+        if not all(
+            (
+                capture_token,
+                capture_parent_pid_text,
+                capture_parent_create_time_text,
+                capture_started_at_text,
+                capture_invocation_sha256,
+                capture_run_id,
+            )
+        ):
             raise RuntimeError("WORKER_CONTROLLED_PARENT_ENVIRONMENT_MISSING")
         try:
             capture_parent_pid = int(capture_parent_pid_text)
-        except ValueError as exc:
-            raise RuntimeError("WORKER_CONTROLLED_PARENT_PID_INVALID") from exc
+            capture_parent_create_time = float(capture_parent_create_time_text)
+            capture_started_at_epoch = float(capture_started_at_text)
+        except (TypeError, ValueError) as exc:
+            raise RuntimeError("WORKER_CONTROLLED_PARENT_IDENTITY_INVALID") from exc
         args.repo_root = args.repo_root.expanduser().resolve(strict=True)
         args.output_root = args.output_root.expanduser().resolve(strict=False)
+        if len(str(capture_run_id)) != 32 or not all(character in "0123456789abcdef" for character in str(capture_run_id)):
+            raise RuntimeError("WORKER_RUN_ID_INVALID")
+        args.run_id = str(capture_run_id)
         args.output_root.mkdir(parents=True, exist_ok=True)
         branch_dir = args.output_root / args.branch
         branch_dir.mkdir(parents=True, exist_ok=True)
@@ -967,11 +1344,22 @@ def main(argv: Sequence[str] | None = None) -> int:  # 每个进程只执行一�
             raise RuntimeError(f"EXTERNAL_CONSOLE_CAPTURE_REQUIRED: {console_path}")
         current_commit = formal.audit.git_text(args.repo_root, "rev-parse", "HEAD")
         if args.branch == "oracle":
-            validate_oracle_precondition(args.output_root, current_commit)
+            oracle_precondition = validate_oracle_precondition(args.output_root, current_commit)
+            if oracle_precondition["run_id"] != args.run_id:
+                raise RuntimeError("ORACLE_RUN_ID_MISMATCH")
         config, config_record = formal.load_committed_agent_config(args.repo_root)
         del config
         checkpoint_before = formal.checkpoint_preflight(args.repo_root)
-        clean_record = feasibility_clean_process_gate(args.repo_root, capture_parent_pid)
+        clean_record = feasibility_clean_process_gate(
+            args.repo_root,
+            args.output_root,
+            args.branch,
+            args.seed,
+            capture_parent_pid,
+            capture_parent_create_time,
+            capture_started_at_epoch,
+            str(capture_invocation_sha256),
+        )
         if not clean_record["pass"]:
             raise RuntimeError(f"clean process gate 发现残留: {clean_record['residuals']}")
         formal.audit.atomic_write_json(
@@ -980,6 +1368,7 @@ def main(argv: Sequence[str] | None = None) -> int:  # 每个进程只执行一�
                 "protocol_id": PROTOCOL_ID,
                 "feasibility_id": FEASIBILITY_ID,
                 "branch": args.branch,
+                "run_id": args.run_id,
                 "git_commit": current_commit,
                 "parent_engineering_commit": PARENT_ENGINEERING_COMMIT,
                 "config_source": config_record,
@@ -988,6 +1377,9 @@ def main(argv: Sequence[str] | None = None) -> int:  # 每个进程只执行一�
                 "console_capture_admission": {
                     "owner": "phase42b_parent_launcher",
                     "parent_pid": capture_parent_pid,
+                    "parent_create_time": capture_parent_create_time,
+                    "launch_started_at_epoch": capture_started_at_epoch,
+                    "invocation_sha256": capture_invocation_sha256,
                     "token_sha256": hashlib.sha256(capture_token.encode("utf-8")).hexdigest(),
                     "token_persisted_in_command_line": False,
                 },
@@ -1032,6 +1424,7 @@ def main(argv: Sequence[str] | None = None) -> int:  # 每个进程只执行一�
             "status": "BLOCKED",
             "branch": branch,
             "seed": getattr(args, "seed", None),
+            "run_id": getattr(args, "run_id", None),
             "process_id": os.getpid(),
             "timestamp_utc": utc_now(),
             "git_commit": failure_commit,
