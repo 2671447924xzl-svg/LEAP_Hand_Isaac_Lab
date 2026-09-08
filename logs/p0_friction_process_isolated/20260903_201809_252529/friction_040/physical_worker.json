@@ -1,0 +1,218 @@
+{
+  "protocol_id": "P0_7F1_PROCESS_ISOLATED_FRICTION_QUALIFICATION",
+  "qualification_eligible": true,
+  "worker_mode": "physical",
+  "pid": 3336,
+  "friction": 0.4,
+  "material_readback": {
+    "status": "PASS",
+    "requested_static": 0.4,
+    "requested_dynamic": 0.4,
+    "before_static": 0.800000011920929,
+    "before_dynamic": 0.800000011920929,
+    "actual_static": 0.4000000059604645,
+    "actual_dynamic": 0.4000000059604645,
+    "object_combine_mode": "min",
+    "hand_static": 0.800000011920929,
+    "hand_dynamic": 0.800000011920929,
+    "hand_combine_mode": "min",
+    "mass_kg": 0.2160000056028366,
+    "physics_step_count": 0,
+    "simulation_time_s": 0.0
+  },
+  "mass": 0.2160000056028366,
+  "checkpoint_sha256": "46675eecc4e51372ec2c336d9637ef588a61b80e24aeb796de263bd1e75ce364",
+  "physics_dt": 0.008333333333333333,
+  "decimation": 4,
+  "seed": 42,
+  "result": {
+    "protocol_id": "P0_7F1_PROCESS_ISOLATED_FRICTION_QUALIFICATION",
+    "worker_mode": "physical",
+    "pid": 3336,
+    "friction": 0.4,
+    "material_readback": {
+      "status": "PASS",
+      "requested_static": 0.4,
+      "requested_dynamic": 0.4,
+      "before_static": 0.800000011920929,
+      "before_dynamic": 0.800000011920929,
+      "actual_static": 0.4000000059604645,
+      "actual_dynamic": 0.4000000059604645,
+      "object_combine_mode": "min",
+      "hand_static": 0.800000011920929,
+      "hand_dynamic": 0.800000011920929,
+      "hand_combine_mode": "min",
+      "mass_kg": 0.2160000056028366,
+      "physics_step_count": 0,
+      "simulation_time_s": 0.0
+    },
+    "material_checks": [
+      {
+        "status": "PASS",
+        "requested_static": 0.4,
+        "requested_dynamic": 0.4,
+        "before_static": 0.800000011920929,
+        "before_dynamic": 0.800000011920929,
+        "actual_static": 0.4000000059604645,
+        "actual_dynamic": 0.4000000059604645,
+        "object_combine_mode": "min",
+        "hand_static": 0.800000011920929,
+        "hand_dynamic": 0.800000011920929,
+        "hand_combine_mode": "min",
+        "mass_kg": 0.2160000056028366,
+        "physics_step_count": 0,
+        "simulation_time_s": 0.0
+      },
+      {
+        "status": "PASS",
+        "requested_static": 0.4,
+        "requested_dynamic": 0.4,
+        "before_static": 0.800000011920929,
+        "before_dynamic": 0.800000011920929,
+        "actual_static": 0.4000000059604645,
+        "actual_dynamic": 0.4000000059604645,
+        "object_combine_mode": "min",
+        "hand_static": 0.800000011920929,
+        "hand_dynamic": 0.800000011920929,
+        "hand_combine_mode": "min",
+        "mass_kg": 0.2160000056028366,
+        "physics_step_count": 1888,
+        "simulation_time_s": 0.0
+      },
+      {
+        "status": "PASS",
+        "requested_static": 0.4,
+        "requested_dynamic": 0.4,
+        "before_static": 0.800000011920929,
+        "before_dynamic": 0.800000011920929,
+        "actual_static": 0.4000000059604645,
+        "actual_dynamic": 0.4000000059604645,
+        "object_combine_mode": "min",
+        "hand_static": 0.800000011920929,
+        "hand_dynamic": 0.800000011920929,
+        "hand_combine_mode": "min",
+        "mass_kg": 0.2160000056028366,
+        "physics_step_count": 3776,
+        "simulation_time_s": 0.0
+      }
+    ],
+    "material_valid": true,
+    "mass": 0.2160000056028366,
+    "checkpoint_sha256": "46675eecc4e51372ec2c336d9637ef588a61b80e24aeb796de263bd1e75ce364",
+    "checkpoint_load": {
+      "status": "PASS",
+      "checkpoint_path": "D:\\Research\\LEAP\\LEAP_Hand_Isaac_Lab\\logs\\rl_games\\leap_hand_reorient\\pretrained\\nn\\leap_hand_reorient.pth",
+      "checkpoint_sha256": "46675eecc4e51372ec2c336d9637ef588a61b80e24aeb796de263bd1e75ce364",
+      "observation_shape": [
+        96
+      ],
+      "action_shape": [
+        16
+      ],
+      "missing_keys": [],
+      "unexpected_keys": [],
+      "shape_mismatch": {}
+    },
+    "physics_dt": 0.008333333333333333,
+    "decimation": 4,
+    "seed": 42,
+    "factor_codes": [
+      "000"
+    ],
+    "events": null,
+    "adr_enabled": false,
+    "controlled_slip_protocol": {
+      "settle_steps": 120,
+      "force_range_n": [
+        0.0,
+        2.2
+      ],
+      "force_step_n": 0.01,
+      "hold_physics_steps": 8,
+      "velocity_threshold_mps": 0.01,
+      "displacement_threshold_m": 0.0005,
+      "consecutive_steps_within_plateau": 5,
+      "probe": {
+        "probe_path": "/World/ground",
+        "restored": true,
+        "collider_path": "/World/ground/GroundPlane/CollisionPlane",
+        "temporary_material_path": "/World/P0_7F1_audit_ground_material",
+        "prior_material_path": "/World/ground/physicsMaterial",
+        "prior_binding_strength": "strongerThanDescendants",
+        "requested_static_friction": 0.8,
+        "requested_dynamic_friction": 0.8,
+        "requested_combine_mode": "min",
+        "restored_strength": true,
+        "temporary_material_removed": true,
+        "actual_static_friction": 0.800000011920929,
+        "actual_dynamic_friction": 0.800000011920929,
+        "actual_combine_mode": "min",
+        "restored_material_path": "/World/ground/physicsMaterial",
+        "restored_binding_strength": "strongerThanDescendants"
+      }
+    },
+    "slip_repeats": [
+      {
+        "repeat": 0,
+        "onset_force_n": 0.99,
+        "onset_found": true,
+        "start_physics_step": 0,
+        "end_physics_step": 1888,
+        "actual_static_friction": 0.4000000059604645,
+        "actual_dynamic_friction": 0.4000000059604645
+      },
+      {
+        "repeat": 1,
+        "onset_force_n": 0.99,
+        "onset_found": true,
+        "start_physics_step": 1888,
+        "end_physics_step": 3776,
+        "actual_static_friction": 0.4000000059604645,
+        "actual_dynamic_friction": 0.4000000059604645
+      },
+      {
+        "repeat": 2,
+        "onset_force_n": 0.99,
+        "onset_found": true,
+        "start_physics_step": 3776,
+        "end_physics_step": 5664,
+        "actual_static_friction": 0.4000000059604645,
+        "actual_dynamic_friction": 0.4000000059604645
+      }
+    ],
+    "slip_raw_csv": "D:\\Research\\LEAP\\LEAP_Hand_Isaac_Lab\\logs\\p0_friction_process_isolated\\20260903_201809_252529\\friction_040\\controlled_slip_raw.csv"
+  },
+  "fatal_error": null,
+  "protected_hashes_before": {
+    "scripts/p0_physics_validation.py": "876a3b3f02ea5a085c21dea0647599d11051a6ac951eab3330abe18e9f2e703f",
+    "scripts/p0_timing_audit.py": "8a35888d370e4716b2557eaa0148486219a91fddd80290d3ea67ad4b34c5db47",
+    "scripts/p0_friction_coupling_diagnosis.py": "d12c4f374be43ae27b5d594fee056559c9fd617dd1ce5ccb9a82d61205622de3",
+    "scripts/p0_friction_material_diagnosis.py": "83f649e8f3c0ba681feee341abeadd795716cfa01af3f813aacbbb53bff10b85",
+    "scripts/p0_friction_material_sync_diagnosis.py": "c41cf3b41df77bf29cc78e0264f34f69e6e9cc77455831286cf5f6e8ad613d55",
+    "scripts/p0_friction_material_sequence_bisect.py": "379e1f34ec8110f54426239b3512dea51ab6b18cdfd478ac574438fcb284923f",
+    "source/LEAP_Isaaclab/LEAP_Isaaclab/tasks/leap_hand_reorient/leap_hand_env_cfg.py": "1ffe106bd5cae70f457651c82ccddf311fc463e7c437e6c3de325c9c494fe18b",
+    "source/LEAP_Isaaclab/LEAP_Isaaclab/tasks/leap_hand_reorient/reorientation_env.py": "5f44dfab7620c3ade7dcf73469290f3b8ed7ac95b2b31db861fa2289352b09ce",
+    "source/LEAP_Isaaclab/LEAP_Isaaclab/tasks/leap_hand_reorient_cri/factor_conditions.py": "1255b2fdb391394c2235ffa17a164ccc52c97ab51525b22aa6285006ba4ed714",
+    "source/LEAP_Isaaclab/LEAP_Isaaclab/tasks/leap_hand_reorient_cri/leap_hand_cri_env_cfg.py": "e25b6087f81a958cfe1e237a7275b8619050597c52ad1adadaaf9eba5120d901",
+    "source/LEAP_Isaaclab/LEAP_Isaaclab/tasks/leap_hand_reorient_cri/reorientation_cri_env.py": "9550176ffaff5a672c2bf285dd37e1fb93411bfec2b295e04330047047be2fae",
+    "source/LEAP_Isaaclab/LEAP_Isaaclab/tasks/leap_hand_reorient/agents/rl_games_ppo_cfg.yaml": "cefe853eb766f40ce6120a16b58d076ba0655f9cde608b9efe21df43745398ba",
+    "logs/rl_games/leap_hand_reorient/pretrained/nn/leap_hand_reorient.pth": "46675eecc4e51372ec2c336d9637ef588a61b80e24aeb796de263bd1e75ce364"
+  },
+  "protected_hashes_after": {
+    "scripts/p0_physics_validation.py": "876a3b3f02ea5a085c21dea0647599d11051a6ac951eab3330abe18e9f2e703f",
+    "scripts/p0_timing_audit.py": "8a35888d370e4716b2557eaa0148486219a91fddd80290d3ea67ad4b34c5db47",
+    "scripts/p0_friction_coupling_diagnosis.py": "d12c4f374be43ae27b5d594fee056559c9fd617dd1ce5ccb9a82d61205622de3",
+    "scripts/p0_friction_material_diagnosis.py": "83f649e8f3c0ba681feee341abeadd795716cfa01af3f813aacbbb53bff10b85",
+    "scripts/p0_friction_material_sync_diagnosis.py": "c41cf3b41df77bf29cc78e0264f34f69e6e9cc77455831286cf5f6e8ad613d55",
+    "scripts/p0_friction_material_sequence_bisect.py": "379e1f34ec8110f54426239b3512dea51ab6b18cdfd478ac574438fcb284923f",
+    "source/LEAP_Isaaclab/LEAP_Isaaclab/tasks/leap_hand_reorient/leap_hand_env_cfg.py": "1ffe106bd5cae70f457651c82ccddf311fc463e7c437e6c3de325c9c494fe18b",
+    "source/LEAP_Isaaclab/LEAP_Isaaclab/tasks/leap_hand_reorient/reorientation_env.py": "5f44dfab7620c3ade7dcf73469290f3b8ed7ac95b2b31db861fa2289352b09ce",
+    "source/LEAP_Isaaclab/LEAP_Isaaclab/tasks/leap_hand_reorient_cri/factor_conditions.py": "1255b2fdb391394c2235ffa17a164ccc52c97ab51525b22aa6285006ba4ed714",
+    "source/LEAP_Isaaclab/LEAP_Isaaclab/tasks/leap_hand_reorient_cri/leap_hand_cri_env_cfg.py": "e25b6087f81a958cfe1e237a7275b8619050597c52ad1adadaaf9eba5120d901",
+    "source/LEAP_Isaaclab/LEAP_Isaaclab/tasks/leap_hand_reorient_cri/reorientation_cri_env.py": "9550176ffaff5a672c2bf285dd37e1fb93411bfec2b295e04330047047be2fae",
+    "source/LEAP_Isaaclab/LEAP_Isaaclab/tasks/leap_hand_reorient/agents/rl_games_ppo_cfg.yaml": "cefe853eb766f40ce6120a16b58d076ba0655f9cde608b9efe21df43745398ba",
+    "logs/rl_games/leap_hand_reorient/pretrained/nn/leap_hand_reorient.pth": "46675eecc4e51372ec2c336d9637ef588a61b80e24aeb796de263bd1e75ce364"
+  },
+  "protected_unchanged": true,
+  "simulation_app_close_contract": "ENTRYPOINT_FINALLY"
+}

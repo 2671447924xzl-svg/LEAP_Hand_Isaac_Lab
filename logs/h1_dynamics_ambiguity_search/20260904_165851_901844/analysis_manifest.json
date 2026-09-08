@@ -1,0 +1,37 @@
+{
+  "protocol_id": "H1_DYNAMICS_AMBIGUITY_CANDIDATE_SCREEN_V1",
+  "created_local": "2026-09-04T16:58:52.828789",
+  "claim_role": "exploratory candidate prioritization only",
+  "formal_h1_status": "NOT_TESTED_O0_COUNTERFACTUAL_REQUIRED",
+  "input_dir": "D:\\Research\\LEAP\\LEAP_Hand_Isaac_Lab\\logs\\b0_dynamics_sensitivity\\20260904_113624_524310",
+  "input_sha256": {
+    "trajectory_data.npz": "0f19253f0b55c43e179e8353fed8f31ed4f158d1adc5badb2bfdd53b28087c81",
+    "summary.json": "8d94a7e1e6d82b07a94fb399f27506242a9f5d28213a97dbe9b4fe61a52887ec",
+    "checkpoint": "46675eecc4e51372ec2c336d9637ef588a61b80e24aeb796de263bd1e75ce364"
+  },
+  "history_windows_steps": [
+    3,
+    5,
+    10
+  ],
+  "future_action_windows_steps": [
+    3,
+    5,
+    10
+  ],
+  "history_distance": "standardized RMS L2 over policy-observation history",
+  "future_action_divergence": "RMS L2 over next window-length raw-action segment",
+  "negative_control_pairing": "within-condition distinct-seed circular shift +1, same timestep",
+  "calibration_quantiles": {
+    "history": 0.1,
+    "future_action": 0.9,
+    "performance_j_rot": 0.9
+  },
+  "standardization": {
+    "sample_count": 147585,
+    "std_floor": 1e-06,
+    "mean_sha256": "9f2ac8cd4610943bfd4e35cd708705a460bfa80638e6f49f217b13940b2035bd",
+    "std_sha256": "8f3a943e339c9dc7e131206caaf425c982b4127a3b7d1ce321f0efd3d76dc4d7"
+  },
+  "snapshot_semantics": "trajectory state only; not replay-complete simulator state"
+}

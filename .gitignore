@@ -66,3 +66,24 @@ recordings/
 # Local temporary experiment files
 *.log
 *.tmp
+
+# ============================================================
+# Research experiment raw data
+# Keep summaries / manifests / checksums / figures trackable,
+# while excluding large or reproducible raw outputs.
+
+# Raw trajectory arrays
+logs/**/*.npz
+
+# Raw tabular trajectories / measurements
+logs/**/*_raw.csv
+logs/**/manipulation_raw.csv
+logs/**/controlled_slip_raw.csv
+
+# Runtime logs
+logs/**/*.log
+
+# Experiment checkpoints generated under logs
+logs/**/checkpoints/*.pth
+logs/**/checkpoints/*.pt
+logs/**/checkpoints/*.ckpt

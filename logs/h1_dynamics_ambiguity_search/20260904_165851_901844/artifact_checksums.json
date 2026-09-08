@@ -1,0 +1,44 @@
+{
+  "generated_artifacts": {
+    "analysis_manifest.json": "eed46281b8444446670c0746fc8d184d93cf7da0f92722adca57fa620a804fc0",
+    "candidate_pairs.csv": "ad7369081ec68610f58e30e3deb6b33526072d2d2367f45ac82240bb3f2c4384",
+    "candidate_state_snapshots.npz": "a8d49220ccee208674f1f3b4c023ee06a12bd85a58ce1b33b7ab569cea8479da",
+    "negative_control_calibration.npz": "5ae4beec8329d68f731a85f6cc8ffc9b94dbf06b597e18e4785892815fb32046",
+    "summary.json": "25fa53bca40caba28e2d2cd9ebe47181bfaf8efe6032ebae471519a76d98ede8"
+  },
+  "source_inputs": {
+    "D:\\Research\\LEAP\\LEAP_Hand_Isaac_Lab\\logs\\b0_dynamics_sensitivity\\20260904_113624_524310\\trajectory_data.npz": "0f19253f0b55c43e179e8353fed8f31ed4f158d1adc5badb2bfdd53b28087c81",
+    "D:\\Research\\LEAP\\LEAP_Hand_Isaac_Lab\\logs\\b0_dynamics_sensitivity\\20260904_113624_524310\\summary.json": "8d94a7e1e6d82b07a94fb399f27506242a9f5d28213a97dbe9b4fe61a52887ec",
+    "D:\\Research\\LEAP\\LEAP_Hand_Isaac_Lab\\logs\\rl_games\\leap_hand_reorient\\pretrained\\nn\\leap_hand_reorient.pth": "46675eecc4e51372ec2c336d9637ef588a61b80e24aeb796de263bd1e75ce364",
+    "D:\\Research\\LEAP\\LEAP_Hand_Isaac_Lab\\scripts\\h1_dynamics_ambiguity_search.py": "f14787fd565885dbbc57ecdffbb0c9fc3f09907ab512ca45b24f35bedd87ef9b"
+  },
+  "protected_before": {
+    "scripts/p0_timing_audit.py": "8a35888d370e4716b2557eaa0148486219a91fddd80290d3ea67ad4b34c5db47",
+    "scripts/p0_physics_validation.py": "876a3b3f02ea5a085c21dea0647599d11051a6ac951eab3330abe18e9f2e703f",
+    "scripts/p0_cri_factor_smoke.py": "aac54b60bd7141f846772e345b99fbec13b4314e0e3d86a1859fdb25736308db",
+    "scripts/p0_friction_process_isolated_qualification.py": "b60a922f74322320ecc3a72d00cc08ed7781b66024a5cef7d6edb588b143946b",
+    "scripts/b0_dynamics_sensitivity_baseline.py": "bc6a85510ba677b164784ee714e3a203f9fd2beb112313d925f462955a2fb5cc",
+    "source/LEAP_Isaaclab/LEAP_Isaaclab/tasks/leap_hand_reorient/leap_hand_env_cfg.py": "1ffe106bd5cae70f457651c82ccddf311fc463e7c437e6c3de325c9c494fe18b",
+    "source/LEAP_Isaaclab/LEAP_Isaaclab/tasks/leap_hand_reorient/reorientation_env.py": "5f44dfab7620c3ade7dcf73469290f3b8ed7ac95b2b31db861fa2289352b09ce",
+    "source/LEAP_Isaaclab/LEAP_Isaaclab/tasks/leap_hand_reorient_cri/factor_conditions.py": "1255b2fdb391394c2235ffa17a164ccc52c97ab51525b22aa6285006ba4ed714",
+    "source/LEAP_Isaaclab/LEAP_Isaaclab/tasks/leap_hand_reorient_cri/leap_hand_cri_env_cfg.py": "e25b6087f81a958cfe1e237a7275b8619050597c52ad1adadaaf9eba5120d901",
+    "source/LEAP_Isaaclab/LEAP_Isaaclab/tasks/leap_hand_reorient_cri/reorientation_cri_env.py": "9550176ffaff5a672c2bf285dd37e1fb93411bfec2b295e04330047047be2fae",
+    "source/LEAP_Isaaclab/LEAP_Isaaclab/tasks/leap_hand_reorient/agents/rl_games_ppo_cfg.yaml": "cefe853eb766f40ce6120a16b58d076ba0655f9cde608b9efe21df43745398ba",
+    "logs/rl_games/leap_hand_reorient/pretrained/nn/leap_hand_reorient.pth": "46675eecc4e51372ec2c336d9637ef588a61b80e24aeb796de263bd1e75ce364"
+  },
+  "protected_after": {
+    "scripts/p0_timing_audit.py": "8a35888d370e4716b2557eaa0148486219a91fddd80290d3ea67ad4b34c5db47",
+    "scripts/p0_physics_validation.py": "876a3b3f02ea5a085c21dea0647599d11051a6ac951eab3330abe18e9f2e703f",
+    "scripts/p0_cri_factor_smoke.py": "aac54b60bd7141f846772e345b99fbec13b4314e0e3d86a1859fdb25736308db",
+    "scripts/p0_friction_process_isolated_qualification.py": "b60a922f74322320ecc3a72d00cc08ed7781b66024a5cef7d6edb588b143946b",
+    "scripts/b0_dynamics_sensitivity_baseline.py": "bc6a85510ba677b164784ee714e3a203f9fd2beb112313d925f462955a2fb5cc",
+    "source/LEAP_Isaaclab/LEAP_Isaaclab/tasks/leap_hand_reorient/leap_hand_env_cfg.py": "1ffe106bd5cae70f457651c82ccddf311fc463e7c437e6c3de325c9c494fe18b",
+    "source/LEAP_Isaaclab/LEAP_Isaaclab/tasks/leap_hand_reorient/reorientation_env.py": "5f44dfab7620c3ade7dcf73469290f3b8ed7ac95b2b31db861fa2289352b09ce",
+    "source/LEAP_Isaaclab/LEAP_Isaaclab/tasks/leap_hand_reorient_cri/factor_conditions.py": "1255b2fdb391394c2235ffa17a164ccc52c97ab51525b22aa6285006ba4ed714",
+    "source/LEAP_Isaaclab/LEAP_Isaaclab/tasks/leap_hand_reorient_cri/leap_hand_cri_env_cfg.py": "e25b6087f81a958cfe1e237a7275b8619050597c52ad1adadaaf9eba5120d901",
+    "source/LEAP_Isaaclab/LEAP_Isaaclab/tasks/leap_hand_reorient_cri/reorientation_cri_env.py": "9550176ffaff5a672c2bf285dd37e1fb93411bfec2b295e04330047047be2fae",
+    "source/LEAP_Isaaclab/LEAP_Isaaclab/tasks/leap_hand_reorient/agents/rl_games_ppo_cfg.yaml": "cefe853eb766f40ce6120a16b58d076ba0655f9cde608b9efe21df43745398ba",
+    "logs/rl_games/leap_hand_reorient/pretrained/nn/leap_hand_reorient.pth": "46675eecc4e51372ec2c336d9637ef588a61b80e24aeb796de263bd1e75ce364"
+  },
+  "protected_unchanged": true
+}

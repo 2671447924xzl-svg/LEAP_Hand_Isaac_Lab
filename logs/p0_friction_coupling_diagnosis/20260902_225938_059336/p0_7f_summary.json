@@ -1,0 +1,1254 @@
+{
+  "protocol_id": "P0_7F_FRICTION_CROSS_ENVIRONMENT_COUPLING_DIAGNOSIS",
+  "run_id": "20260902_225938_059336",
+  "parent_qualification_run_id": "20260902_205231_823279",
+  "measurement_mode": "MULTI_ENV_SIMULTANEOUS",
+  "process_id": 34356,
+  "status": "DATA_COLLECTED",
+  "error": null,
+  "git_branch": "chd-dev",
+  "git_commit": "b40b30ba684e2e1e244242739deb0be5cc0dcf45",
+  "git_commit_after": "b40b30ba684e2e1e244242739deb0be5cc0dcf45",
+  "script_sha256": "0fa26bcb91df4475e76f47ff05d2e122beb287012f54c8edf395b61a9f84de09",
+  "script_sha256_after": "0fa26bcb91df4475e76f47ff05d2e122beb287012f54c8edf395b61a9f84de09",
+  "protected_hashes_before": {
+    "scripts/p0_physics_validation.py": "876a3b3f02ea5a085c21dea0647599d11051a6ac951eab3330abe18e9f2e703f",
+    "scripts/p0_timing_audit.py": "8a35888d370e4716b2557eaa0148486219a91fddd80290d3ea67ad4b34c5db47",
+    "source/LEAP_Isaaclab/LEAP_Isaaclab/tasks/leap_hand_reorient/__init__.py": "173d628e2e41de08a4621288c6c2aedc2ed348c5c2e78a0818fe66a6c69200e2",
+    "source/LEAP_Isaaclab/LEAP_Isaaclab/tasks/leap_hand_reorient/leap_hand_env_cfg.py": "1ffe106bd5cae70f457651c82ccddf311fc463e7c437e6c3de325c9c494fe18b",
+    "source/LEAP_Isaaclab/LEAP_Isaaclab/tasks/leap_hand_reorient/reorientation_env.py": "5f44dfab7620c3ade7dcf73469290f3b8ed7ac95b2b31db861fa2289352b09ce",
+    "source/LEAP_Isaaclab/LEAP_Isaaclab/assets/leap.py": "525ba721463ba0e202e1400ea53c18e655e9d8f886cff1fb5a41d22228b091d0",
+    "source/LEAP_Isaaclab/LEAP_Isaaclab/tasks/leap_hand_reorient_cri/factor_conditions.py": "1255b2fdb391394c2235ffa17a164ccc52c97ab51525b22aa6285006ba4ed714",
+    "source/LEAP_Isaaclab/LEAP_Isaaclab/tasks/leap_hand_reorient_cri/leap_hand_cri_env_cfg.py": "e25b6087f81a958cfe1e237a7275b8619050597c52ad1adadaaf9eba5120d901",
+    "source/LEAP_Isaaclab/LEAP_Isaaclab/tasks/leap_hand_reorient_cri/reorientation_cri_env.py": "9550176ffaff5a672c2bf285dd37e1fb93411bfec2b295e04330047047be2fae",
+    "source/LEAP_Isaaclab/LEAP_Isaaclab/tasks/leap_hand_reorient/agents/rl_games_ppo_cfg.yaml": "cefe853eb766f40ce6120a16b58d076ba0655f9cde608b9efe21df43745398ba",
+    "logs/rl_games/leap_hand_reorient/pretrained/nn/leap_hand_reorient.pth": "46675eecc4e51372ec2c336d9637ef588a61b80e24aeb796de263bd1e75ce364"
+  },
+  "protected_hashes_after": {
+    "scripts/p0_physics_validation.py": "876a3b3f02ea5a085c21dea0647599d11051a6ac951eab3330abe18e9f2e703f",
+    "scripts/p0_timing_audit.py": "8a35888d370e4716b2557eaa0148486219a91fddd80290d3ea67ad4b34c5db47",
+    "source/LEAP_Isaaclab/LEAP_Isaaclab/tasks/leap_hand_reorient/__init__.py": "173d628e2e41de08a4621288c6c2aedc2ed348c5c2e78a0818fe66a6c69200e2",
+    "source/LEAP_Isaaclab/LEAP_Isaaclab/tasks/leap_hand_reorient/leap_hand_env_cfg.py": "1ffe106bd5cae70f457651c82ccddf311fc463e7c437e6c3de325c9c494fe18b",
+    "source/LEAP_Isaaclab/LEAP_Isaaclab/tasks/leap_hand_reorient/reorientation_env.py": "5f44dfab7620c3ade7dcf73469290f3b8ed7ac95b2b31db861fa2289352b09ce",
+    "source/LEAP_Isaaclab/LEAP_Isaaclab/assets/leap.py": "525ba721463ba0e202e1400ea53c18e655e9d8f886cff1fb5a41d22228b091d0",
+    "source/LEAP_Isaaclab/LEAP_Isaaclab/tasks/leap_hand_reorient_cri/factor_conditions.py": "1255b2fdb391394c2235ffa17a164ccc52c97ab51525b22aa6285006ba4ed714",
+    "source/LEAP_Isaaclab/LEAP_Isaaclab/tasks/leap_hand_reorient_cri/leap_hand_cri_env_cfg.py": "e25b6087f81a958cfe1e237a7275b8619050597c52ad1adadaaf9eba5120d901",
+    "source/LEAP_Isaaclab/LEAP_Isaaclab/tasks/leap_hand_reorient_cri/reorientation_cri_env.py": "9550176ffaff5a672c2bf285dd37e1fb93411bfec2b295e04330047047be2fae",
+    "source/LEAP_Isaaclab/LEAP_Isaaclab/tasks/leap_hand_reorient/agents/rl_games_ppo_cfg.yaml": "cefe853eb766f40ce6120a16b58d076ba0655f9cde608b9efe21df43745398ba",
+    "logs/rl_games/leap_hand_reorient/pretrained/nn/leap_hand_reorient.pth": "46675eecc4e51372ec2c336d9637ef588a61b80e24aeb796de263bd1e75ce364"
+  },
+  "protected_unchanged": true,
+  "task_id": "Isaac-Reorient-Cube-Leap-CRI",
+  "schema": "CRI_FACTOR_SCHEMA_V1",
+  "num_envs": 4,
+  "factor_assignment": [
+    "000",
+    "100",
+    "010",
+    "001"
+  ],
+  "physics_dt": 0.008333333333333333,
+  "decimation": 4,
+  "protocol_constants": {
+    "frictions": [
+      0.8,
+      0.45,
+      0.4,
+      0.35,
+      0.3
+    ],
+    "force_grid_n": [
+      0.0,
+      2.2,
+      0.01
+    ],
+    "hold_steps": 8,
+    "settling_steps": 120,
+    "velocity_threshold_mps": 0.01,
+    "displacement_threshold_m": 0.0005,
+    "consecutive_steps": 5,
+    "probe_friction": 0.8,
+    "combine_mode": "min"
+  },
+  "material_audit": [
+    {
+      "moment": "A_TASK_CREATION",
+      "root_view_python_object_id": 2283998542832,
+      "physx_material_handle_identity": "API_NOT_EXPOSED",
+      "envs": {
+        "0": {
+          "environment_id": 0,
+          "factor_code": "000",
+          "object_prim": {
+            "valid": true,
+            "path": "/World/envs/env_0/object",
+            "type": "Xform",
+            "python_object_id": 2283998648640,
+            "is_instance": false,
+            "is_instance_proxy": false,
+            "prototype_path": null,
+            "prim_stack": [
+              {
+                "layer": "anon:0000021149438BA0:World0.usd",
+                "path": "/World/envs/env_0/object"
+              },
+              {
+                "layer": "C:/Users/XZL/AppData/Local/Temp/Assets/Isaac/6.0/Isaac/Props/Blocks/DexCube/dex_cube_instanceable.usd",
+                "path": "/DexCube"
+              }
+            ]
+          },
+          "collider_prim_paths": [
+            "/World/envs/env_0/object/collisions/collisions"
+          ],
+          "physics_material_prim": {
+            "valid": true,
+            "path": "/World/envs/env_0/object/cri_object_physics_material",
+            "type": "Material",
+            "python_object_id": 2283998649152,
+            "is_instance": false,
+            "is_instance_proxy": false,
+            "prototype_path": null,
+            "prim_stack": [
+              {
+                "layer": "anon:0000021149438BA0:World0.usd",
+                "path": "/World/envs/env_0/object/cri_object_physics_material"
+              }
+            ]
+          },
+          "material_usdshade_python_object_id": 2283998763648,
+          "material_bindings": [
+            {
+              "prim_path": "/World/envs/env_0/object",
+              "direct_material_path": "",
+              "direct_relation_path": "/World/envs/env_0/object.material:binding:physics",
+              "binding_strength": "weakerThanDescendants",
+              "computed_material_path": null,
+              "computed_relation_path": null
+            },
+            {
+              "prim_path": "/World/envs/env_0/object/collisions/collisions",
+              "direct_material_path": "/World/envs/env_0/object/cri_object_physics_material",
+              "direct_relation_path": "/World/envs/env_0/object/collisions/collisions.material:binding:physics",
+              "binding_strength": "strongerThanDescendants",
+              "computed_material_path": "/World/envs/env_0/object/cri_object_physics_material",
+              "computed_relation_path": "/World/envs/env_0/object/collisions/collisions.material:binding:physics"
+            }
+          ],
+          "static_friction_readback": 0.800000011920929,
+          "dynamic_friction_readback": 0.800000011920929,
+          "friction_combine_mode": "min",
+          "material_api_target": "RigidObject.root_view.set_material_properties(env_indices)"
+        },
+        "2": {
+          "environment_id": 2,
+          "factor_code": "010",
+          "object_prim": {
+            "valid": true,
+            "path": "/World/envs/env_2/object",
+            "type": "Xform",
+            "python_object_id": 2283998649024,
+            "is_instance": false,
+            "is_instance_proxy": false,
+            "prototype_path": null,
+            "prim_stack": [
+              {
+                "layer": "anon:0000021149438BA0:World0.usd",
+                "path": "/World/envs/env_2/object"
+              },
+              {
+                "layer": "C:/Users/XZL/AppData/Local/Temp/Assets/Isaac/6.0/Isaac/Props/Blocks/DexCube/dex_cube_instanceable.usd",
+                "path": "/DexCube"
+              }
+            ]
+          },
+          "collider_prim_paths": [
+            "/World/envs/env_2/object/collisions/collisions"
+          ],
+          "physics_material_prim": {
+            "valid": true,
+            "path": "/World/envs/env_2/object/cri_object_physics_material",
+            "type": "Material",
+            "python_object_id": 2283998648640,
+            "is_instance": false,
+            "is_instance_proxy": false,
+            "prototype_path": null,
+            "prim_stack": [
+              {
+                "layer": "anon:0000021149438BA0:World0.usd",
+                "path": "/World/envs/env_2/object/cri_object_physics_material"
+              }
+            ]
+          },
+          "material_usdshade_python_object_id": 2283998764048,
+          "material_bindings": [
+            {
+              "prim_path": "/World/envs/env_2/object",
+              "direct_material_path": "",
+              "direct_relation_path": "/World/envs/env_2/object.material:binding:physics",
+              "binding_strength": "weakerThanDescendants",
+              "computed_material_path": null,
+              "computed_relation_path": null
+            },
+            {
+              "prim_path": "/World/envs/env_2/object/collisions/collisions",
+              "direct_material_path": "/World/envs/env_2/object/cri_object_physics_material",
+              "direct_relation_path": "/World/envs/env_2/object/collisions/collisions.material:binding:physics",
+              "binding_strength": "strongerThanDescendants",
+              "computed_material_path": "/World/envs/env_2/object/cri_object_physics_material",
+              "computed_relation_path": "/World/envs/env_2/object/collisions/collisions.material:binding:physics"
+            }
+          ],
+          "static_friction_readback": 0.800000011920929,
+          "dynamic_friction_readback": 0.800000011920929,
+          "friction_combine_mode": "min",
+          "material_api_target": "RigidObject.root_view.set_material_properties(env_indices)"
+        }
+      },
+      "usd_material_paths_independent": true,
+      "computed_binding_paths_independent": true,
+      "shared_exposed_material_path": false
+    },
+    {
+      "moment": "B_PARENT_FACTOR_ASSIGNMENT",
+      "root_view_python_object_id": 2283998542832,
+      "physx_material_handle_identity": "API_NOT_EXPOSED",
+      "envs": {
+        "0": {
+          "environment_id": 0,
+          "factor_code": "000",
+          "object_prim": {
+            "valid": true,
+            "path": "/World/envs/env_0/object",
+            "type": "Xform",
+            "python_object_id": 2283998837184,
+            "is_instance": false,
+            "is_instance_proxy": false,
+            "prototype_path": null,
+            "prim_stack": [
+              {
+                "layer": "anon:0000021149438BA0:World0.usd",
+                "path": "/World/envs/env_0/object"
+              },
+              {
+                "layer": "C:/Users/XZL/AppData/Local/Temp/Assets/Isaac/6.0/Isaac/Props/Blocks/DexCube/dex_cube_instanceable.usd",
+                "path": "/DexCube"
+              }
+            ]
+          },
+          "collider_prim_paths": [
+            "/World/envs/env_0/object/collisions/collisions"
+          ],
+          "physics_material_prim": {
+            "valid": true,
+            "path": "/World/envs/env_0/object/cri_object_physics_material",
+            "type": "Material",
+            "python_object_id": 2283998837824,
+            "is_instance": false,
+            "is_instance_proxy": false,
+            "prototype_path": null,
+            "prim_stack": [
+              {
+                "layer": "anon:0000021149438BA0:World0.usd",
+                "path": "/World/envs/env_0/object/cri_object_physics_material"
+              }
+            ]
+          },
+          "material_usdshade_python_object_id": 2284250309600,
+          "material_bindings": [
+            {
+              "prim_path": "/World/envs/env_0/object",
+              "direct_material_path": "",
+              "direct_relation_path": "/World/envs/env_0/object.material:binding:physics",
+              "binding_strength": "weakerThanDescendants",
+              "computed_material_path": null,
+              "computed_relation_path": null
+            },
+            {
+              "prim_path": "/World/envs/env_0/object/collisions/collisions",
+              "direct_material_path": "/World/envs/env_0/object/cri_object_physics_material",
+              "direct_relation_path": "/World/envs/env_0/object/collisions/collisions.material:binding:physics",
+              "binding_strength": "strongerThanDescendants",
+              "computed_material_path": "/World/envs/env_0/object/cri_object_physics_material",
+              "computed_relation_path": "/World/envs/env_0/object/collisions/collisions.material:binding:physics"
+            }
+          ],
+          "static_friction_readback": 0.800000011920929,
+          "dynamic_friction_readback": 0.800000011920929,
+          "friction_combine_mode": "min",
+          "material_api_target": "RigidObject.root_view.set_material_properties(env_indices)"
+        },
+        "2": {
+          "environment_id": 2,
+          "factor_code": "010",
+          "object_prim": {
+            "valid": true,
+            "path": "/World/envs/env_2/object",
+            "type": "Xform",
+            "python_object_id": 2284250291392,
+            "is_instance": false,
+            "is_instance_proxy": false,
+            "prototype_path": null,
+            "prim_stack": [
+              {
+                "layer": "anon:0000021149438BA0:World0.usd",
+                "path": "/World/envs/env_2/object"
+              },
+              {
+                "layer": "C:/Users/XZL/AppData/Local/Temp/Assets/Isaac/6.0/Isaac/Props/Blocks/DexCube/dex_cube_instanceable.usd",
+                "path": "/DexCube"
+              }
+            ]
+          },
+          "collider_prim_paths": [
+            "/World/envs/env_2/object/collisions/collisions"
+          ],
+          "physics_material_prim": {
+            "valid": true,
+            "path": "/World/envs/env_2/object/cri_object_physics_material",
+            "type": "Material",
+            "python_object_id": 2283998837184,
+            "is_instance": false,
+            "is_instance_proxy": false,
+            "prototype_path": null,
+            "prim_stack": [
+              {
+                "layer": "anon:0000021149438BA0:World0.usd",
+                "path": "/World/envs/env_2/object/cri_object_physics_material"
+              }
+            ]
+          },
+          "material_usdshade_python_object_id": 2284250310000,
+          "material_bindings": [
+            {
+              "prim_path": "/World/envs/env_2/object",
+              "direct_material_path": "",
+              "direct_relation_path": "/World/envs/env_2/object.material:binding:physics",
+              "binding_strength": "weakerThanDescendants",
+              "computed_material_path": null,
+              "computed_relation_path": null
+            },
+            {
+              "prim_path": "/World/envs/env_2/object/collisions/collisions",
+              "direct_material_path": "/World/envs/env_2/object/cri_object_physics_material",
+              "direct_relation_path": "/World/envs/env_2/object/collisions/collisions.material:binding:physics",
+              "binding_strength": "strongerThanDescendants",
+              "computed_material_path": "/World/envs/env_2/object/cri_object_physics_material",
+              "computed_relation_path": "/World/envs/env_2/object/collisions/collisions.material:binding:physics"
+            }
+          ],
+          "static_friction_readback": 0.44999998807907104,
+          "dynamic_friction_readback": 0.44999998807907104,
+          "friction_combine_mode": "min",
+          "material_api_target": "RigidObject.root_view.set_material_properties(env_indices)"
+        }
+      },
+      "usd_material_paths_independent": true,
+      "computed_binding_paths_independent": true,
+      "shared_exposed_material_path": false
+    },
+    {
+      "moment": "AFTER_CANDIDATE_0.45",
+      "root_view_python_object_id": 2283998542832,
+      "physx_material_handle_identity": "API_NOT_EXPOSED",
+      "envs": {
+        "0": {
+          "environment_id": 0,
+          "factor_code": "000",
+          "object_prim": {
+            "valid": true,
+            "path": "/World/envs/env_0/object",
+            "type": "Xform",
+            "python_object_id": 2283998837824,
+            "is_instance": false,
+            "is_instance_proxy": false,
+            "prototype_path": null,
+            "prim_stack": [
+              {
+                "layer": "anon:0000021149438BA0:World0.usd",
+                "path": "/World/envs/env_0/object"
+              },
+              {
+                "layer": "C:/Users/XZL/AppData/Local/Temp/Assets/Isaac/6.0/Isaac/Props/Blocks/DexCube/dex_cube_instanceable.usd",
+                "path": "/DexCube"
+              }
+            ]
+          },
+          "collider_prim_paths": [
+            "/World/envs/env_0/object/collisions/collisions"
+          ],
+          "physics_material_prim": {
+            "valid": true,
+            "path": "/World/envs/env_0/object/cri_object_physics_material",
+            "type": "Material",
+            "python_object_id": 2283998836928,
+            "is_instance": false,
+            "is_instance_proxy": false,
+            "prototype_path": null,
+            "prim_stack": [
+              {
+                "layer": "anon:0000021149438BA0:World0.usd",
+                "path": "/World/envs/env_0/object/cri_object_physics_material"
+              }
+            ]
+          },
+          "material_usdshade_python_object_id": 2284250308800,
+          "material_bindings": [
+            {
+              "prim_path": "/World/envs/env_0/object",
+              "direct_material_path": "",
+              "direct_relation_path": "/World/envs/env_0/object.material:binding:physics",
+              "binding_strength": "weakerThanDescendants",
+              "computed_material_path": null,
+              "computed_relation_path": null
+            },
+            {
+              "prim_path": "/World/envs/env_0/object/collisions/collisions",
+              "direct_material_path": "/World/envs/env_0/object/cri_object_physics_material",
+              "direct_relation_path": "/World/envs/env_0/object/collisions/collisions.material:binding:physics",
+              "binding_strength": "strongerThanDescendants",
+              "computed_material_path": "/World/envs/env_0/object/cri_object_physics_material",
+              "computed_relation_path": "/World/envs/env_0/object/collisions/collisions.material:binding:physics"
+            }
+          ],
+          "static_friction_readback": 0.800000011920929,
+          "dynamic_friction_readback": 0.800000011920929,
+          "friction_combine_mode": "min",
+          "material_api_target": "RigidObject.root_view.set_material_properties(env_indices)"
+        },
+        "2": {
+          "environment_id": 2,
+          "factor_code": "010",
+          "object_prim": {
+            "valid": true,
+            "path": "/World/envs/env_2/object",
+            "type": "Xform",
+            "python_object_id": 2284250290240,
+            "is_instance": false,
+            "is_instance_proxy": false,
+            "prototype_path": null,
+            "prim_stack": [
+              {
+                "layer": "anon:0000021149438BA0:World0.usd",
+                "path": "/World/envs/env_2/object"
+              },
+              {
+                "layer": "C:/Users/XZL/AppData/Local/Temp/Assets/Isaac/6.0/Isaac/Props/Blocks/DexCube/dex_cube_instanceable.usd",
+                "path": "/DexCube"
+              }
+            ]
+          },
+          "collider_prim_paths": [
+            "/World/envs/env_2/object/collisions/collisions"
+          ],
+          "physics_material_prim": {
+            "valid": true,
+            "path": "/World/envs/env_2/object/cri_object_physics_material",
+            "type": "Material",
+            "python_object_id": 2283998837824,
+            "is_instance": false,
+            "is_instance_proxy": false,
+            "prototype_path": null,
+            "prim_stack": [
+              {
+                "layer": "anon:0000021149438BA0:World0.usd",
+                "path": "/World/envs/env_2/object/cri_object_physics_material"
+              }
+            ]
+          },
+          "material_usdshade_python_object_id": 2284250307520,
+          "material_bindings": [
+            {
+              "prim_path": "/World/envs/env_2/object",
+              "direct_material_path": "",
+              "direct_relation_path": "/World/envs/env_2/object.material:binding:physics",
+              "binding_strength": "weakerThanDescendants",
+              "computed_material_path": null,
+              "computed_relation_path": null
+            },
+            {
+              "prim_path": "/World/envs/env_2/object/collisions/collisions",
+              "direct_material_path": "/World/envs/env_2/object/cri_object_physics_material",
+              "direct_relation_path": "/World/envs/env_2/object/collisions/collisions.material:binding:physics",
+              "binding_strength": "strongerThanDescendants",
+              "computed_material_path": "/World/envs/env_2/object/cri_object_physics_material",
+              "computed_relation_path": "/World/envs/env_2/object/collisions/collisions.material:binding:physics"
+            }
+          ],
+          "static_friction_readback": 0.44999998807907104,
+          "dynamic_friction_readback": 0.44999998807907104,
+          "friction_combine_mode": "min",
+          "material_api_target": "RigidObject.root_view.set_material_properties(env_indices)"
+        }
+      },
+      "usd_material_paths_independent": true,
+      "computed_binding_paths_independent": true,
+      "shared_exposed_material_path": false
+    },
+    {
+      "moment": "AFTER_CANDIDATE_0.40",
+      "root_view_python_object_id": 2283998542832,
+      "physx_material_handle_identity": "API_NOT_EXPOSED",
+      "envs": {
+        "0": {
+          "environment_id": 0,
+          "factor_code": "000",
+          "object_prim": {
+            "valid": true,
+            "path": "/World/envs/env_0/object",
+            "type": "Xform",
+            "python_object_id": 2283998836928,
+            "is_instance": false,
+            "is_instance_proxy": false,
+            "prototype_path": null,
+            "prim_stack": [
+              {
+                "layer": "anon:0000021149438BA0:World0.usd",
+                "path": "/World/envs/env_0/object"
+              },
+              {
+                "layer": "C:/Users/XZL/AppData/Local/Temp/Assets/Isaac/6.0/Isaac/Props/Blocks/DexCube/dex_cube_instanceable.usd",
+                "path": "/DexCube"
+              }
+            ]
+          },
+          "collider_prim_paths": [
+            "/World/envs/env_0/object/collisions/collisions"
+          ],
+          "physics_material_prim": {
+            "valid": true,
+            "path": "/World/envs/env_0/object/cri_object_physics_material",
+            "type": "Material",
+            "python_object_id": 2284250294720,
+            "is_instance": false,
+            "is_instance_proxy": false,
+            "prototype_path": null,
+            "prim_stack": [
+              {
+                "layer": "anon:0000021149438BA0:World0.usd",
+                "path": "/World/envs/env_0/object/cri_object_physics_material"
+              }
+            ]
+          },
+          "material_usdshade_python_object_id": 2284250420848,
+          "material_bindings": [
+            {
+              "prim_path": "/World/envs/env_0/object",
+              "direct_material_path": "",
+              "direct_relation_path": "/World/envs/env_0/object.material:binding:physics",
+              "binding_strength": "weakerThanDescendants",
+              "computed_material_path": null,
+              "computed_relation_path": null
+            },
+            {
+              "prim_path": "/World/envs/env_0/object/collisions/collisions",
+              "direct_material_path": "/World/envs/env_0/object/cri_object_physics_material",
+              "direct_relation_path": "/World/envs/env_0/object/collisions/collisions.material:binding:physics",
+              "binding_strength": "strongerThanDescendants",
+              "computed_material_path": "/World/envs/env_0/object/cri_object_physics_material",
+              "computed_relation_path": "/World/envs/env_0/object/collisions/collisions.material:binding:physics"
+            }
+          ],
+          "static_friction_readback": 0.800000011920929,
+          "dynamic_friction_readback": 0.800000011920929,
+          "friction_combine_mode": "min",
+          "material_api_target": "RigidObject.root_view.set_material_properties(env_indices)"
+        },
+        "2": {
+          "environment_id": 2,
+          "factor_code": "010",
+          "object_prim": {
+            "valid": true,
+            "path": "/World/envs/env_2/object",
+            "type": "Xform",
+            "python_object_id": 2284250294464,
+            "is_instance": false,
+            "is_instance_proxy": false,
+            "prototype_path": null,
+            "prim_stack": [
+              {
+                "layer": "anon:0000021149438BA0:World0.usd",
+                "path": "/World/envs/env_2/object"
+              },
+              {
+                "layer": "C:/Users/XZL/AppData/Local/Temp/Assets/Isaac/6.0/Isaac/Props/Blocks/DexCube/dex_cube_instanceable.usd",
+                "path": "/DexCube"
+              }
+            ]
+          },
+          "collider_prim_paths": [
+            "/World/envs/env_2/object/collisions/collisions"
+          ],
+          "physics_material_prim": {
+            "valid": true,
+            "path": "/World/envs/env_2/object/cri_object_physics_material",
+            "type": "Material",
+            "python_object_id": 2283998836928,
+            "is_instance": false,
+            "is_instance_proxy": false,
+            "prototype_path": null,
+            "prim_stack": [
+              {
+                "layer": "anon:0000021149438BA0:World0.usd",
+                "path": "/World/envs/env_2/object/cri_object_physics_material"
+              }
+            ]
+          },
+          "material_usdshade_python_object_id": 2284250421488,
+          "material_bindings": [
+            {
+              "prim_path": "/World/envs/env_2/object",
+              "direct_material_path": "",
+              "direct_relation_path": "/World/envs/env_2/object.material:binding:physics",
+              "binding_strength": "weakerThanDescendants",
+              "computed_material_path": null,
+              "computed_relation_path": null
+            },
+            {
+              "prim_path": "/World/envs/env_2/object/collisions/collisions",
+              "direct_material_path": "/World/envs/env_2/object/cri_object_physics_material",
+              "direct_relation_path": "/World/envs/env_2/object/collisions/collisions.material:binding:physics",
+              "binding_strength": "strongerThanDescendants",
+              "computed_material_path": "/World/envs/env_2/object/cri_object_physics_material",
+              "computed_relation_path": "/World/envs/env_2/object/collisions/collisions.material:binding:physics"
+            }
+          ],
+          "static_friction_readback": 0.4000000059604645,
+          "dynamic_friction_readback": 0.4000000059604645,
+          "friction_combine_mode": "min",
+          "material_api_target": "RigidObject.root_view.set_material_properties(env_indices)"
+        }
+      },
+      "usd_material_paths_independent": true,
+      "computed_binding_paths_independent": true,
+      "shared_exposed_material_path": false
+    },
+    {
+      "moment": "AFTER_CANDIDATE_0.35",
+      "root_view_python_object_id": 2283998542832,
+      "physx_material_handle_identity": "API_NOT_EXPOSED",
+      "envs": {
+        "0": {
+          "environment_id": 0,
+          "factor_code": "000",
+          "object_prim": {
+            "valid": true,
+            "path": "/World/envs/env_0/object",
+            "type": "Xform",
+            "python_object_id": 2284250294080,
+            "is_instance": false,
+            "is_instance_proxy": false,
+            "prototype_path": null,
+            "prim_stack": [
+              {
+                "layer": "anon:0000021149438BA0:World0.usd",
+                "path": "/World/envs/env_0/object"
+              },
+              {
+                "layer": "C:/Users/XZL/AppData/Local/Temp/Assets/Isaac/6.0/Isaac/Props/Blocks/DexCube/dex_cube_instanceable.usd",
+                "path": "/DexCube"
+              }
+            ]
+          },
+          "collider_prim_paths": [
+            "/World/envs/env_0/object/collisions/collisions"
+          ],
+          "physics_material_prim": {
+            "valid": true,
+            "path": "/World/envs/env_0/object/cri_object_physics_material",
+            "type": "Material",
+            "python_object_id": 2284250290240,
+            "is_instance": false,
+            "is_instance_proxy": false,
+            "prototype_path": null,
+            "prim_stack": [
+              {
+                "layer": "anon:0000021149438BA0:World0.usd",
+                "path": "/World/envs/env_0/object/cri_object_physics_material"
+              }
+            ]
+          },
+          "material_usdshade_python_object_id": 2284250364832,
+          "material_bindings": [
+            {
+              "prim_path": "/World/envs/env_0/object",
+              "direct_material_path": "",
+              "direct_relation_path": "/World/envs/env_0/object.material:binding:physics",
+              "binding_strength": "weakerThanDescendants",
+              "computed_material_path": null,
+              "computed_relation_path": null
+            },
+            {
+              "prim_path": "/World/envs/env_0/object/collisions/collisions",
+              "direct_material_path": "/World/envs/env_0/object/cri_object_physics_material",
+              "direct_relation_path": "/World/envs/env_0/object/collisions/collisions.material:binding:physics",
+              "binding_strength": "strongerThanDescendants",
+              "computed_material_path": "/World/envs/env_0/object/cri_object_physics_material",
+              "computed_relation_path": "/World/envs/env_0/object/collisions/collisions.material:binding:physics"
+            }
+          ],
+          "static_friction_readback": 0.800000011920929,
+          "dynamic_friction_readback": 0.800000011920929,
+          "friction_combine_mode": "min",
+          "material_api_target": "RigidObject.root_view.set_material_properties(env_indices)"
+        },
+        "2": {
+          "environment_id": 2,
+          "factor_code": "010",
+          "object_prim": {
+            "valid": true,
+            "path": "/World/envs/env_2/object",
+            "type": "Xform",
+            "python_object_id": 2284250294848,
+            "is_instance": false,
+            "is_instance_proxy": false,
+            "prototype_path": null,
+            "prim_stack": [
+              {
+                "layer": "anon:0000021149438BA0:World0.usd",
+                "path": "/World/envs/env_2/object"
+              },
+              {
+                "layer": "C:/Users/XZL/AppData/Local/Temp/Assets/Isaac/6.0/Isaac/Props/Blocks/DexCube/dex_cube_instanceable.usd",
+                "path": "/DexCube"
+              }
+            ]
+          },
+          "collider_prim_paths": [
+            "/World/envs/env_2/object/collisions/collisions"
+          ],
+          "physics_material_prim": {
+            "valid": true,
+            "path": "/World/envs/env_2/object/cri_object_physics_material",
+            "type": "Material",
+            "python_object_id": 2284250294080,
+            "is_instance": false,
+            "is_instance_proxy": false,
+            "prototype_path": null,
+            "prim_stack": [
+              {
+                "layer": "anon:0000021149438BA0:World0.usd",
+                "path": "/World/envs/env_2/object/cri_object_physics_material"
+              }
+            ]
+          },
+          "material_usdshade_python_object_id": 2284250423168,
+          "material_bindings": [
+            {
+              "prim_path": "/World/envs/env_2/object",
+              "direct_material_path": "",
+              "direct_relation_path": "/World/envs/env_2/object.material:binding:physics",
+              "binding_strength": "weakerThanDescendants",
+              "computed_material_path": null,
+              "computed_relation_path": null
+            },
+            {
+              "prim_path": "/World/envs/env_2/object/collisions/collisions",
+              "direct_material_path": "/World/envs/env_2/object/cri_object_physics_material",
+              "direct_relation_path": "/World/envs/env_2/object/collisions/collisions.material:binding:physics",
+              "binding_strength": "strongerThanDescendants",
+              "computed_material_path": "/World/envs/env_2/object/cri_object_physics_material",
+              "computed_relation_path": "/World/envs/env_2/object/collisions/collisions.material:binding:physics"
+            }
+          ],
+          "static_friction_readback": 0.3499999940395355,
+          "dynamic_friction_readback": 0.3499999940395355,
+          "friction_combine_mode": "min",
+          "material_api_target": "RigidObject.root_view.set_material_properties(env_indices)"
+        }
+      },
+      "usd_material_paths_independent": true,
+      "computed_binding_paths_independent": true,
+      "shared_exposed_material_path": false
+    },
+    {
+      "moment": "AFTER_CANDIDATE_0.30",
+      "root_view_python_object_id": 2283998542832,
+      "physx_material_handle_identity": "API_NOT_EXPOSED",
+      "envs": {
+        "0": {
+          "environment_id": 0,
+          "factor_code": "000",
+          "object_prim": {
+            "valid": true,
+            "path": "/World/envs/env_0/object",
+            "type": "Xform",
+            "python_object_id": 2284250296384,
+            "is_instance": false,
+            "is_instance_proxy": false,
+            "prototype_path": null,
+            "prim_stack": [
+              {
+                "layer": "anon:0000021149438BA0:World0.usd",
+                "path": "/World/envs/env_0/object"
+              },
+              {
+                "layer": "C:/Users/XZL/AppData/Local/Temp/Assets/Isaac/6.0/Isaac/Props/Blocks/DexCube/dex_cube_instanceable.usd",
+                "path": "/DexCube"
+              }
+            ]
+          },
+          "collider_prim_paths": [
+            "/World/envs/env_0/object/collisions/collisions"
+          ],
+          "physics_material_prim": {
+            "valid": true,
+            "path": "/World/envs/env_0/object/cri_object_physics_material",
+            "type": "Material",
+            "python_object_id": 2284250297536,
+            "is_instance": false,
+            "is_instance_proxy": false,
+            "prototype_path": null,
+            "prim_stack": [
+              {
+                "layer": "anon:0000021149438BA0:World0.usd",
+                "path": "/World/envs/env_0/object/cri_object_physics_material"
+              }
+            ]
+          },
+          "material_usdshade_python_object_id": 2284250352992,
+          "material_bindings": [
+            {
+              "prim_path": "/World/envs/env_0/object",
+              "direct_material_path": "",
+              "direct_relation_path": "/World/envs/env_0/object.material:binding:physics",
+              "binding_strength": "weakerThanDescendants",
+              "computed_material_path": null,
+              "computed_relation_path": null
+            },
+            {
+              "prim_path": "/World/envs/env_0/object/collisions/collisions",
+              "direct_material_path": "/World/envs/env_0/object/cri_object_physics_material",
+              "direct_relation_path": "/World/envs/env_0/object/collisions/collisions.material:binding:physics",
+              "binding_strength": "strongerThanDescendants",
+              "computed_material_path": "/World/envs/env_0/object/cri_object_physics_material",
+              "computed_relation_path": "/World/envs/env_0/object/collisions/collisions.material:binding:physics"
+            }
+          ],
+          "static_friction_readback": 0.800000011920929,
+          "dynamic_friction_readback": 0.800000011920929,
+          "friction_combine_mode": "min",
+          "material_api_target": "RigidObject.root_view.set_material_properties(env_indices)"
+        },
+        "2": {
+          "environment_id": 2,
+          "factor_code": "010",
+          "object_prim": {
+            "valid": true,
+            "path": "/World/envs/env_2/object",
+            "type": "Xform",
+            "python_object_id": 2284250296000,
+            "is_instance": false,
+            "is_instance_proxy": false,
+            "prototype_path": null,
+            "prim_stack": [
+              {
+                "layer": "anon:0000021149438BA0:World0.usd",
+                "path": "/World/envs/env_2/object"
+              },
+              {
+                "layer": "C:/Users/XZL/AppData/Local/Temp/Assets/Isaac/6.0/Isaac/Props/Blocks/DexCube/dex_cube_instanceable.usd",
+                "path": "/DexCube"
+              }
+            ]
+          },
+          "collider_prim_paths": [
+            "/World/envs/env_2/object/collisions/collisions"
+          ],
+          "physics_material_prim": {
+            "valid": true,
+            "path": "/World/envs/env_2/object/cri_object_physics_material",
+            "type": "Material",
+            "python_object_id": 2284250296384,
+            "is_instance": false,
+            "is_instance_proxy": false,
+            "prototype_path": null,
+            "prim_stack": [
+              {
+                "layer": "anon:0000021149438BA0:World0.usd",
+                "path": "/World/envs/env_2/object/cri_object_physics_material"
+              }
+            ]
+          },
+          "material_usdshade_python_object_id": 2284250315440,
+          "material_bindings": [
+            {
+              "prim_path": "/World/envs/env_2/object",
+              "direct_material_path": "",
+              "direct_relation_path": "/World/envs/env_2/object.material:binding:physics",
+              "binding_strength": "weakerThanDescendants",
+              "computed_material_path": null,
+              "computed_relation_path": null
+            },
+            {
+              "prim_path": "/World/envs/env_2/object/collisions/collisions",
+              "direct_material_path": "/World/envs/env_2/object/cri_object_physics_material",
+              "direct_relation_path": "/World/envs/env_2/object/collisions/collisions.material:binding:physics",
+              "binding_strength": "strongerThanDescendants",
+              "computed_material_path": "/World/envs/env_2/object/cri_object_physics_material",
+              "computed_relation_path": "/World/envs/env_2/object/collisions/collisions.material:binding:physics"
+            }
+          ],
+          "static_friction_readback": 0.30000001192092896,
+          "dynamic_friction_readback": 0.30000001192092896,
+          "friction_combine_mode": "min",
+          "material_api_target": "RigidObject.root_view.set_material_properties(env_indices)"
+        }
+      },
+      "usd_material_paths_independent": true,
+      "computed_binding_paths_independent": true,
+      "shared_exposed_material_path": false
+    }
+  ],
+  "shared_exposed_material_path": false,
+  "physx_material_handle_identity": "API_NOT_EXPOSED",
+  "probe_metadata": {
+    "probe_path": "/World/ground",
+    "restored": true,
+    "collider_path": "/World/ground/GroundPlane/CollisionPlane",
+    "temporary_material_path": "/World/P0_7F_audit_ground_material",
+    "prior_material_path": "/World/ground/physicsMaterial",
+    "static_friction": 0.800000011920929,
+    "dynamic_friction": 0.800000011920929,
+    "combine_mode": "min",
+    "temporary_material_removed": true
+  },
+  "results": {
+    "conditions": [
+      {
+        "env2_friction": 0.45,
+        "repeats": [
+          {
+            "repeat": 0,
+            "conditions": {
+              "nominal": {
+                "env_id": 0,
+                "friction": 0.8,
+                "onset_n": 1.28,
+                "material": {
+                  "static": 0.800000011920929,
+                  "dynamic": 0.800000011920929,
+                  "combine_mode": "min"
+                }
+              },
+              "candidate": {
+                "env_id": 2,
+                "friction": 0.45,
+                "onset_n": 1.04,
+                "material": {
+                  "static": 0.44999998807907104,
+                  "dynamic": 0.44999998807907104,
+                  "combine_mode": "min"
+                }
+              }
+            }
+          },
+          {
+            "repeat": 1,
+            "conditions": {
+              "nominal": {
+                "env_id": 0,
+                "friction": 0.8,
+                "onset_n": 1.28,
+                "material": {
+                  "static": 0.800000011920929,
+                  "dynamic": 0.800000011920929,
+                  "combine_mode": "min"
+                }
+              },
+              "candidate": {
+                "env_id": 2,
+                "friction": 0.45,
+                "onset_n": 1.04,
+                "material": {
+                  "static": 0.44999998807907104,
+                  "dynamic": 0.44999998807907104,
+                  "combine_mode": "min"
+                }
+              }
+            }
+          },
+          {
+            "repeat": 2,
+            "conditions": {
+              "nominal": {
+                "env_id": 0,
+                "friction": 0.8,
+                "onset_n": 1.28,
+                "material": {
+                  "static": 0.800000011920929,
+                  "dynamic": 0.800000011920929,
+                  "combine_mode": "min"
+                }
+              },
+              "candidate": {
+                "env_id": 2,
+                "friction": 0.45,
+                "onset_n": 1.04,
+                "material": {
+                  "static": 0.44999998807907104,
+                  "dynamic": 0.44999998807907104,
+                  "combine_mode": "min"
+                }
+              }
+            }
+          }
+        ]
+      },
+      {
+        "env2_friction": 0.4,
+        "repeats": [
+          {
+            "repeat": 0,
+            "conditions": {
+              "nominal": {
+                "env_id": 0,
+                "friction": 0.8,
+                "onset_n": 1.23,
+                "material": {
+                  "static": 0.800000011920929,
+                  "dynamic": 0.800000011920929,
+                  "combine_mode": "min"
+                }
+              },
+              "candidate": {
+                "env_id": 2,
+                "friction": 0.4,
+                "onset_n": 0.99,
+                "material": {
+                  "static": 0.4000000059604645,
+                  "dynamic": 0.4000000059604645,
+                  "combine_mode": "min"
+                }
+              }
+            }
+          },
+          {
+            "repeat": 1,
+            "conditions": {
+              "nominal": {
+                "env_id": 0,
+                "friction": 0.8,
+                "onset_n": 1.23,
+                "material": {
+                  "static": 0.800000011920929,
+                  "dynamic": 0.800000011920929,
+                  "combine_mode": "min"
+                }
+              },
+              "candidate": {
+                "env_id": 2,
+                "friction": 0.4,
+                "onset_n": 0.99,
+                "material": {
+                  "static": 0.4000000059604645,
+                  "dynamic": 0.4000000059604645,
+                  "combine_mode": "min"
+                }
+              }
+            }
+          },
+          {
+            "repeat": 2,
+            "conditions": {
+              "nominal": {
+                "env_id": 0,
+                "friction": 0.8,
+                "onset_n": 1.23,
+                "material": {
+                  "static": 0.800000011920929,
+                  "dynamic": 0.800000011920929,
+                  "combine_mode": "min"
+                }
+              },
+              "candidate": {
+                "env_id": 2,
+                "friction": 0.4,
+                "onset_n": 0.99,
+                "material": {
+                  "static": 0.4000000059604645,
+                  "dynamic": 0.4000000059604645,
+                  "combine_mode": "min"
+                }
+              }
+            }
+          }
+        ]
+      },
+      {
+        "env2_friction": 0.35,
+        "repeats": [
+          {
+            "repeat": 0,
+            "conditions": {
+              "nominal": {
+                "env_id": 0,
+                "friction": 0.8,
+                "onset_n": 1.18,
+                "material": {
+                  "static": 0.800000011920929,
+                  "dynamic": 0.800000011920929,
+                  "combine_mode": "min"
+                }
+              },
+              "candidate": {
+                "env_id": 2,
+                "friction": 0.35,
+                "onset_n": 0.94,
+                "material": {
+                  "static": 0.3499999940395355,
+                  "dynamic": 0.3499999940395355,
+                  "combine_mode": "min"
+                }
+              }
+            }
+          },
+          {
+            "repeat": 1,
+            "conditions": {
+              "nominal": {
+                "env_id": 0,
+                "friction": 0.8,
+                "onset_n": 1.18,
+                "material": {
+                  "static": 0.800000011920929,
+                  "dynamic": 0.800000011920929,
+                  "combine_mode": "min"
+                }
+              },
+              "candidate": {
+                "env_id": 2,
+                "friction": 0.35,
+                "onset_n": 0.94,
+                "material": {
+                  "static": 0.3499999940395355,
+                  "dynamic": 0.3499999940395355,
+                  "combine_mode": "min"
+                }
+              }
+            }
+          },
+          {
+            "repeat": 2,
+            "conditions": {
+              "nominal": {
+                "env_id": 0,
+                "friction": 0.8,
+                "onset_n": 1.18,
+                "material": {
+                  "static": 0.800000011920929,
+                  "dynamic": 0.800000011920929,
+                  "combine_mode": "min"
+                }
+              },
+              "candidate": {
+                "env_id": 2,
+                "friction": 0.35,
+                "onset_n": 0.94,
+                "material": {
+                  "static": 0.3499999940395355,
+                  "dynamic": 0.3499999940395355,
+                  "combine_mode": "min"
+                }
+              }
+            }
+          }
+        ]
+      },
+      {
+        "env2_friction": 0.3,
+        "repeats": [
+          {
+            "repeat": 0,
+            "conditions": {
+              "nominal": {
+                "env_id": 0,
+                "friction": 0.8,
+                "onset_n": 1.12,
+                "material": {
+                  "static": 0.800000011920929,
+                  "dynamic": 0.800000011920929,
+                  "combine_mode": "min"
+                }
+              },
+              "candidate": {
+                "env_id": 2,
+                "friction": 0.3,
+                "onset_n": 0.88,
+                "material": {
+                  "static": 0.30000001192092896,
+                  "dynamic": 0.30000001192092896,
+                  "combine_mode": "min"
+                }
+              }
+            }
+          },
+          {
+            "repeat": 1,
+            "conditions": {
+              "nominal": {
+                "env_id": 0,
+                "friction": 0.8,
+                "onset_n": 1.12,
+                "material": {
+                  "static": 0.800000011920929,
+                  "dynamic": 0.800000011920929,
+                  "combine_mode": "min"
+                }
+              },
+              "candidate": {
+                "env_id": 2,
+                "friction": 0.3,
+                "onset_n": 0.88,
+                "material": {
+                  "static": 0.30000001192092896,
+                  "dynamic": 0.30000001192092896,
+                  "combine_mode": "min"
+                }
+              }
+            }
+          },
+          {
+            "repeat": 2,
+            "conditions": {
+              "nominal": {
+                "env_id": 0,
+                "friction": 0.8,
+                "onset_n": 1.12,
+                "material": {
+                  "static": 0.800000011920929,
+                  "dynamic": 0.800000011920929,
+                  "combine_mode": "min"
+                }
+              },
+              "candidate": {
+                "env_id": 2,
+                "friction": 0.3,
+                "onset_n": 0.88,
+                "material": {
+                  "static": 0.30000001192092896,
+                  "dynamic": 0.30000001192092896,
+                  "combine_mode": "min"
+                }
+              }
+            }
+          }
+        ]
+      }
+    ]
+  },
+  "versions": {
+    "isaac_sim": [
+      "6.0.1",
+      "rc.7",
+      "6",
+      "0",
+      "1",
+      "rc",
+      "7",
+      "release.42383.32955d8d.gl"
+    ],
+    "isaaclab_package": "6.1.14",
+    "isaaclab_file": "D:\\Isaac\\IsaacLab_LEAP\\source\\isaaclab\\isaaclab\\__init__.py"
+  }
+}

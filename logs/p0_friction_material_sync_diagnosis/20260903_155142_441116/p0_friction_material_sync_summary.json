@@ -1,0 +1,5845 @@
+{
+  "evidence_label": "P0_7F0_1_DIAGNOSIS_ONLY_NOT_FOR_QUALIFICATION",
+  "qualification_eligible": false,
+  "run_id": "20260903_155142_441116",
+  "process_id": 48692,
+  "task_id": "Isaac-Reorient-Cube-Leap-CRI",
+  "factor_codes": [
+    "000",
+    "100",
+    "010",
+    "001"
+  ],
+  "target_env_id": 2,
+  "requested_friction": 0.45,
+  "history_reproducer_friction": 0.35,
+  "physics_dt": 0.008333333333333333,
+  "decimation": 4,
+  "events_cfg_is_none": true,
+  "material_api": "RigidObject.root_view.set_material_properties/get_material_properties",
+  "reset_call_chain_contract": [
+    "gym.Env.reset",
+    "DirectRLEnv.reset",
+    "ReorientationCRIEnv._reset_idx",
+    "ReorientationEnv._reset_idx",
+    "DirectRLEnv._reset_idx",
+    "scene.reset",
+    "event manager skipped because events=None",
+    "ReorientationCRIEnv._apply_factor_conditions",
+    "ReorientationCRIEnv._write_object_material",
+    "PhysX set_material_properties",
+    "ReorientationCRIEnv._read_back_factor_values",
+    "PhysX get_material_properties",
+    "ReorientationCRIEnv._assert_requested_matches_actual",
+    "scene.write_data_to_sim + sim.forward only if reset returns"
+  ],
+  "visibility_cases": [
+    {
+      "case": "immediate",
+      "requested": 0.45,
+      "preparation": {
+        "history_write": {
+          "requested": 0.35,
+          "env_ids": {
+            "shape": [
+              1
+            ],
+            "dtype": "torch.int64",
+            "device": "cuda:0",
+            "values": [
+              2
+            ]
+          },
+          "before": {
+            "env_ids": {
+              "shape": [
+                1
+              ],
+              "dtype": "torch.int64",
+              "device": "cuda:0",
+              "values": [
+                2
+              ]
+            },
+            "material_tensor": {
+              "shape": [
+                4,
+                1,
+                3
+              ],
+              "dtype": "torch.float32",
+              "device": "cuda:0",
+              "values": [
+                [
+                  [
+                    0.800000011920929,
+                    0.800000011920929,
+                    0.0
+                  ]
+                ],
+                [
+                  [
+                    0.800000011920929,
+                    0.800000011920929,
+                    0.0
+                  ]
+                ],
+                [
+                  [
+                    0.44999998807907104,
+                    0.44999998807907104,
+                    0.0
+                  ]
+                ],
+                [
+                  [
+                    0.800000011920929,
+                    0.800000011920929,
+                    0.0
+                  ]
+                ]
+              ]
+            },
+            "getter_static_all_envs": [
+              0.800000011920929,
+              0.800000011920929,
+              0.44999998807907104,
+              0.800000011920929
+            ],
+            "getter_dynamic_all_envs": [
+              0.800000011920929,
+              0.800000011920929,
+              0.44999998807907104,
+              0.800000011920929
+            ],
+            "getter_static_target": 0.44999998807907104,
+            "getter_dynamic_target": 0.44999998807907104,
+            "requested_static_all_envs": [
+              0.800000011920929,
+              0.800000011920929,
+              0.44999998807907104,
+              0.800000011920929
+            ],
+            "requested_dynamic_all_envs": [
+              0.800000011920929,
+              0.800000011920929,
+              0.44999998807907104,
+              0.800000011920929
+            ],
+            "actual_static_buffer_all_envs": [
+              0.800000011920929,
+              0.800000011920929,
+              0.44999998807907104,
+              0.800000011920929
+            ],
+            "actual_dynamic_buffer_all_envs": [
+              0.800000011920929,
+              0.800000011920929,
+              0.44999998807907104,
+              0.800000011920929
+            ],
+            "actual_static_buffer_target": 0.44999998807907104,
+            "actual_dynamic_buffer_target": 0.44999998807907104,
+            "physics_step_count": 0,
+            "simulation_time": 0.0,
+            "environment_sim_step_counter": 0,
+            "common_step_counter": 0
+          },
+          "after_setter": {
+            "env_ids": {
+              "shape": [
+                1
+              ],
+              "dtype": "torch.int64",
+              "device": "cuda:0",
+              "values": [
+                2
+              ]
+            },
+            "material_tensor": {
+              "shape": [
+                4,
+                1,
+                3
+              ],
+              "dtype": "torch.float32",
+              "device": "cuda:0",
+              "values": [
+                [
+                  [
+                    0.800000011920929,
+                    0.800000011920929,
+                    0.0
+                  ]
+                ],
+                [
+                  [
+                    0.800000011920929,
+                    0.800000011920929,
+                    0.0
+                  ]
+                ],
+                [
+                  [
+                    0.3499999940395355,
+                    0.3499999940395355,
+                    0.0
+                  ]
+                ],
+                [
+                  [
+                    0.800000011920929,
+                    0.800000011920929,
+                    0.0
+                  ]
+                ]
+              ]
+            },
+            "getter_static_all_envs": [
+              0.800000011920929,
+              0.800000011920929,
+              0.3499999940395355,
+              0.800000011920929
+            ],
+            "getter_dynamic_all_envs": [
+              0.800000011920929,
+              0.800000011920929,
+              0.3499999940395355,
+              0.800000011920929
+            ],
+            "getter_static_target": 0.3499999940395355,
+            "getter_dynamic_target": 0.3499999940395355,
+            "requested_static_all_envs": [
+              0.800000011920929,
+              0.800000011920929,
+              0.44999998807907104,
+              0.800000011920929
+            ],
+            "requested_dynamic_all_envs": [
+              0.800000011920929,
+              0.800000011920929,
+              0.44999998807907104,
+              0.800000011920929
+            ],
+            "actual_static_buffer_all_envs": [
+              0.800000011920929,
+              0.800000011920929,
+              0.44999998807907104,
+              0.800000011920929
+            ],
+            "actual_dynamic_buffer_all_envs": [
+              0.800000011920929,
+              0.800000011920929,
+              0.44999998807907104,
+              0.800000011920929
+            ],
+            "actual_static_buffer_target": 0.44999998807907104,
+            "actual_dynamic_buffer_target": 0.44999998807907104,
+            "physics_step_count": 0,
+            "simulation_time": 0.0,
+            "environment_sim_step_counter": 0,
+            "common_step_counter": 0
+          }
+        },
+        "history_readback": {
+          "env_ids": {
+            "shape": [
+              1
+            ],
+            "dtype": "torch.int64",
+            "device": "cuda:0",
+            "values": [
+              2
+            ]
+          },
+          "material_tensor": {
+            "shape": [
+              4,
+              1,
+              3
+            ],
+            "dtype": "torch.float32",
+            "device": "cuda:0",
+            "values": [
+              [
+                [
+                  0.800000011920929,
+                  0.800000011920929,
+                  0.0
+                ]
+              ],
+              [
+                [
+                  0.800000011920929,
+                  0.800000011920929,
+                  0.0
+                ]
+              ],
+              [
+                [
+                  0.3499999940395355,
+                  0.3499999940395355,
+                  0.0
+                ]
+              ],
+              [
+                [
+                  0.800000011920929,
+                  0.800000011920929,
+                  0.0
+                ]
+              ]
+            ]
+          },
+          "getter_static_all_envs": [
+            0.800000011920929,
+            0.800000011920929,
+            0.3499999940395355,
+            0.800000011920929
+          ],
+          "getter_dynamic_all_envs": [
+            0.800000011920929,
+            0.800000011920929,
+            0.3499999940395355,
+            0.800000011920929
+          ],
+          "getter_static_target": 0.3499999940395355,
+          "getter_dynamic_target": 0.3499999940395355,
+          "requested_static_all_envs": [
+            0.800000011920929,
+            0.800000011920929,
+            0.44999998807907104,
+            0.800000011920929
+          ],
+          "requested_dynamic_all_envs": [
+            0.800000011920929,
+            0.800000011920929,
+            0.44999998807907104,
+            0.800000011920929
+          ],
+          "actual_static_buffer_all_envs": [
+            0.800000011920929,
+            0.800000011920929,
+            0.3499999940395355,
+            0.800000011920929
+          ],
+          "actual_dynamic_buffer_all_envs": [
+            0.800000011920929,
+            0.800000011920929,
+            0.3499999940395355,
+            0.800000011920929
+          ],
+          "actual_static_buffer_target": 0.3499999940395355,
+          "actual_dynamic_buffer_target": 0.3499999940395355,
+          "physics_step_count": 0,
+          "simulation_time": 0.0,
+          "environment_sim_step_counter": 0,
+          "common_step_counter": 0
+        },
+        "reset": {
+          "pass": true,
+          "error": null,
+          "before": {
+            "env_ids": {
+              "shape": [
+                1
+              ],
+              "dtype": "torch.int64",
+              "device": "cuda:0",
+              "values": [
+                2
+              ]
+            },
+            "material_tensor": {
+              "shape": [
+                4,
+                1,
+                3
+              ],
+              "dtype": "torch.float32",
+              "device": "cuda:0",
+              "values": [
+                [
+                  [
+                    0.800000011920929,
+                    0.800000011920929,
+                    0.0
+                  ]
+                ],
+                [
+                  [
+                    0.800000011920929,
+                    0.800000011920929,
+                    0.0
+                  ]
+                ],
+                [
+                  [
+                    0.3499999940395355,
+                    0.3499999940395355,
+                    0.0
+                  ]
+                ],
+                [
+                  [
+                    0.800000011920929,
+                    0.800000011920929,
+                    0.0
+                  ]
+                ]
+              ]
+            },
+            "getter_static_all_envs": [
+              0.800000011920929,
+              0.800000011920929,
+              0.3499999940395355,
+              0.800000011920929
+            ],
+            "getter_dynamic_all_envs": [
+              0.800000011920929,
+              0.800000011920929,
+              0.3499999940395355,
+              0.800000011920929
+            ],
+            "getter_static_target": 0.3499999940395355,
+            "getter_dynamic_target": 0.3499999940395355,
+            "requested_static_all_envs": [
+              0.800000011920929,
+              0.800000011920929,
+              0.44999998807907104,
+              0.800000011920929
+            ],
+            "requested_dynamic_all_envs": [
+              0.800000011920929,
+              0.800000011920929,
+              0.44999998807907104,
+              0.800000011920929
+            ],
+            "actual_static_buffer_all_envs": [
+              0.800000011920929,
+              0.800000011920929,
+              0.3499999940395355,
+              0.800000011920929
+            ],
+            "actual_dynamic_buffer_all_envs": [
+              0.800000011920929,
+              0.800000011920929,
+              0.3499999940395355,
+              0.800000011920929
+            ],
+            "actual_static_buffer_target": 0.3499999940395355,
+            "actual_dynamic_buffer_target": 0.3499999940395355,
+            "physics_step_count": 0,
+            "simulation_time": 0.0,
+            "environment_sim_step_counter": 0,
+            "common_step_counter": 0
+          },
+          "after": {
+            "env_ids": {
+              "shape": [
+                1
+              ],
+              "dtype": "torch.int64",
+              "device": "cuda:0",
+              "values": [
+                2
+              ]
+            },
+            "material_tensor": {
+              "shape": [
+                4,
+                1,
+                3
+              ],
+              "dtype": "torch.float32",
+              "device": "cuda:0",
+              "values": [
+                [
+                  [
+                    0.800000011920929,
+                    0.800000011920929,
+                    0.0
+                  ]
+                ],
+                [
+                  [
+                    0.800000011920929,
+                    0.800000011920929,
+                    0.0
+                  ]
+                ],
+                [
+                  [
+                    0.44999998807907104,
+                    0.44999998807907104,
+                    0.0
+                  ]
+                ],
+                [
+                  [
+                    0.800000011920929,
+                    0.800000011920929,
+                    0.0
+                  ]
+                ]
+              ]
+            },
+            "getter_static_all_envs": [
+              0.800000011920929,
+              0.800000011920929,
+              0.44999998807907104,
+              0.800000011920929
+            ],
+            "getter_dynamic_all_envs": [
+              0.800000011920929,
+              0.800000011920929,
+              0.44999998807907104,
+              0.800000011920929
+            ],
+            "getter_static_target": 0.44999998807907104,
+            "getter_dynamic_target": 0.44999998807907104,
+            "requested_static_all_envs": [
+              0.800000011920929,
+              0.800000011920929,
+              0.44999998807907104,
+              0.800000011920929
+            ],
+            "requested_dynamic_all_envs": [
+              0.800000011920929,
+              0.800000011920929,
+              0.44999998807907104,
+              0.800000011920929
+            ],
+            "actual_static_buffer_all_envs": [
+              0.800000011920929,
+              0.800000011920929,
+              0.44999998807907104,
+              0.800000011920929
+            ],
+            "actual_dynamic_buffer_all_envs": [
+              0.800000011920929,
+              0.800000011920929,
+              0.44999998807907104,
+              0.800000011920929
+            ],
+            "actual_static_buffer_target": 0.44999998807907104,
+            "actual_dynamic_buffer_target": 0.44999998807907104,
+            "physics_step_count": 0,
+            "simulation_time": 0.0,
+            "environment_sim_step_counter": 0,
+            "common_step_counter": 0
+          }
+        }
+      },
+      "write": {
+        "requested": 0.45,
+        "env_ids": {
+          "shape": [
+            1
+          ],
+          "dtype": "torch.int64",
+          "device": "cuda:0",
+          "values": [
+            2
+          ]
+        },
+        "before": {
+          "env_ids": {
+            "shape": [
+              1
+            ],
+            "dtype": "torch.int64",
+            "device": "cuda:0",
+            "values": [
+              2
+            ]
+          },
+          "material_tensor": {
+            "shape": [
+              4,
+              1,
+              3
+            ],
+            "dtype": "torch.float32",
+            "device": "cuda:0",
+            "values": [
+              [
+                [
+                  0.800000011920929,
+                  0.800000011920929,
+                  0.0
+                ]
+              ],
+              [
+                [
+                  0.800000011920929,
+                  0.800000011920929,
+                  0.0
+                ]
+              ],
+              [
+                [
+                  0.44999998807907104,
+                  0.44999998807907104,
+                  0.0
+                ]
+              ],
+              [
+                [
+                  0.800000011920929,
+                  0.800000011920929,
+                  0.0
+                ]
+              ]
+            ]
+          },
+          "getter_static_all_envs": [
+            0.800000011920929,
+            0.800000011920929,
+            0.44999998807907104,
+            0.800000011920929
+          ],
+          "getter_dynamic_all_envs": [
+            0.800000011920929,
+            0.800000011920929,
+            0.44999998807907104,
+            0.800000011920929
+          ],
+          "getter_static_target": 0.44999998807907104,
+          "getter_dynamic_target": 0.44999998807907104,
+          "requested_static_all_envs": [
+            0.800000011920929,
+            0.800000011920929,
+            0.44999998807907104,
+            0.800000011920929
+          ],
+          "requested_dynamic_all_envs": [
+            0.800000011920929,
+            0.800000011920929,
+            0.44999998807907104,
+            0.800000011920929
+          ],
+          "actual_static_buffer_all_envs": [
+            0.800000011920929,
+            0.800000011920929,
+            0.44999998807907104,
+            0.800000011920929
+          ],
+          "actual_dynamic_buffer_all_envs": [
+            0.800000011920929,
+            0.800000011920929,
+            0.44999998807907104,
+            0.800000011920929
+          ],
+          "actual_static_buffer_target": 0.44999998807907104,
+          "actual_dynamic_buffer_target": 0.44999998807907104,
+          "physics_step_count": 0,
+          "simulation_time": 0.0,
+          "environment_sim_step_counter": 0,
+          "common_step_counter": 0
+        },
+        "after_setter": {
+          "env_ids": {
+            "shape": [
+              1
+            ],
+            "dtype": "torch.int64",
+            "device": "cuda:0",
+            "values": [
+              2
+            ]
+          },
+          "material_tensor": {
+            "shape": [
+              4,
+              1,
+              3
+            ],
+            "dtype": "torch.float32",
+            "device": "cuda:0",
+            "values": [
+              [
+                [
+                  0.800000011920929,
+                  0.800000011920929,
+                  0.0
+                ]
+              ],
+              [
+                [
+                  0.800000011920929,
+                  0.800000011920929,
+                  0.0
+                ]
+              ],
+              [
+                [
+                  0.44999998807907104,
+                  0.44999998807907104,
+                  0.0
+                ]
+              ],
+              [
+                [
+                  0.800000011920929,
+                  0.800000011920929,
+                  0.0
+                ]
+              ]
+            ]
+          },
+          "getter_static_all_envs": [
+            0.800000011920929,
+            0.800000011920929,
+            0.44999998807907104,
+            0.800000011920929
+          ],
+          "getter_dynamic_all_envs": [
+            0.800000011920929,
+            0.800000011920929,
+            0.44999998807907104,
+            0.800000011920929
+          ],
+          "getter_static_target": 0.44999998807907104,
+          "getter_dynamic_target": 0.44999998807907104,
+          "requested_static_all_envs": [
+            0.800000011920929,
+            0.800000011920929,
+            0.44999998807907104,
+            0.800000011920929
+          ],
+          "requested_dynamic_all_envs": [
+            0.800000011920929,
+            0.800000011920929,
+            0.44999998807907104,
+            0.800000011920929
+          ],
+          "actual_static_buffer_all_envs": [
+            0.800000011920929,
+            0.800000011920929,
+            0.44999998807907104,
+            0.800000011920929
+          ],
+          "actual_dynamic_buffer_all_envs": [
+            0.800000011920929,
+            0.800000011920929,
+            0.44999998807907104,
+            0.800000011920929
+          ],
+          "actual_static_buffer_target": 0.44999998807907104,
+          "actual_dynamic_buffer_target": 0.44999998807907104,
+          "physics_step_count": 0,
+          "simulation_time": 0.0,
+          "environment_sim_step_counter": 0,
+          "common_step_counter": 0
+        }
+      },
+      "boundary": {
+        "called": false,
+        "error": null
+      },
+      "clock_before_boundary": {
+        "physics_step_count": 0,
+        "simulation_time": 0.0,
+        "environment_sim_step_counter": 0,
+        "common_step_counter": 0
+      },
+      "clock_after_boundary": {
+        "physics_step_count": 0,
+        "simulation_time": 0.0,
+        "environment_sim_step_counter": 0,
+        "common_step_counter": 0
+      },
+      "readback": 0.44999998807907104,
+      "buffer": 0.44999998807907104,
+      "match": true,
+      "observation": {
+        "requested": 0.45,
+        "getter": 0.44999998807907104,
+        "buffer": 0.44999998807907104,
+        "getter_match": true,
+        "buffer_match": true,
+        "match": true,
+        "state": {
+          "env_ids": {
+            "shape": [
+              1
+            ],
+            "dtype": "torch.int64",
+            "device": "cuda:0",
+            "values": [
+              2
+            ]
+          },
+          "material_tensor": {
+            "shape": [
+              4,
+              1,
+              3
+            ],
+            "dtype": "torch.float32",
+            "device": "cuda:0",
+            "values": [
+              [
+                [
+                  0.800000011920929,
+                  0.800000011920929,
+                  0.0
+                ]
+              ],
+              [
+                [
+                  0.800000011920929,
+                  0.800000011920929,
+                  0.0
+                ]
+              ],
+              [
+                [
+                  0.44999998807907104,
+                  0.44999998807907104,
+                  0.0
+                ]
+              ],
+              [
+                [
+                  0.800000011920929,
+                  0.800000011920929,
+                  0.0
+                ]
+              ]
+            ]
+          },
+          "getter_static_all_envs": [
+            0.800000011920929,
+            0.800000011920929,
+            0.44999998807907104,
+            0.800000011920929
+          ],
+          "getter_dynamic_all_envs": [
+            0.800000011920929,
+            0.800000011920929,
+            0.44999998807907104,
+            0.800000011920929
+          ],
+          "getter_static_target": 0.44999998807907104,
+          "getter_dynamic_target": 0.44999998807907104,
+          "requested_static_all_envs": [
+            0.800000011920929,
+            0.800000011920929,
+            0.44999998807907104,
+            0.800000011920929
+          ],
+          "requested_dynamic_all_envs": [
+            0.800000011920929,
+            0.800000011920929,
+            0.44999998807907104,
+            0.800000011920929
+          ],
+          "actual_static_buffer_all_envs": [
+            0.800000011920929,
+            0.800000011920929,
+            0.44999998807907104,
+            0.800000011920929
+          ],
+          "actual_dynamic_buffer_all_envs": [
+            0.800000011920929,
+            0.800000011920929,
+            0.44999998807907104,
+            0.800000011920929
+          ],
+          "actual_static_buffer_target": 0.44999998807907104,
+          "actual_dynamic_buffer_target": 0.44999998807907104,
+          "physics_step_count": 0,
+          "simulation_time": 0.0,
+          "environment_sim_step_counter": 0,
+          "common_step_counter": 0
+        }
+      }
+    },
+    {
+      "case": "app_update",
+      "requested": 0.45,
+      "preparation": {
+        "history_write": {
+          "requested": 0.35,
+          "env_ids": {
+            "shape": [
+              1
+            ],
+            "dtype": "torch.int64",
+            "device": "cuda:0",
+            "values": [
+              2
+            ]
+          },
+          "before": {
+            "env_ids": {
+              "shape": [
+                1
+              ],
+              "dtype": "torch.int64",
+              "device": "cuda:0",
+              "values": [
+                2
+              ]
+            },
+            "material_tensor": {
+              "shape": [
+                4,
+                1,
+                3
+              ],
+              "dtype": "torch.float32",
+              "device": "cuda:0",
+              "values": [
+                [
+                  [
+                    0.800000011920929,
+                    0.800000011920929,
+                    0.0
+                  ]
+                ],
+                [
+                  [
+                    0.800000011920929,
+                    0.800000011920929,
+                    0.0
+                  ]
+                ],
+                [
+                  [
+                    0.44999998807907104,
+                    0.44999998807907104,
+                    0.0
+                  ]
+                ],
+                [
+                  [
+                    0.800000011920929,
+                    0.800000011920929,
+                    0.0
+                  ]
+                ]
+              ]
+            },
+            "getter_static_all_envs": [
+              0.800000011920929,
+              0.800000011920929,
+              0.44999998807907104,
+              0.800000011920929
+            ],
+            "getter_dynamic_all_envs": [
+              0.800000011920929,
+              0.800000011920929,
+              0.44999998807907104,
+              0.800000011920929
+            ],
+            "getter_static_target": 0.44999998807907104,
+            "getter_dynamic_target": 0.44999998807907104,
+            "requested_static_all_envs": [
+              0.800000011920929,
+              0.800000011920929,
+              0.44999998807907104,
+              0.800000011920929
+            ],
+            "requested_dynamic_all_envs": [
+              0.800000011920929,
+              0.800000011920929,
+              0.44999998807907104,
+              0.800000011920929
+            ],
+            "actual_static_buffer_all_envs": [
+              0.800000011920929,
+              0.800000011920929,
+              0.44999998807907104,
+              0.800000011920929
+            ],
+            "actual_dynamic_buffer_all_envs": [
+              0.800000011920929,
+              0.800000011920929,
+              0.44999998807907104,
+              0.800000011920929
+            ],
+            "actual_static_buffer_target": 0.44999998807907104,
+            "actual_dynamic_buffer_target": 0.44999998807907104,
+            "physics_step_count": 0,
+            "simulation_time": 0.0,
+            "environment_sim_step_counter": 0,
+            "common_step_counter": 0
+          },
+          "after_setter": {
+            "env_ids": {
+              "shape": [
+                1
+              ],
+              "dtype": "torch.int64",
+              "device": "cuda:0",
+              "values": [
+                2
+              ]
+            },
+            "material_tensor": {
+              "shape": [
+                4,
+                1,
+                3
+              ],
+              "dtype": "torch.float32",
+              "device": "cuda:0",
+              "values": [
+                [
+                  [
+                    0.800000011920929,
+                    0.800000011920929,
+                    0.0
+                  ]
+                ],
+                [
+                  [
+                    0.800000011920929,
+                    0.800000011920929,
+                    0.0
+                  ]
+                ],
+                [
+                  [
+                    0.3499999940395355,
+                    0.3499999940395355,
+                    0.0
+                  ]
+                ],
+                [
+                  [
+                    0.800000011920929,
+                    0.800000011920929,
+                    0.0
+                  ]
+                ]
+              ]
+            },
+            "getter_static_all_envs": [
+              0.800000011920929,
+              0.800000011920929,
+              0.3499999940395355,
+              0.800000011920929
+            ],
+            "getter_dynamic_all_envs": [
+              0.800000011920929,
+              0.800000011920929,
+              0.3499999940395355,
+              0.800000011920929
+            ],
+            "getter_static_target": 0.3499999940395355,
+            "getter_dynamic_target": 0.3499999940395355,
+            "requested_static_all_envs": [
+              0.800000011920929,
+              0.800000011920929,
+              0.44999998807907104,
+              0.800000011920929
+            ],
+            "requested_dynamic_all_envs": [
+              0.800000011920929,
+              0.800000011920929,
+              0.44999998807907104,
+              0.800000011920929
+            ],
+            "actual_static_buffer_all_envs": [
+              0.800000011920929,
+              0.800000011920929,
+              0.44999998807907104,
+              0.800000011920929
+            ],
+            "actual_dynamic_buffer_all_envs": [
+              0.800000011920929,
+              0.800000011920929,
+              0.44999998807907104,
+              0.800000011920929
+            ],
+            "actual_static_buffer_target": 0.44999998807907104,
+            "actual_dynamic_buffer_target": 0.44999998807907104,
+            "physics_step_count": 0,
+            "simulation_time": 0.0,
+            "environment_sim_step_counter": 0,
+            "common_step_counter": 0
+          }
+        },
+        "history_readback": {
+          "env_ids": {
+            "shape": [
+              1
+            ],
+            "dtype": "torch.int64",
+            "device": "cuda:0",
+            "values": [
+              2
+            ]
+          },
+          "material_tensor": {
+            "shape": [
+              4,
+              1,
+              3
+            ],
+            "dtype": "torch.float32",
+            "device": "cuda:0",
+            "values": [
+              [
+                [
+                  0.800000011920929,
+                  0.800000011920929,
+                  0.0
+                ]
+              ],
+              [
+                [
+                  0.800000011920929,
+                  0.800000011920929,
+                  0.0
+                ]
+              ],
+              [
+                [
+                  0.3499999940395355,
+                  0.3499999940395355,
+                  0.0
+                ]
+              ],
+              [
+                [
+                  0.800000011920929,
+                  0.800000011920929,
+                  0.0
+                ]
+              ]
+            ]
+          },
+          "getter_static_all_envs": [
+            0.800000011920929,
+            0.800000011920929,
+            0.3499999940395355,
+            0.800000011920929
+          ],
+          "getter_dynamic_all_envs": [
+            0.800000011920929,
+            0.800000011920929,
+            0.3499999940395355,
+            0.800000011920929
+          ],
+          "getter_static_target": 0.3499999940395355,
+          "getter_dynamic_target": 0.3499999940395355,
+          "requested_static_all_envs": [
+            0.800000011920929,
+            0.800000011920929,
+            0.44999998807907104,
+            0.800000011920929
+          ],
+          "requested_dynamic_all_envs": [
+            0.800000011920929,
+            0.800000011920929,
+            0.44999998807907104,
+            0.800000011920929
+          ],
+          "actual_static_buffer_all_envs": [
+            0.800000011920929,
+            0.800000011920929,
+            0.3499999940395355,
+            0.800000011920929
+          ],
+          "actual_dynamic_buffer_all_envs": [
+            0.800000011920929,
+            0.800000011920929,
+            0.3499999940395355,
+            0.800000011920929
+          ],
+          "actual_static_buffer_target": 0.3499999940395355,
+          "actual_dynamic_buffer_target": 0.3499999940395355,
+          "physics_step_count": 0,
+          "simulation_time": 0.0,
+          "environment_sim_step_counter": 0,
+          "common_step_counter": 0
+        },
+        "reset": {
+          "pass": true,
+          "error": null,
+          "before": {
+            "env_ids": {
+              "shape": [
+                1
+              ],
+              "dtype": "torch.int64",
+              "device": "cuda:0",
+              "values": [
+                2
+              ]
+            },
+            "material_tensor": {
+              "shape": [
+                4,
+                1,
+                3
+              ],
+              "dtype": "torch.float32",
+              "device": "cuda:0",
+              "values": [
+                [
+                  [
+                    0.800000011920929,
+                    0.800000011920929,
+                    0.0
+                  ]
+                ],
+                [
+                  [
+                    0.800000011920929,
+                    0.800000011920929,
+                    0.0
+                  ]
+                ],
+                [
+                  [
+                    0.3499999940395355,
+                    0.3499999940395355,
+                    0.0
+                  ]
+                ],
+                [
+                  [
+                    0.800000011920929,
+                    0.800000011920929,
+                    0.0
+                  ]
+                ]
+              ]
+            },
+            "getter_static_all_envs": [
+              0.800000011920929,
+              0.800000011920929,
+              0.3499999940395355,
+              0.800000011920929
+            ],
+            "getter_dynamic_all_envs": [
+              0.800000011920929,
+              0.800000011920929,
+              0.3499999940395355,
+              0.800000011920929
+            ],
+            "getter_static_target": 0.3499999940395355,
+            "getter_dynamic_target": 0.3499999940395355,
+            "requested_static_all_envs": [
+              0.800000011920929,
+              0.800000011920929,
+              0.44999998807907104,
+              0.800000011920929
+            ],
+            "requested_dynamic_all_envs": [
+              0.800000011920929,
+              0.800000011920929,
+              0.44999998807907104,
+              0.800000011920929
+            ],
+            "actual_static_buffer_all_envs": [
+              0.800000011920929,
+              0.800000011920929,
+              0.3499999940395355,
+              0.800000011920929
+            ],
+            "actual_dynamic_buffer_all_envs": [
+              0.800000011920929,
+              0.800000011920929,
+              0.3499999940395355,
+              0.800000011920929
+            ],
+            "actual_static_buffer_target": 0.3499999940395355,
+            "actual_dynamic_buffer_target": 0.3499999940395355,
+            "physics_step_count": 0,
+            "simulation_time": 0.0,
+            "environment_sim_step_counter": 0,
+            "common_step_counter": 0
+          },
+          "after": {
+            "env_ids": {
+              "shape": [
+                1
+              ],
+              "dtype": "torch.int64",
+              "device": "cuda:0",
+              "values": [
+                2
+              ]
+            },
+            "material_tensor": {
+              "shape": [
+                4,
+                1,
+                3
+              ],
+              "dtype": "torch.float32",
+              "device": "cuda:0",
+              "values": [
+                [
+                  [
+                    0.800000011920929,
+                    0.800000011920929,
+                    0.0
+                  ]
+                ],
+                [
+                  [
+                    0.800000011920929,
+                    0.800000011920929,
+                    0.0
+                  ]
+                ],
+                [
+                  [
+                    0.44999998807907104,
+                    0.44999998807907104,
+                    0.0
+                  ]
+                ],
+                [
+                  [
+                    0.800000011920929,
+                    0.800000011920929,
+                    0.0
+                  ]
+                ]
+              ]
+            },
+            "getter_static_all_envs": [
+              0.800000011920929,
+              0.800000011920929,
+              0.44999998807907104,
+              0.800000011920929
+            ],
+            "getter_dynamic_all_envs": [
+              0.800000011920929,
+              0.800000011920929,
+              0.44999998807907104,
+              0.800000011920929
+            ],
+            "getter_static_target": 0.44999998807907104,
+            "getter_dynamic_target": 0.44999998807907104,
+            "requested_static_all_envs": [
+              0.800000011920929,
+              0.800000011920929,
+              0.44999998807907104,
+              0.800000011920929
+            ],
+            "requested_dynamic_all_envs": [
+              0.800000011920929,
+              0.800000011920929,
+              0.44999998807907104,
+              0.800000011920929
+            ],
+            "actual_static_buffer_all_envs": [
+              0.800000011920929,
+              0.800000011920929,
+              0.44999998807907104,
+              0.800000011920929
+            ],
+            "actual_dynamic_buffer_all_envs": [
+              0.800000011920929,
+              0.800000011920929,
+              0.44999998807907104,
+              0.800000011920929
+            ],
+            "actual_static_buffer_target": 0.44999998807907104,
+            "actual_dynamic_buffer_target": 0.44999998807907104,
+            "physics_step_count": 0,
+            "simulation_time": 0.0,
+            "environment_sim_step_counter": 0,
+            "common_step_counter": 0
+          }
+        }
+      },
+      "write": {
+        "requested": 0.45,
+        "env_ids": {
+          "shape": [
+            1
+          ],
+          "dtype": "torch.int64",
+          "device": "cuda:0",
+          "values": [
+            2
+          ]
+        },
+        "before": {
+          "env_ids": {
+            "shape": [
+              1
+            ],
+            "dtype": "torch.int64",
+            "device": "cuda:0",
+            "values": [
+              2
+            ]
+          },
+          "material_tensor": {
+            "shape": [
+              4,
+              1,
+              3
+            ],
+            "dtype": "torch.float32",
+            "device": "cuda:0",
+            "values": [
+              [
+                [
+                  0.800000011920929,
+                  0.800000011920929,
+                  0.0
+                ]
+              ],
+              [
+                [
+                  0.800000011920929,
+                  0.800000011920929,
+                  0.0
+                ]
+              ],
+              [
+                [
+                  0.44999998807907104,
+                  0.44999998807907104,
+                  0.0
+                ]
+              ],
+              [
+                [
+                  0.800000011920929,
+                  0.800000011920929,
+                  0.0
+                ]
+              ]
+            ]
+          },
+          "getter_static_all_envs": [
+            0.800000011920929,
+            0.800000011920929,
+            0.44999998807907104,
+            0.800000011920929
+          ],
+          "getter_dynamic_all_envs": [
+            0.800000011920929,
+            0.800000011920929,
+            0.44999998807907104,
+            0.800000011920929
+          ],
+          "getter_static_target": 0.44999998807907104,
+          "getter_dynamic_target": 0.44999998807907104,
+          "requested_static_all_envs": [
+            0.800000011920929,
+            0.800000011920929,
+            0.44999998807907104,
+            0.800000011920929
+          ],
+          "requested_dynamic_all_envs": [
+            0.800000011920929,
+            0.800000011920929,
+            0.44999998807907104,
+            0.800000011920929
+          ],
+          "actual_static_buffer_all_envs": [
+            0.800000011920929,
+            0.800000011920929,
+            0.44999998807907104,
+            0.800000011920929
+          ],
+          "actual_dynamic_buffer_all_envs": [
+            0.800000011920929,
+            0.800000011920929,
+            0.44999998807907104,
+            0.800000011920929
+          ],
+          "actual_static_buffer_target": 0.44999998807907104,
+          "actual_dynamic_buffer_target": 0.44999998807907104,
+          "physics_step_count": 0,
+          "simulation_time": 0.0,
+          "environment_sim_step_counter": 0,
+          "common_step_counter": 0
+        },
+        "after_setter": {
+          "env_ids": {
+            "shape": [
+              1
+            ],
+            "dtype": "torch.int64",
+            "device": "cuda:0",
+            "values": [
+              2
+            ]
+          },
+          "material_tensor": {
+            "shape": [
+              4,
+              1,
+              3
+            ],
+            "dtype": "torch.float32",
+            "device": "cuda:0",
+            "values": [
+              [
+                [
+                  0.800000011920929,
+                  0.800000011920929,
+                  0.0
+                ]
+              ],
+              [
+                [
+                  0.800000011920929,
+                  0.800000011920929,
+                  0.0
+                ]
+              ],
+              [
+                [
+                  0.44999998807907104,
+                  0.44999998807907104,
+                  0.0
+                ]
+              ],
+              [
+                [
+                  0.800000011920929,
+                  0.800000011920929,
+                  0.0
+                ]
+              ]
+            ]
+          },
+          "getter_static_all_envs": [
+            0.800000011920929,
+            0.800000011920929,
+            0.44999998807907104,
+            0.800000011920929
+          ],
+          "getter_dynamic_all_envs": [
+            0.800000011920929,
+            0.800000011920929,
+            0.44999998807907104,
+            0.800000011920929
+          ],
+          "getter_static_target": 0.44999998807907104,
+          "getter_dynamic_target": 0.44999998807907104,
+          "requested_static_all_envs": [
+            0.800000011920929,
+            0.800000011920929,
+            0.44999998807907104,
+            0.800000011920929
+          ],
+          "requested_dynamic_all_envs": [
+            0.800000011920929,
+            0.800000011920929,
+            0.44999998807907104,
+            0.800000011920929
+          ],
+          "actual_static_buffer_all_envs": [
+            0.800000011920929,
+            0.800000011920929,
+            0.44999998807907104,
+            0.800000011920929
+          ],
+          "actual_dynamic_buffer_all_envs": [
+            0.800000011920929,
+            0.800000011920929,
+            0.44999998807907104,
+            0.800000011920929
+          ],
+          "actual_static_buffer_target": 0.44999998807907104,
+          "actual_dynamic_buffer_target": 0.44999998807907104,
+          "physics_step_count": 0,
+          "simulation_time": 0.0,
+          "environment_sim_step_counter": 0,
+          "common_step_counter": 0
+        }
+      },
+      "boundary": {
+        "called": true,
+        "error": null,
+        "return_type": "NoneType"
+      },
+      "clock_before_boundary": {
+        "physics_step_count": 0,
+        "simulation_time": 0.0,
+        "environment_sim_step_counter": 0,
+        "common_step_counter": 0
+      },
+      "clock_after_boundary": {
+        "physics_step_count": 0,
+        "simulation_time": 0.0,
+        "environment_sim_step_counter": 0,
+        "common_step_counter": 0
+      },
+      "readback": 0.44999998807907104,
+      "buffer": 0.44999998807907104,
+      "match": true,
+      "observation": {
+        "requested": 0.45,
+        "getter": 0.44999998807907104,
+        "buffer": 0.44999998807907104,
+        "getter_match": true,
+        "buffer_match": true,
+        "match": true,
+        "state": {
+          "env_ids": {
+            "shape": [
+              1
+            ],
+            "dtype": "torch.int64",
+            "device": "cuda:0",
+            "values": [
+              2
+            ]
+          },
+          "material_tensor": {
+            "shape": [
+              4,
+              1,
+              3
+            ],
+            "dtype": "torch.float32",
+            "device": "cuda:0",
+            "values": [
+              [
+                [
+                  0.800000011920929,
+                  0.800000011920929,
+                  0.0
+                ]
+              ],
+              [
+                [
+                  0.800000011920929,
+                  0.800000011920929,
+                  0.0
+                ]
+              ],
+              [
+                [
+                  0.44999998807907104,
+                  0.44999998807907104,
+                  0.0
+                ]
+              ],
+              [
+                [
+                  0.800000011920929,
+                  0.800000011920929,
+                  0.0
+                ]
+              ]
+            ]
+          },
+          "getter_static_all_envs": [
+            0.800000011920929,
+            0.800000011920929,
+            0.44999998807907104,
+            0.800000011920929
+          ],
+          "getter_dynamic_all_envs": [
+            0.800000011920929,
+            0.800000011920929,
+            0.44999998807907104,
+            0.800000011920929
+          ],
+          "getter_static_target": 0.44999998807907104,
+          "getter_dynamic_target": 0.44999998807907104,
+          "requested_static_all_envs": [
+            0.800000011920929,
+            0.800000011920929,
+            0.44999998807907104,
+            0.800000011920929
+          ],
+          "requested_dynamic_all_envs": [
+            0.800000011920929,
+            0.800000011920929,
+            0.44999998807907104,
+            0.800000011920929
+          ],
+          "actual_static_buffer_all_envs": [
+            0.800000011920929,
+            0.800000011920929,
+            0.44999998807907104,
+            0.800000011920929
+          ],
+          "actual_dynamic_buffer_all_envs": [
+            0.800000011920929,
+            0.800000011920929,
+            0.44999998807907104,
+            0.800000011920929
+          ],
+          "actual_static_buffer_target": 0.44999998807907104,
+          "actual_dynamic_buffer_target": 0.44999998807907104,
+          "physics_step_count": 0,
+          "simulation_time": 0.0,
+          "environment_sim_step_counter": 0,
+          "common_step_counter": 0
+        }
+      }
+    },
+    {
+      "case": "physics_step",
+      "requested": 0.45,
+      "preparation": {
+        "history_write": {
+          "requested": 0.35,
+          "env_ids": {
+            "shape": [
+              1
+            ],
+            "dtype": "torch.int64",
+            "device": "cuda:0",
+            "values": [
+              2
+            ]
+          },
+          "before": {
+            "env_ids": {
+              "shape": [
+                1
+              ],
+              "dtype": "torch.int64",
+              "device": "cuda:0",
+              "values": [
+                2
+              ]
+            },
+            "material_tensor": {
+              "shape": [
+                4,
+                1,
+                3
+              ],
+              "dtype": "torch.float32",
+              "device": "cuda:0",
+              "values": [
+                [
+                  [
+                    0.800000011920929,
+                    0.800000011920929,
+                    0.0
+                  ]
+                ],
+                [
+                  [
+                    0.800000011920929,
+                    0.800000011920929,
+                    0.0
+                  ]
+                ],
+                [
+                  [
+                    0.44999998807907104,
+                    0.44999998807907104,
+                    0.0
+                  ]
+                ],
+                [
+                  [
+                    0.800000011920929,
+                    0.800000011920929,
+                    0.0
+                  ]
+                ]
+              ]
+            },
+            "getter_static_all_envs": [
+              0.800000011920929,
+              0.800000011920929,
+              0.44999998807907104,
+              0.800000011920929
+            ],
+            "getter_dynamic_all_envs": [
+              0.800000011920929,
+              0.800000011920929,
+              0.44999998807907104,
+              0.800000011920929
+            ],
+            "getter_static_target": 0.44999998807907104,
+            "getter_dynamic_target": 0.44999998807907104,
+            "requested_static_all_envs": [
+              0.800000011920929,
+              0.800000011920929,
+              0.44999998807907104,
+              0.800000011920929
+            ],
+            "requested_dynamic_all_envs": [
+              0.800000011920929,
+              0.800000011920929,
+              0.44999998807907104,
+              0.800000011920929
+            ],
+            "actual_static_buffer_all_envs": [
+              0.800000011920929,
+              0.800000011920929,
+              0.44999998807907104,
+              0.800000011920929
+            ],
+            "actual_dynamic_buffer_all_envs": [
+              0.800000011920929,
+              0.800000011920929,
+              0.44999998807907104,
+              0.800000011920929
+            ],
+            "actual_static_buffer_target": 0.44999998807907104,
+            "actual_dynamic_buffer_target": 0.44999998807907104,
+            "physics_step_count": 0,
+            "simulation_time": 0.0,
+            "environment_sim_step_counter": 0,
+            "common_step_counter": 0
+          },
+          "after_setter": {
+            "env_ids": {
+              "shape": [
+                1
+              ],
+              "dtype": "torch.int64",
+              "device": "cuda:0",
+              "values": [
+                2
+              ]
+            },
+            "material_tensor": {
+              "shape": [
+                4,
+                1,
+                3
+              ],
+              "dtype": "torch.float32",
+              "device": "cuda:0",
+              "values": [
+                [
+                  [
+                    0.800000011920929,
+                    0.800000011920929,
+                    0.0
+                  ]
+                ],
+                [
+                  [
+                    0.800000011920929,
+                    0.800000011920929,
+                    0.0
+                  ]
+                ],
+                [
+                  [
+                    0.3499999940395355,
+                    0.3499999940395355,
+                    0.0
+                  ]
+                ],
+                [
+                  [
+                    0.800000011920929,
+                    0.800000011920929,
+                    0.0
+                  ]
+                ]
+              ]
+            },
+            "getter_static_all_envs": [
+              0.800000011920929,
+              0.800000011920929,
+              0.3499999940395355,
+              0.800000011920929
+            ],
+            "getter_dynamic_all_envs": [
+              0.800000011920929,
+              0.800000011920929,
+              0.3499999940395355,
+              0.800000011920929
+            ],
+            "getter_static_target": 0.3499999940395355,
+            "getter_dynamic_target": 0.3499999940395355,
+            "requested_static_all_envs": [
+              0.800000011920929,
+              0.800000011920929,
+              0.44999998807907104,
+              0.800000011920929
+            ],
+            "requested_dynamic_all_envs": [
+              0.800000011920929,
+              0.800000011920929,
+              0.44999998807907104,
+              0.800000011920929
+            ],
+            "actual_static_buffer_all_envs": [
+              0.800000011920929,
+              0.800000011920929,
+              0.44999998807907104,
+              0.800000011920929
+            ],
+            "actual_dynamic_buffer_all_envs": [
+              0.800000011920929,
+              0.800000011920929,
+              0.44999998807907104,
+              0.800000011920929
+            ],
+            "actual_static_buffer_target": 0.44999998807907104,
+            "actual_dynamic_buffer_target": 0.44999998807907104,
+            "physics_step_count": 0,
+            "simulation_time": 0.0,
+            "environment_sim_step_counter": 0,
+            "common_step_counter": 0
+          }
+        },
+        "history_readback": {
+          "env_ids": {
+            "shape": [
+              1
+            ],
+            "dtype": "torch.int64",
+            "device": "cuda:0",
+            "values": [
+              2
+            ]
+          },
+          "material_tensor": {
+            "shape": [
+              4,
+              1,
+              3
+            ],
+            "dtype": "torch.float32",
+            "device": "cuda:0",
+            "values": [
+              [
+                [
+                  0.800000011920929,
+                  0.800000011920929,
+                  0.0
+                ]
+              ],
+              [
+                [
+                  0.800000011920929,
+                  0.800000011920929,
+                  0.0
+                ]
+              ],
+              [
+                [
+                  0.3499999940395355,
+                  0.3499999940395355,
+                  0.0
+                ]
+              ],
+              [
+                [
+                  0.800000011920929,
+                  0.800000011920929,
+                  0.0
+                ]
+              ]
+            ]
+          },
+          "getter_static_all_envs": [
+            0.800000011920929,
+            0.800000011920929,
+            0.3499999940395355,
+            0.800000011920929
+          ],
+          "getter_dynamic_all_envs": [
+            0.800000011920929,
+            0.800000011920929,
+            0.3499999940395355,
+            0.800000011920929
+          ],
+          "getter_static_target": 0.3499999940395355,
+          "getter_dynamic_target": 0.3499999940395355,
+          "requested_static_all_envs": [
+            0.800000011920929,
+            0.800000011920929,
+            0.44999998807907104,
+            0.800000011920929
+          ],
+          "requested_dynamic_all_envs": [
+            0.800000011920929,
+            0.800000011920929,
+            0.44999998807907104,
+            0.800000011920929
+          ],
+          "actual_static_buffer_all_envs": [
+            0.800000011920929,
+            0.800000011920929,
+            0.3499999940395355,
+            0.800000011920929
+          ],
+          "actual_dynamic_buffer_all_envs": [
+            0.800000011920929,
+            0.800000011920929,
+            0.3499999940395355,
+            0.800000011920929
+          ],
+          "actual_static_buffer_target": 0.3499999940395355,
+          "actual_dynamic_buffer_target": 0.3499999940395355,
+          "physics_step_count": 0,
+          "simulation_time": 0.0,
+          "environment_sim_step_counter": 0,
+          "common_step_counter": 0
+        },
+        "reset": {
+          "pass": true,
+          "error": null,
+          "before": {
+            "env_ids": {
+              "shape": [
+                1
+              ],
+              "dtype": "torch.int64",
+              "device": "cuda:0",
+              "values": [
+                2
+              ]
+            },
+            "material_tensor": {
+              "shape": [
+                4,
+                1,
+                3
+              ],
+              "dtype": "torch.float32",
+              "device": "cuda:0",
+              "values": [
+                [
+                  [
+                    0.800000011920929,
+                    0.800000011920929,
+                    0.0
+                  ]
+                ],
+                [
+                  [
+                    0.800000011920929,
+                    0.800000011920929,
+                    0.0
+                  ]
+                ],
+                [
+                  [
+                    0.3499999940395355,
+                    0.3499999940395355,
+                    0.0
+                  ]
+                ],
+                [
+                  [
+                    0.800000011920929,
+                    0.800000011920929,
+                    0.0
+                  ]
+                ]
+              ]
+            },
+            "getter_static_all_envs": [
+              0.800000011920929,
+              0.800000011920929,
+              0.3499999940395355,
+              0.800000011920929
+            ],
+            "getter_dynamic_all_envs": [
+              0.800000011920929,
+              0.800000011920929,
+              0.3499999940395355,
+              0.800000011920929
+            ],
+            "getter_static_target": 0.3499999940395355,
+            "getter_dynamic_target": 0.3499999940395355,
+            "requested_static_all_envs": [
+              0.800000011920929,
+              0.800000011920929,
+              0.44999998807907104,
+              0.800000011920929
+            ],
+            "requested_dynamic_all_envs": [
+              0.800000011920929,
+              0.800000011920929,
+              0.44999998807907104,
+              0.800000011920929
+            ],
+            "actual_static_buffer_all_envs": [
+              0.800000011920929,
+              0.800000011920929,
+              0.3499999940395355,
+              0.800000011920929
+            ],
+            "actual_dynamic_buffer_all_envs": [
+              0.800000011920929,
+              0.800000011920929,
+              0.3499999940395355,
+              0.800000011920929
+            ],
+            "actual_static_buffer_target": 0.3499999940395355,
+            "actual_dynamic_buffer_target": 0.3499999940395355,
+            "physics_step_count": 0,
+            "simulation_time": 0.0,
+            "environment_sim_step_counter": 0,
+            "common_step_counter": 0
+          },
+          "after": {
+            "env_ids": {
+              "shape": [
+                1
+              ],
+              "dtype": "torch.int64",
+              "device": "cuda:0",
+              "values": [
+                2
+              ]
+            },
+            "material_tensor": {
+              "shape": [
+                4,
+                1,
+                3
+              ],
+              "dtype": "torch.float32",
+              "device": "cuda:0",
+              "values": [
+                [
+                  [
+                    0.800000011920929,
+                    0.800000011920929,
+                    0.0
+                  ]
+                ],
+                [
+                  [
+                    0.800000011920929,
+                    0.800000011920929,
+                    0.0
+                  ]
+                ],
+                [
+                  [
+                    0.44999998807907104,
+                    0.44999998807907104,
+                    0.0
+                  ]
+                ],
+                [
+                  [
+                    0.800000011920929,
+                    0.800000011920929,
+                    0.0
+                  ]
+                ]
+              ]
+            },
+            "getter_static_all_envs": [
+              0.800000011920929,
+              0.800000011920929,
+              0.44999998807907104,
+              0.800000011920929
+            ],
+            "getter_dynamic_all_envs": [
+              0.800000011920929,
+              0.800000011920929,
+              0.44999998807907104,
+              0.800000011920929
+            ],
+            "getter_static_target": 0.44999998807907104,
+            "getter_dynamic_target": 0.44999998807907104,
+            "requested_static_all_envs": [
+              0.800000011920929,
+              0.800000011920929,
+              0.44999998807907104,
+              0.800000011920929
+            ],
+            "requested_dynamic_all_envs": [
+              0.800000011920929,
+              0.800000011920929,
+              0.44999998807907104,
+              0.800000011920929
+            ],
+            "actual_static_buffer_all_envs": [
+              0.800000011920929,
+              0.800000011920929,
+              0.44999998807907104,
+              0.800000011920929
+            ],
+            "actual_dynamic_buffer_all_envs": [
+              0.800000011920929,
+              0.800000011920929,
+              0.44999998807907104,
+              0.800000011920929
+            ],
+            "actual_static_buffer_target": 0.44999998807907104,
+            "actual_dynamic_buffer_target": 0.44999998807907104,
+            "physics_step_count": 0,
+            "simulation_time": 0.0,
+            "environment_sim_step_counter": 0,
+            "common_step_counter": 0
+          }
+        }
+      },
+      "write": {
+        "requested": 0.45,
+        "env_ids": {
+          "shape": [
+            1
+          ],
+          "dtype": "torch.int64",
+          "device": "cuda:0",
+          "values": [
+            2
+          ]
+        },
+        "before": {
+          "env_ids": {
+            "shape": [
+              1
+            ],
+            "dtype": "torch.int64",
+            "device": "cuda:0",
+            "values": [
+              2
+            ]
+          },
+          "material_tensor": {
+            "shape": [
+              4,
+              1,
+              3
+            ],
+            "dtype": "torch.float32",
+            "device": "cuda:0",
+            "values": [
+              [
+                [
+                  0.800000011920929,
+                  0.800000011920929,
+                  0.0
+                ]
+              ],
+              [
+                [
+                  0.800000011920929,
+                  0.800000011920929,
+                  0.0
+                ]
+              ],
+              [
+                [
+                  0.44999998807907104,
+                  0.44999998807907104,
+                  0.0
+                ]
+              ],
+              [
+                [
+                  0.800000011920929,
+                  0.800000011920929,
+                  0.0
+                ]
+              ]
+            ]
+          },
+          "getter_static_all_envs": [
+            0.800000011920929,
+            0.800000011920929,
+            0.44999998807907104,
+            0.800000011920929
+          ],
+          "getter_dynamic_all_envs": [
+            0.800000011920929,
+            0.800000011920929,
+            0.44999998807907104,
+            0.800000011920929
+          ],
+          "getter_static_target": 0.44999998807907104,
+          "getter_dynamic_target": 0.44999998807907104,
+          "requested_static_all_envs": [
+            0.800000011920929,
+            0.800000011920929,
+            0.44999998807907104,
+            0.800000011920929
+          ],
+          "requested_dynamic_all_envs": [
+            0.800000011920929,
+            0.800000011920929,
+            0.44999998807907104,
+            0.800000011920929
+          ],
+          "actual_static_buffer_all_envs": [
+            0.800000011920929,
+            0.800000011920929,
+            0.44999998807907104,
+            0.800000011920929
+          ],
+          "actual_dynamic_buffer_all_envs": [
+            0.800000011920929,
+            0.800000011920929,
+            0.44999998807907104,
+            0.800000011920929
+          ],
+          "actual_static_buffer_target": 0.44999998807907104,
+          "actual_dynamic_buffer_target": 0.44999998807907104,
+          "physics_step_count": 0,
+          "simulation_time": 0.0,
+          "environment_sim_step_counter": 0,
+          "common_step_counter": 0
+        },
+        "after_setter": {
+          "env_ids": {
+            "shape": [
+              1
+            ],
+            "dtype": "torch.int64",
+            "device": "cuda:0",
+            "values": [
+              2
+            ]
+          },
+          "material_tensor": {
+            "shape": [
+              4,
+              1,
+              3
+            ],
+            "dtype": "torch.float32",
+            "device": "cuda:0",
+            "values": [
+              [
+                [
+                  0.800000011920929,
+                  0.800000011920929,
+                  0.0
+                ]
+              ],
+              [
+                [
+                  0.800000011920929,
+                  0.800000011920929,
+                  0.0
+                ]
+              ],
+              [
+                [
+                  0.44999998807907104,
+                  0.44999998807907104,
+                  0.0
+                ]
+              ],
+              [
+                [
+                  0.800000011920929,
+                  0.800000011920929,
+                  0.0
+                ]
+              ]
+            ]
+          },
+          "getter_static_all_envs": [
+            0.800000011920929,
+            0.800000011920929,
+            0.44999998807907104,
+            0.800000011920929
+          ],
+          "getter_dynamic_all_envs": [
+            0.800000011920929,
+            0.800000011920929,
+            0.44999998807907104,
+            0.800000011920929
+          ],
+          "getter_static_target": 0.44999998807907104,
+          "getter_dynamic_target": 0.44999998807907104,
+          "requested_static_all_envs": [
+            0.800000011920929,
+            0.800000011920929,
+            0.44999998807907104,
+            0.800000011920929
+          ],
+          "requested_dynamic_all_envs": [
+            0.800000011920929,
+            0.800000011920929,
+            0.44999998807907104,
+            0.800000011920929
+          ],
+          "actual_static_buffer_all_envs": [
+            0.800000011920929,
+            0.800000011920929,
+            0.44999998807907104,
+            0.800000011920929
+          ],
+          "actual_dynamic_buffer_all_envs": [
+            0.800000011920929,
+            0.800000011920929,
+            0.44999998807907104,
+            0.800000011920929
+          ],
+          "actual_static_buffer_target": 0.44999998807907104,
+          "actual_dynamic_buffer_target": 0.44999998807907104,
+          "physics_step_count": 0,
+          "simulation_time": 0.0,
+          "environment_sim_step_counter": 0,
+          "common_step_counter": 0
+        }
+      },
+      "boundary": {
+        "called": true,
+        "error": null,
+        "return_type": "NoneType"
+      },
+      "clock_before_boundary": {
+        "physics_step_count": 0,
+        "simulation_time": 0.0,
+        "environment_sim_step_counter": 0,
+        "common_step_counter": 0
+      },
+      "clock_after_boundary": {
+        "physics_step_count": 1,
+        "simulation_time": 0.0,
+        "environment_sim_step_counter": 0,
+        "common_step_counter": 0
+      },
+      "readback": 0.44999998807907104,
+      "buffer": 0.44999998807907104,
+      "match": true,
+      "observation": {
+        "requested": 0.45,
+        "getter": 0.44999998807907104,
+        "buffer": 0.44999998807907104,
+        "getter_match": true,
+        "buffer_match": true,
+        "match": true,
+        "state": {
+          "env_ids": {
+            "shape": [
+              1
+            ],
+            "dtype": "torch.int64",
+            "device": "cuda:0",
+            "values": [
+              2
+            ]
+          },
+          "material_tensor": {
+            "shape": [
+              4,
+              1,
+              3
+            ],
+            "dtype": "torch.float32",
+            "device": "cuda:0",
+            "values": [
+              [
+                [
+                  0.800000011920929,
+                  0.800000011920929,
+                  0.0
+                ]
+              ],
+              [
+                [
+                  0.800000011920929,
+                  0.800000011920929,
+                  0.0
+                ]
+              ],
+              [
+                [
+                  0.44999998807907104,
+                  0.44999998807907104,
+                  0.0
+                ]
+              ],
+              [
+                [
+                  0.800000011920929,
+                  0.800000011920929,
+                  0.0
+                ]
+              ]
+            ]
+          },
+          "getter_static_all_envs": [
+            0.800000011920929,
+            0.800000011920929,
+            0.44999998807907104,
+            0.800000011920929
+          ],
+          "getter_dynamic_all_envs": [
+            0.800000011920929,
+            0.800000011920929,
+            0.44999998807907104,
+            0.800000011920929
+          ],
+          "getter_static_target": 0.44999998807907104,
+          "getter_dynamic_target": 0.44999998807907104,
+          "requested_static_all_envs": [
+            0.800000011920929,
+            0.800000011920929,
+            0.44999998807907104,
+            0.800000011920929
+          ],
+          "requested_dynamic_all_envs": [
+            0.800000011920929,
+            0.800000011920929,
+            0.44999998807907104,
+            0.800000011920929
+          ],
+          "actual_static_buffer_all_envs": [
+            0.800000011920929,
+            0.800000011920929,
+            0.44999998807907104,
+            0.800000011920929
+          ],
+          "actual_dynamic_buffer_all_envs": [
+            0.800000011920929,
+            0.800000011920929,
+            0.44999998807907104,
+            0.800000011920929
+          ],
+          "actual_static_buffer_target": 0.44999998807907104,
+          "actual_dynamic_buffer_target": 0.44999998807907104,
+          "physics_step_count": 1,
+          "simulation_time": 0.0,
+          "environment_sim_step_counter": 0,
+          "common_step_counter": 0
+        }
+      }
+    },
+    {
+      "case": "env_step",
+      "requested": 0.45,
+      "preparation": {
+        "history_write": {
+          "requested": 0.35,
+          "env_ids": {
+            "shape": [
+              1
+            ],
+            "dtype": "torch.int64",
+            "device": "cuda:0",
+            "values": [
+              2
+            ]
+          },
+          "before": {
+            "env_ids": {
+              "shape": [
+                1
+              ],
+              "dtype": "torch.int64",
+              "device": "cuda:0",
+              "values": [
+                2
+              ]
+            },
+            "material_tensor": {
+              "shape": [
+                4,
+                1,
+                3
+              ],
+              "dtype": "torch.float32",
+              "device": "cuda:0",
+              "values": [
+                [
+                  [
+                    0.800000011920929,
+                    0.800000011920929,
+                    0.0
+                  ]
+                ],
+                [
+                  [
+                    0.800000011920929,
+                    0.800000011920929,
+                    0.0
+                  ]
+                ],
+                [
+                  [
+                    0.44999998807907104,
+                    0.44999998807907104,
+                    0.0
+                  ]
+                ],
+                [
+                  [
+                    0.800000011920929,
+                    0.800000011920929,
+                    0.0
+                  ]
+                ]
+              ]
+            },
+            "getter_static_all_envs": [
+              0.800000011920929,
+              0.800000011920929,
+              0.44999998807907104,
+              0.800000011920929
+            ],
+            "getter_dynamic_all_envs": [
+              0.800000011920929,
+              0.800000011920929,
+              0.44999998807907104,
+              0.800000011920929
+            ],
+            "getter_static_target": 0.44999998807907104,
+            "getter_dynamic_target": 0.44999998807907104,
+            "requested_static_all_envs": [
+              0.800000011920929,
+              0.800000011920929,
+              0.44999998807907104,
+              0.800000011920929
+            ],
+            "requested_dynamic_all_envs": [
+              0.800000011920929,
+              0.800000011920929,
+              0.44999998807907104,
+              0.800000011920929
+            ],
+            "actual_static_buffer_all_envs": [
+              0.800000011920929,
+              0.800000011920929,
+              0.44999998807907104,
+              0.800000011920929
+            ],
+            "actual_dynamic_buffer_all_envs": [
+              0.800000011920929,
+              0.800000011920929,
+              0.44999998807907104,
+              0.800000011920929
+            ],
+            "actual_static_buffer_target": 0.44999998807907104,
+            "actual_dynamic_buffer_target": 0.44999998807907104,
+            "physics_step_count": 1,
+            "simulation_time": 0.0,
+            "environment_sim_step_counter": 0,
+            "common_step_counter": 0
+          },
+          "after_setter": {
+            "env_ids": {
+              "shape": [
+                1
+              ],
+              "dtype": "torch.int64",
+              "device": "cuda:0",
+              "values": [
+                2
+              ]
+            },
+            "material_tensor": {
+              "shape": [
+                4,
+                1,
+                3
+              ],
+              "dtype": "torch.float32",
+              "device": "cuda:0",
+              "values": [
+                [
+                  [
+                    0.800000011920929,
+                    0.800000011920929,
+                    0.0
+                  ]
+                ],
+                [
+                  [
+                    0.800000011920929,
+                    0.800000011920929,
+                    0.0
+                  ]
+                ],
+                [
+                  [
+                    0.3499999940395355,
+                    0.3499999940395355,
+                    0.0
+                  ]
+                ],
+                [
+                  [
+                    0.800000011920929,
+                    0.800000011920929,
+                    0.0
+                  ]
+                ]
+              ]
+            },
+            "getter_static_all_envs": [
+              0.800000011920929,
+              0.800000011920929,
+              0.3499999940395355,
+              0.800000011920929
+            ],
+            "getter_dynamic_all_envs": [
+              0.800000011920929,
+              0.800000011920929,
+              0.3499999940395355,
+              0.800000011920929
+            ],
+            "getter_static_target": 0.3499999940395355,
+            "getter_dynamic_target": 0.3499999940395355,
+            "requested_static_all_envs": [
+              0.800000011920929,
+              0.800000011920929,
+              0.44999998807907104,
+              0.800000011920929
+            ],
+            "requested_dynamic_all_envs": [
+              0.800000011920929,
+              0.800000011920929,
+              0.44999998807907104,
+              0.800000011920929
+            ],
+            "actual_static_buffer_all_envs": [
+              0.800000011920929,
+              0.800000011920929,
+              0.44999998807907104,
+              0.800000011920929
+            ],
+            "actual_dynamic_buffer_all_envs": [
+              0.800000011920929,
+              0.800000011920929,
+              0.44999998807907104,
+              0.800000011920929
+            ],
+            "actual_static_buffer_target": 0.44999998807907104,
+            "actual_dynamic_buffer_target": 0.44999998807907104,
+            "physics_step_count": 1,
+            "simulation_time": 0.0,
+            "environment_sim_step_counter": 0,
+            "common_step_counter": 0
+          }
+        },
+        "history_readback": {
+          "env_ids": {
+            "shape": [
+              1
+            ],
+            "dtype": "torch.int64",
+            "device": "cuda:0",
+            "values": [
+              2
+            ]
+          },
+          "material_tensor": {
+            "shape": [
+              4,
+              1,
+              3
+            ],
+            "dtype": "torch.float32",
+            "device": "cuda:0",
+            "values": [
+              [
+                [
+                  0.800000011920929,
+                  0.800000011920929,
+                  0.0
+                ]
+              ],
+              [
+                [
+                  0.800000011920929,
+                  0.800000011920929,
+                  0.0
+                ]
+              ],
+              [
+                [
+                  0.3499999940395355,
+                  0.3499999940395355,
+                  0.0
+                ]
+              ],
+              [
+                [
+                  0.800000011920929,
+                  0.800000011920929,
+                  0.0
+                ]
+              ]
+            ]
+          },
+          "getter_static_all_envs": [
+            0.800000011920929,
+            0.800000011920929,
+            0.3499999940395355,
+            0.800000011920929
+          ],
+          "getter_dynamic_all_envs": [
+            0.800000011920929,
+            0.800000011920929,
+            0.3499999940395355,
+            0.800000011920929
+          ],
+          "getter_static_target": 0.3499999940395355,
+          "getter_dynamic_target": 0.3499999940395355,
+          "requested_static_all_envs": [
+            0.800000011920929,
+            0.800000011920929,
+            0.44999998807907104,
+            0.800000011920929
+          ],
+          "requested_dynamic_all_envs": [
+            0.800000011920929,
+            0.800000011920929,
+            0.44999998807907104,
+            0.800000011920929
+          ],
+          "actual_static_buffer_all_envs": [
+            0.800000011920929,
+            0.800000011920929,
+            0.3499999940395355,
+            0.800000011920929
+          ],
+          "actual_dynamic_buffer_all_envs": [
+            0.800000011920929,
+            0.800000011920929,
+            0.3499999940395355,
+            0.800000011920929
+          ],
+          "actual_static_buffer_target": 0.3499999940395355,
+          "actual_dynamic_buffer_target": 0.3499999940395355,
+          "physics_step_count": 1,
+          "simulation_time": 0.0,
+          "environment_sim_step_counter": 0,
+          "common_step_counter": 0
+        },
+        "reset": {
+          "pass": true,
+          "error": null,
+          "before": {
+            "env_ids": {
+              "shape": [
+                1
+              ],
+              "dtype": "torch.int64",
+              "device": "cuda:0",
+              "values": [
+                2
+              ]
+            },
+            "material_tensor": {
+              "shape": [
+                4,
+                1,
+                3
+              ],
+              "dtype": "torch.float32",
+              "device": "cuda:0",
+              "values": [
+                [
+                  [
+                    0.800000011920929,
+                    0.800000011920929,
+                    0.0
+                  ]
+                ],
+                [
+                  [
+                    0.800000011920929,
+                    0.800000011920929,
+                    0.0
+                  ]
+                ],
+                [
+                  [
+                    0.3499999940395355,
+                    0.3499999940395355,
+                    0.0
+                  ]
+                ],
+                [
+                  [
+                    0.800000011920929,
+                    0.800000011920929,
+                    0.0
+                  ]
+                ]
+              ]
+            },
+            "getter_static_all_envs": [
+              0.800000011920929,
+              0.800000011920929,
+              0.3499999940395355,
+              0.800000011920929
+            ],
+            "getter_dynamic_all_envs": [
+              0.800000011920929,
+              0.800000011920929,
+              0.3499999940395355,
+              0.800000011920929
+            ],
+            "getter_static_target": 0.3499999940395355,
+            "getter_dynamic_target": 0.3499999940395355,
+            "requested_static_all_envs": [
+              0.800000011920929,
+              0.800000011920929,
+              0.44999998807907104,
+              0.800000011920929
+            ],
+            "requested_dynamic_all_envs": [
+              0.800000011920929,
+              0.800000011920929,
+              0.44999998807907104,
+              0.800000011920929
+            ],
+            "actual_static_buffer_all_envs": [
+              0.800000011920929,
+              0.800000011920929,
+              0.3499999940395355,
+              0.800000011920929
+            ],
+            "actual_dynamic_buffer_all_envs": [
+              0.800000011920929,
+              0.800000011920929,
+              0.3499999940395355,
+              0.800000011920929
+            ],
+            "actual_static_buffer_target": 0.3499999940395355,
+            "actual_dynamic_buffer_target": 0.3499999940395355,
+            "physics_step_count": 1,
+            "simulation_time": 0.0,
+            "environment_sim_step_counter": 0,
+            "common_step_counter": 0
+          },
+          "after": {
+            "env_ids": {
+              "shape": [
+                1
+              ],
+              "dtype": "torch.int64",
+              "device": "cuda:0",
+              "values": [
+                2
+              ]
+            },
+            "material_tensor": {
+              "shape": [
+                4,
+                1,
+                3
+              ],
+              "dtype": "torch.float32",
+              "device": "cuda:0",
+              "values": [
+                [
+                  [
+                    0.800000011920929,
+                    0.800000011920929,
+                    0.0
+                  ]
+                ],
+                [
+                  [
+                    0.800000011920929,
+                    0.800000011920929,
+                    0.0
+                  ]
+                ],
+                [
+                  [
+                    0.44999998807907104,
+                    0.44999998807907104,
+                    0.0
+                  ]
+                ],
+                [
+                  [
+                    0.800000011920929,
+                    0.800000011920929,
+                    0.0
+                  ]
+                ]
+              ]
+            },
+            "getter_static_all_envs": [
+              0.800000011920929,
+              0.800000011920929,
+              0.44999998807907104,
+              0.800000011920929
+            ],
+            "getter_dynamic_all_envs": [
+              0.800000011920929,
+              0.800000011920929,
+              0.44999998807907104,
+              0.800000011920929
+            ],
+            "getter_static_target": 0.44999998807907104,
+            "getter_dynamic_target": 0.44999998807907104,
+            "requested_static_all_envs": [
+              0.800000011920929,
+              0.800000011920929,
+              0.44999998807907104,
+              0.800000011920929
+            ],
+            "requested_dynamic_all_envs": [
+              0.800000011920929,
+              0.800000011920929,
+              0.44999998807907104,
+              0.800000011920929
+            ],
+            "actual_static_buffer_all_envs": [
+              0.800000011920929,
+              0.800000011920929,
+              0.44999998807907104,
+              0.800000011920929
+            ],
+            "actual_dynamic_buffer_all_envs": [
+              0.800000011920929,
+              0.800000011920929,
+              0.44999998807907104,
+              0.800000011920929
+            ],
+            "actual_static_buffer_target": 0.44999998807907104,
+            "actual_dynamic_buffer_target": 0.44999998807907104,
+            "physics_step_count": 1,
+            "simulation_time": 0.0,
+            "environment_sim_step_counter": 0,
+            "common_step_counter": 0
+          }
+        }
+      },
+      "write": {
+        "requested": 0.45,
+        "env_ids": {
+          "shape": [
+            1
+          ],
+          "dtype": "torch.int64",
+          "device": "cuda:0",
+          "values": [
+            2
+          ]
+        },
+        "before": {
+          "env_ids": {
+            "shape": [
+              1
+            ],
+            "dtype": "torch.int64",
+            "device": "cuda:0",
+            "values": [
+              2
+            ]
+          },
+          "material_tensor": {
+            "shape": [
+              4,
+              1,
+              3
+            ],
+            "dtype": "torch.float32",
+            "device": "cuda:0",
+            "values": [
+              [
+                [
+                  0.800000011920929,
+                  0.800000011920929,
+                  0.0
+                ]
+              ],
+              [
+                [
+                  0.800000011920929,
+                  0.800000011920929,
+                  0.0
+                ]
+              ],
+              [
+                [
+                  0.44999998807907104,
+                  0.44999998807907104,
+                  0.0
+                ]
+              ],
+              [
+                [
+                  0.800000011920929,
+                  0.800000011920929,
+                  0.0
+                ]
+              ]
+            ]
+          },
+          "getter_static_all_envs": [
+            0.800000011920929,
+            0.800000011920929,
+            0.44999998807907104,
+            0.800000011920929
+          ],
+          "getter_dynamic_all_envs": [
+            0.800000011920929,
+            0.800000011920929,
+            0.44999998807907104,
+            0.800000011920929
+          ],
+          "getter_static_target": 0.44999998807907104,
+          "getter_dynamic_target": 0.44999998807907104,
+          "requested_static_all_envs": [
+            0.800000011920929,
+            0.800000011920929,
+            0.44999998807907104,
+            0.800000011920929
+          ],
+          "requested_dynamic_all_envs": [
+            0.800000011920929,
+            0.800000011920929,
+            0.44999998807907104,
+            0.800000011920929
+          ],
+          "actual_static_buffer_all_envs": [
+            0.800000011920929,
+            0.800000011920929,
+            0.44999998807907104,
+            0.800000011920929
+          ],
+          "actual_dynamic_buffer_all_envs": [
+            0.800000011920929,
+            0.800000011920929,
+            0.44999998807907104,
+            0.800000011920929
+          ],
+          "actual_static_buffer_target": 0.44999998807907104,
+          "actual_dynamic_buffer_target": 0.44999998807907104,
+          "physics_step_count": 1,
+          "simulation_time": 0.0,
+          "environment_sim_step_counter": 0,
+          "common_step_counter": 0
+        },
+        "after_setter": {
+          "env_ids": {
+            "shape": [
+              1
+            ],
+            "dtype": "torch.int64",
+            "device": "cuda:0",
+            "values": [
+              2
+            ]
+          },
+          "material_tensor": {
+            "shape": [
+              4,
+              1,
+              3
+            ],
+            "dtype": "torch.float32",
+            "device": "cuda:0",
+            "values": [
+              [
+                [
+                  0.800000011920929,
+                  0.800000011920929,
+                  0.0
+                ]
+              ],
+              [
+                [
+                  0.800000011920929,
+                  0.800000011920929,
+                  0.0
+                ]
+              ],
+              [
+                [
+                  0.44999998807907104,
+                  0.44999998807907104,
+                  0.0
+                ]
+              ],
+              [
+                [
+                  0.800000011920929,
+                  0.800000011920929,
+                  0.0
+                ]
+              ]
+            ]
+          },
+          "getter_static_all_envs": [
+            0.800000011920929,
+            0.800000011920929,
+            0.44999998807907104,
+            0.800000011920929
+          ],
+          "getter_dynamic_all_envs": [
+            0.800000011920929,
+            0.800000011920929,
+            0.44999998807907104,
+            0.800000011920929
+          ],
+          "getter_static_target": 0.44999998807907104,
+          "getter_dynamic_target": 0.44999998807907104,
+          "requested_static_all_envs": [
+            0.800000011920929,
+            0.800000011920929,
+            0.44999998807907104,
+            0.800000011920929
+          ],
+          "requested_dynamic_all_envs": [
+            0.800000011920929,
+            0.800000011920929,
+            0.44999998807907104,
+            0.800000011920929
+          ],
+          "actual_static_buffer_all_envs": [
+            0.800000011920929,
+            0.800000011920929,
+            0.44999998807907104,
+            0.800000011920929
+          ],
+          "actual_dynamic_buffer_all_envs": [
+            0.800000011920929,
+            0.800000011920929,
+            0.44999998807907104,
+            0.800000011920929
+          ],
+          "actual_static_buffer_target": 0.44999998807907104,
+          "actual_dynamic_buffer_target": 0.44999998807907104,
+          "physics_step_count": 1,
+          "simulation_time": 0.0,
+          "environment_sim_step_counter": 0,
+          "common_step_counter": 0
+        }
+      },
+      "boundary": {
+        "called": true,
+        "error": null,
+        "return_type": "tuple"
+      },
+      "clock_before_boundary": {
+        "physics_step_count": 1,
+        "simulation_time": 0.0,
+        "environment_sim_step_counter": 0,
+        "common_step_counter": 0
+      },
+      "clock_after_boundary": {
+        "physics_step_count": 5,
+        "simulation_time": 0.0,
+        "environment_sim_step_counter": 4,
+        "common_step_counter": 1
+      },
+      "readback": 0.44999998807907104,
+      "buffer": 0.44999998807907104,
+      "match": true,
+      "observation": {
+        "requested": 0.45,
+        "getter": 0.44999998807907104,
+        "buffer": 0.44999998807907104,
+        "getter_match": true,
+        "buffer_match": true,
+        "match": true,
+        "state": {
+          "env_ids": {
+            "shape": [
+              1
+            ],
+            "dtype": "torch.int64",
+            "device": "cuda:0",
+            "values": [
+              2
+            ]
+          },
+          "material_tensor": {
+            "shape": [
+              4,
+              1,
+              3
+            ],
+            "dtype": "torch.float32",
+            "device": "cuda:0",
+            "values": [
+              [
+                [
+                  0.800000011920929,
+                  0.800000011920929,
+                  0.0
+                ]
+              ],
+              [
+                [
+                  0.800000011920929,
+                  0.800000011920929,
+                  0.0
+                ]
+              ],
+              [
+                [
+                  0.44999998807907104,
+                  0.44999998807907104,
+                  0.0
+                ]
+              ],
+              [
+                [
+                  0.800000011920929,
+                  0.800000011920929,
+                  0.0
+                ]
+              ]
+            ]
+          },
+          "getter_static_all_envs": [
+            0.800000011920929,
+            0.800000011920929,
+            0.44999998807907104,
+            0.800000011920929
+          ],
+          "getter_dynamic_all_envs": [
+            0.800000011920929,
+            0.800000011920929,
+            0.44999998807907104,
+            0.800000011920929
+          ],
+          "getter_static_target": 0.44999998807907104,
+          "getter_dynamic_target": 0.44999998807907104,
+          "requested_static_all_envs": [
+            0.800000011920929,
+            0.800000011920929,
+            0.44999998807907104,
+            0.800000011920929
+          ],
+          "requested_dynamic_all_envs": [
+            0.800000011920929,
+            0.800000011920929,
+            0.44999998807907104,
+            0.800000011920929
+          ],
+          "actual_static_buffer_all_envs": [
+            0.800000011920929,
+            0.800000011920929,
+            0.44999998807907104,
+            0.800000011920929
+          ],
+          "actual_dynamic_buffer_all_envs": [
+            0.800000011920929,
+            0.800000011920929,
+            0.44999998807907104,
+            0.800000011920929
+          ],
+          "actual_static_buffer_target": 0.44999998807907104,
+          "actual_dynamic_buffer_target": 0.44999998807907104,
+          "physics_step_count": 5,
+          "simulation_time": 0.0,
+          "environment_sim_step_counter": 4,
+          "common_step_counter": 1
+        }
+      }
+    }
+  ],
+  "immediate_setter_visible": true,
+  "synchronization_effect": "none",
+  "reset_overwrite": {
+    "detected": false,
+    "reset_groups": [
+      {
+        "reset_context": "INITIAL_RESET",
+        "target_setter_values": [
+          0.44999998807907104
+        ],
+        "write_0.45_then_0.35": false
+      },
+      {
+        "reset_context": "CASE_IMMEDIATE_RESET",
+        "target_setter_values": [
+          0.44999998807907104
+        ],
+        "write_0.45_then_0.35": false
+      },
+      {
+        "reset_context": "CASE_APP_UPDATE_RESET",
+        "target_setter_values": [
+          0.44999998807907104
+        ],
+        "write_0.45_then_0.35": false
+      },
+      {
+        "reset_context": "CASE_PHYSICS_STEP_RESET",
+        "target_setter_values": [
+          0.44999998807907104
+        ],
+        "write_0.45_then_0.35": false
+      },
+      {
+        "reset_context": "CASE_ENV_STEP_RESET",
+        "target_setter_values": [
+          0.44999998807907104
+        ],
+        "write_0.45_then_0.35": false
+      },
+      {
+        "reset_context": "HISTORY_FRESH_A_INITIAL_RESET",
+        "target_setter_values": [
+          0.44999998807907104
+        ],
+        "write_0.45_then_0.35": false
+      },
+      {
+        "reset_context": "HISTORY_FRESH_B_INITIAL_RESET",
+        "target_setter_values": [
+          0.44999998807907104
+        ],
+        "write_0.45_then_0.35": false
+      },
+      {
+        "reset_context": "HISTORY_HISTORY_C_INITIAL_RESET",
+        "target_setter_values": [
+          0.44999998807907104
+        ],
+        "write_0.45_then_0.35": false
+      },
+      {
+        "reset_context": "HISTORY_HISTORY_C_RESET_AFTER_0.35",
+        "target_setter_values": [
+          0.44999998807907104
+        ],
+        "write_0.45_then_0.35": false
+      }
+    ]
+  },
+  "history_tests": {
+    "fresh_a": {
+      "lifecycle_id": "history_fresh_a",
+      "process_id": 48692,
+      "with_history": false,
+      "initial_reset": {
+        "pass": true,
+        "error": null,
+        "before": {
+          "env_ids": {
+            "shape": [
+              1
+            ],
+            "dtype": "torch.int64",
+            "device": "cuda:0",
+            "values": [
+              2
+            ]
+          },
+          "material_tensor": {
+            "shape": [
+              4,
+              1,
+              3
+            ],
+            "dtype": "torch.float32",
+            "device": "cuda:0",
+            "values": [
+              [
+                [
+                  0.800000011920929,
+                  0.800000011920929,
+                  0.0
+                ]
+              ],
+              [
+                [
+                  0.800000011920929,
+                  0.800000011920929,
+                  0.0
+                ]
+              ],
+              [
+                [
+                  0.800000011920929,
+                  0.800000011920929,
+                  0.0
+                ]
+              ],
+              [
+                [
+                  0.800000011920929,
+                  0.800000011920929,
+                  0.0
+                ]
+              ]
+            ]
+          },
+          "getter_static_all_envs": [
+            0.800000011920929,
+            0.800000011920929,
+            0.800000011920929,
+            0.800000011920929
+          ],
+          "getter_dynamic_all_envs": [
+            0.800000011920929,
+            0.800000011920929,
+            0.800000011920929,
+            0.800000011920929
+          ],
+          "getter_static_target": 0.800000011920929,
+          "getter_dynamic_target": 0.800000011920929,
+          "requested_static_all_envs": [
+            null,
+            null,
+            null,
+            null
+          ],
+          "requested_dynamic_all_envs": [
+            null,
+            null,
+            null,
+            null
+          ],
+          "actual_static_buffer_all_envs": [
+            null,
+            null,
+            null,
+            null
+          ],
+          "actual_dynamic_buffer_all_envs": [
+            null,
+            null,
+            null,
+            null
+          ],
+          "actual_static_buffer_target": null,
+          "actual_dynamic_buffer_target": null,
+          "physics_step_count": 0,
+          "simulation_time": 0.0,
+          "environment_sim_step_counter": 0,
+          "common_step_counter": 0
+        },
+        "after": {
+          "env_ids": {
+            "shape": [
+              1
+            ],
+            "dtype": "torch.int64",
+            "device": "cuda:0",
+            "values": [
+              2
+            ]
+          },
+          "material_tensor": {
+            "shape": [
+              4,
+              1,
+              3
+            ],
+            "dtype": "torch.float32",
+            "device": "cuda:0",
+            "values": [
+              [
+                [
+                  0.800000011920929,
+                  0.800000011920929,
+                  0.0
+                ]
+              ],
+              [
+                [
+                  0.800000011920929,
+                  0.800000011920929,
+                  0.0
+                ]
+              ],
+              [
+                [
+                  0.44999998807907104,
+                  0.44999998807907104,
+                  0.0
+                ]
+              ],
+              [
+                [
+                  0.800000011920929,
+                  0.800000011920929,
+                  0.0
+                ]
+              ]
+            ]
+          },
+          "getter_static_all_envs": [
+            0.800000011920929,
+            0.800000011920929,
+            0.44999998807907104,
+            0.800000011920929
+          ],
+          "getter_dynamic_all_envs": [
+            0.800000011920929,
+            0.800000011920929,
+            0.44999998807907104,
+            0.800000011920929
+          ],
+          "getter_static_target": 0.44999998807907104,
+          "getter_dynamic_target": 0.44999998807907104,
+          "requested_static_all_envs": [
+            0.800000011920929,
+            0.800000011920929,
+            0.44999998807907104,
+            0.800000011920929
+          ],
+          "requested_dynamic_all_envs": [
+            0.800000011920929,
+            0.800000011920929,
+            0.44999998807907104,
+            0.800000011920929
+          ],
+          "actual_static_buffer_all_envs": [
+            0.800000011920929,
+            0.800000011920929,
+            0.44999998807907104,
+            0.800000011920929
+          ],
+          "actual_dynamic_buffer_all_envs": [
+            0.800000011920929,
+            0.800000011920929,
+            0.44999998807907104,
+            0.800000011920929
+          ],
+          "actual_static_buffer_target": 0.44999998807907104,
+          "actual_dynamic_buffer_target": 0.44999998807907104,
+          "physics_step_count": 0,
+          "simulation_time": 0.0,
+          "environment_sim_step_counter": 0,
+          "common_step_counter": 0
+        }
+      },
+      "history_write": null,
+      "history_readback": null,
+      "tested_reset": {
+        "pass": true,
+        "error": null,
+        "before": {
+          "env_ids": {
+            "shape": [
+              1
+            ],
+            "dtype": "torch.int64",
+            "device": "cuda:0",
+            "values": [
+              2
+            ]
+          },
+          "material_tensor": {
+            "shape": [
+              4,
+              1,
+              3
+            ],
+            "dtype": "torch.float32",
+            "device": "cuda:0",
+            "values": [
+              [
+                [
+                  0.800000011920929,
+                  0.800000011920929,
+                  0.0
+                ]
+              ],
+              [
+                [
+                  0.800000011920929,
+                  0.800000011920929,
+                  0.0
+                ]
+              ],
+              [
+                [
+                  0.800000011920929,
+                  0.800000011920929,
+                  0.0
+                ]
+              ],
+              [
+                [
+                  0.800000011920929,
+                  0.800000011920929,
+                  0.0
+                ]
+              ]
+            ]
+          },
+          "getter_static_all_envs": [
+            0.800000011920929,
+            0.800000011920929,
+            0.800000011920929,
+            0.800000011920929
+          ],
+          "getter_dynamic_all_envs": [
+            0.800000011920929,
+            0.800000011920929,
+            0.800000011920929,
+            0.800000011920929
+          ],
+          "getter_static_target": 0.800000011920929,
+          "getter_dynamic_target": 0.800000011920929,
+          "requested_static_all_envs": [
+            null,
+            null,
+            null,
+            null
+          ],
+          "requested_dynamic_all_envs": [
+            null,
+            null,
+            null,
+            null
+          ],
+          "actual_static_buffer_all_envs": [
+            null,
+            null,
+            null,
+            null
+          ],
+          "actual_dynamic_buffer_all_envs": [
+            null,
+            null,
+            null,
+            null
+          ],
+          "actual_static_buffer_target": null,
+          "actual_dynamic_buffer_target": null,
+          "physics_step_count": 0,
+          "simulation_time": 0.0,
+          "environment_sim_step_counter": 0,
+          "common_step_counter": 0
+        },
+        "after": {
+          "env_ids": {
+            "shape": [
+              1
+            ],
+            "dtype": "torch.int64",
+            "device": "cuda:0",
+            "values": [
+              2
+            ]
+          },
+          "material_tensor": {
+            "shape": [
+              4,
+              1,
+              3
+            ],
+            "dtype": "torch.float32",
+            "device": "cuda:0",
+            "values": [
+              [
+                [
+                  0.800000011920929,
+                  0.800000011920929,
+                  0.0
+                ]
+              ],
+              [
+                [
+                  0.800000011920929,
+                  0.800000011920929,
+                  0.0
+                ]
+              ],
+              [
+                [
+                  0.44999998807907104,
+                  0.44999998807907104,
+                  0.0
+                ]
+              ],
+              [
+                [
+                  0.800000011920929,
+                  0.800000011920929,
+                  0.0
+                ]
+              ]
+            ]
+          },
+          "getter_static_all_envs": [
+            0.800000011920929,
+            0.800000011920929,
+            0.44999998807907104,
+            0.800000011920929
+          ],
+          "getter_dynamic_all_envs": [
+            0.800000011920929,
+            0.800000011920929,
+            0.44999998807907104,
+            0.800000011920929
+          ],
+          "getter_static_target": 0.44999998807907104,
+          "getter_dynamic_target": 0.44999998807907104,
+          "requested_static_all_envs": [
+            0.800000011920929,
+            0.800000011920929,
+            0.44999998807907104,
+            0.800000011920929
+          ],
+          "requested_dynamic_all_envs": [
+            0.800000011920929,
+            0.800000011920929,
+            0.44999998807907104,
+            0.800000011920929
+          ],
+          "actual_static_buffer_all_envs": [
+            0.800000011920929,
+            0.800000011920929,
+            0.44999998807907104,
+            0.800000011920929
+          ],
+          "actual_dynamic_buffer_all_envs": [
+            0.800000011920929,
+            0.800000011920929,
+            0.44999998807907104,
+            0.800000011920929
+          ],
+          "actual_static_buffer_target": 0.44999998807907104,
+          "actual_dynamic_buffer_target": 0.44999998807907104,
+          "physics_step_count": 0,
+          "simulation_time": 0.0,
+          "environment_sim_step_counter": 0,
+          "common_step_counter": 0
+        }
+      },
+      "write": {
+        "requested": 0.45,
+        "env_ids": {
+          "shape": [
+            1
+          ],
+          "dtype": "torch.int64",
+          "device": "cuda:0",
+          "values": [
+            2
+          ]
+        },
+        "before": {
+          "env_ids": {
+            "shape": [
+              1
+            ],
+            "dtype": "torch.int64",
+            "device": "cuda:0",
+            "values": [
+              2
+            ]
+          },
+          "material_tensor": {
+            "shape": [
+              4,
+              1,
+              3
+            ],
+            "dtype": "torch.float32",
+            "device": "cuda:0",
+            "values": [
+              [
+                [
+                  0.800000011920929,
+                  0.800000011920929,
+                  0.0
+                ]
+              ],
+              [
+                [
+                  0.800000011920929,
+                  0.800000011920929,
+                  0.0
+                ]
+              ],
+              [
+                [
+                  0.44999998807907104,
+                  0.44999998807907104,
+                  0.0
+                ]
+              ],
+              [
+                [
+                  0.800000011920929,
+                  0.800000011920929,
+                  0.0
+                ]
+              ]
+            ]
+          },
+          "getter_static_all_envs": [
+            0.800000011920929,
+            0.800000011920929,
+            0.44999998807907104,
+            0.800000011920929
+          ],
+          "getter_dynamic_all_envs": [
+            0.800000011920929,
+            0.800000011920929,
+            0.44999998807907104,
+            0.800000011920929
+          ],
+          "getter_static_target": 0.44999998807907104,
+          "getter_dynamic_target": 0.44999998807907104,
+          "requested_static_all_envs": [
+            0.800000011920929,
+            0.800000011920929,
+            0.44999998807907104,
+            0.800000011920929
+          ],
+          "requested_dynamic_all_envs": [
+            0.800000011920929,
+            0.800000011920929,
+            0.44999998807907104,
+            0.800000011920929
+          ],
+          "actual_static_buffer_all_envs": [
+            0.800000011920929,
+            0.800000011920929,
+            0.44999998807907104,
+            0.800000011920929
+          ],
+          "actual_dynamic_buffer_all_envs": [
+            0.800000011920929,
+            0.800000011920929,
+            0.44999998807907104,
+            0.800000011920929
+          ],
+          "actual_static_buffer_target": 0.44999998807907104,
+          "actual_dynamic_buffer_target": 0.44999998807907104,
+          "physics_step_count": 0,
+          "simulation_time": 0.0,
+          "environment_sim_step_counter": 0,
+          "common_step_counter": 0
+        },
+        "after_setter": {
+          "env_ids": {
+            "shape": [
+              1
+            ],
+            "dtype": "torch.int64",
+            "device": "cuda:0",
+            "values": [
+              2
+            ]
+          },
+          "material_tensor": {
+            "shape": [
+              4,
+              1,
+              3
+            ],
+            "dtype": "torch.float32",
+            "device": "cuda:0",
+            "values": [
+              [
+                [
+                  0.800000011920929,
+                  0.800000011920929,
+                  0.0
+                ]
+              ],
+              [
+                [
+                  0.800000011920929,
+                  0.800000011920929,
+                  0.0
+                ]
+              ],
+              [
+                [
+                  0.44999998807907104,
+                  0.44999998807907104,
+                  0.0
+                ]
+              ],
+              [
+                [
+                  0.800000011920929,
+                  0.800000011920929,
+                  0.0
+                ]
+              ]
+            ]
+          },
+          "getter_static_all_envs": [
+            0.800000011920929,
+            0.800000011920929,
+            0.44999998807907104,
+            0.800000011920929
+          ],
+          "getter_dynamic_all_envs": [
+            0.800000011920929,
+            0.800000011920929,
+            0.44999998807907104,
+            0.800000011920929
+          ],
+          "getter_static_target": 0.44999998807907104,
+          "getter_dynamic_target": 0.44999998807907104,
+          "requested_static_all_envs": [
+            0.800000011920929,
+            0.800000011920929,
+            0.44999998807907104,
+            0.800000011920929
+          ],
+          "requested_dynamic_all_envs": [
+            0.800000011920929,
+            0.800000011920929,
+            0.44999998807907104,
+            0.800000011920929
+          ],
+          "actual_static_buffer_all_envs": [
+            0.800000011920929,
+            0.800000011920929,
+            0.44999998807907104,
+            0.800000011920929
+          ],
+          "actual_dynamic_buffer_all_envs": [
+            0.800000011920929,
+            0.800000011920929,
+            0.44999998807907104,
+            0.800000011920929
+          ],
+          "actual_static_buffer_target": 0.44999998807907104,
+          "actual_dynamic_buffer_target": 0.44999998807907104,
+          "physics_step_count": 0,
+          "simulation_time": 0.0,
+          "environment_sim_step_counter": 0,
+          "common_step_counter": 0
+        }
+      },
+      "observation": {
+        "requested": 0.45,
+        "getter": 0.44999998807907104,
+        "buffer": 0.44999998807907104,
+        "getter_match": true,
+        "buffer_match": true,
+        "match": true,
+        "state": {
+          "env_ids": {
+            "shape": [
+              1
+            ],
+            "dtype": "torch.int64",
+            "device": "cuda:0",
+            "values": [
+              2
+            ]
+          },
+          "material_tensor": {
+            "shape": [
+              4,
+              1,
+              3
+            ],
+            "dtype": "torch.float32",
+            "device": "cuda:0",
+            "values": [
+              [
+                [
+                  0.800000011920929,
+                  0.800000011920929,
+                  0.0
+                ]
+              ],
+              [
+                [
+                  0.800000011920929,
+                  0.800000011920929,
+                  0.0
+                ]
+              ],
+              [
+                [
+                  0.44999998807907104,
+                  0.44999998807907104,
+                  0.0
+                ]
+              ],
+              [
+                [
+                  0.800000011920929,
+                  0.800000011920929,
+                  0.0
+                ]
+              ]
+            ]
+          },
+          "getter_static_all_envs": [
+            0.800000011920929,
+            0.800000011920929,
+            0.44999998807907104,
+            0.800000011920929
+          ],
+          "getter_dynamic_all_envs": [
+            0.800000011920929,
+            0.800000011920929,
+            0.44999998807907104,
+            0.800000011920929
+          ],
+          "getter_static_target": 0.44999998807907104,
+          "getter_dynamic_target": 0.44999998807907104,
+          "requested_static_all_envs": [
+            0.800000011920929,
+            0.800000011920929,
+            0.44999998807907104,
+            0.800000011920929
+          ],
+          "requested_dynamic_all_envs": [
+            0.800000011920929,
+            0.800000011920929,
+            0.44999998807907104,
+            0.800000011920929
+          ],
+          "actual_static_buffer_all_envs": [
+            0.800000011920929,
+            0.800000011920929,
+            0.44999998807907104,
+            0.800000011920929
+          ],
+          "actual_dynamic_buffer_all_envs": [
+            0.800000011920929,
+            0.800000011920929,
+            0.44999998807907104,
+            0.800000011920929
+          ],
+          "actual_static_buffer_target": 0.44999998807907104,
+          "actual_dynamic_buffer_target": 0.44999998807907104,
+          "physics_step_count": 0,
+          "simulation_time": 0.0,
+          "environment_sim_step_counter": 0,
+          "common_step_counter": 0
+        }
+      },
+      "pass": true,
+      "post_reset_write_match": true
+    },
+    "fresh_b": {
+      "lifecycle_id": "history_fresh_b",
+      "process_id": 48692,
+      "with_history": false,
+      "initial_reset": {
+        "pass": true,
+        "error": null,
+        "before": {
+          "env_ids": {
+            "shape": [
+              1
+            ],
+            "dtype": "torch.int64",
+            "device": "cuda:0",
+            "values": [
+              2
+            ]
+          },
+          "material_tensor": {
+            "shape": [
+              4,
+              1,
+              3
+            ],
+            "dtype": "torch.float32",
+            "device": "cuda:0",
+            "values": [
+              [
+                [
+                  0.800000011920929,
+                  0.800000011920929,
+                  0.0
+                ]
+              ],
+              [
+                [
+                  0.800000011920929,
+                  0.800000011920929,
+                  0.0
+                ]
+              ],
+              [
+                [
+                  0.800000011920929,
+                  0.800000011920929,
+                  0.0
+                ]
+              ],
+              [
+                [
+                  0.800000011920929,
+                  0.800000011920929,
+                  0.0
+                ]
+              ]
+            ]
+          },
+          "getter_static_all_envs": [
+            0.800000011920929,
+            0.800000011920929,
+            0.800000011920929,
+            0.800000011920929
+          ],
+          "getter_dynamic_all_envs": [
+            0.800000011920929,
+            0.800000011920929,
+            0.800000011920929,
+            0.800000011920929
+          ],
+          "getter_static_target": 0.800000011920929,
+          "getter_dynamic_target": 0.800000011920929,
+          "requested_static_all_envs": [
+            null,
+            null,
+            null,
+            null
+          ],
+          "requested_dynamic_all_envs": [
+            null,
+            null,
+            null,
+            null
+          ],
+          "actual_static_buffer_all_envs": [
+            null,
+            null,
+            null,
+            null
+          ],
+          "actual_dynamic_buffer_all_envs": [
+            null,
+            null,
+            null,
+            null
+          ],
+          "actual_static_buffer_target": null,
+          "actual_dynamic_buffer_target": null,
+          "physics_step_count": 0,
+          "simulation_time": 0.0,
+          "environment_sim_step_counter": 0,
+          "common_step_counter": 0
+        },
+        "after": {
+          "env_ids": {
+            "shape": [
+              1
+            ],
+            "dtype": "torch.int64",
+            "device": "cuda:0",
+            "values": [
+              2
+            ]
+          },
+          "material_tensor": {
+            "shape": [
+              4,
+              1,
+              3
+            ],
+            "dtype": "torch.float32",
+            "device": "cuda:0",
+            "values": [
+              [
+                [
+                  0.800000011920929,
+                  0.800000011920929,
+                  0.0
+                ]
+              ],
+              [
+                [
+                  0.800000011920929,
+                  0.800000011920929,
+                  0.0
+                ]
+              ],
+              [
+                [
+                  0.44999998807907104,
+                  0.44999998807907104,
+                  0.0
+                ]
+              ],
+              [
+                [
+                  0.800000011920929,
+                  0.800000011920929,
+                  0.0
+                ]
+              ]
+            ]
+          },
+          "getter_static_all_envs": [
+            0.800000011920929,
+            0.800000011920929,
+            0.44999998807907104,
+            0.800000011920929
+          ],
+          "getter_dynamic_all_envs": [
+            0.800000011920929,
+            0.800000011920929,
+            0.44999998807907104,
+            0.800000011920929
+          ],
+          "getter_static_target": 0.44999998807907104,
+          "getter_dynamic_target": 0.44999998807907104,
+          "requested_static_all_envs": [
+            0.800000011920929,
+            0.800000011920929,
+            0.44999998807907104,
+            0.800000011920929
+          ],
+          "requested_dynamic_all_envs": [
+            0.800000011920929,
+            0.800000011920929,
+            0.44999998807907104,
+            0.800000011920929
+          ],
+          "actual_static_buffer_all_envs": [
+            0.800000011920929,
+            0.800000011920929,
+            0.44999998807907104,
+            0.800000011920929
+          ],
+          "actual_dynamic_buffer_all_envs": [
+            0.800000011920929,
+            0.800000011920929,
+            0.44999998807907104,
+            0.800000011920929
+          ],
+          "actual_static_buffer_target": 0.44999998807907104,
+          "actual_dynamic_buffer_target": 0.44999998807907104,
+          "physics_step_count": 0,
+          "simulation_time": 0.0,
+          "environment_sim_step_counter": 0,
+          "common_step_counter": 0
+        }
+      },
+      "history_write": null,
+      "history_readback": null,
+      "tested_reset": {
+        "pass": true,
+        "error": null,
+        "before": {
+          "env_ids": {
+            "shape": [
+              1
+            ],
+            "dtype": "torch.int64",
+            "device": "cuda:0",
+            "values": [
+              2
+            ]
+          },
+          "material_tensor": {
+            "shape": [
+              4,
+              1,
+              3
+            ],
+            "dtype": "torch.float32",
+            "device": "cuda:0",
+            "values": [
+              [
+                [
+                  0.800000011920929,
+                  0.800000011920929,
+                  0.0
+                ]
+              ],
+              [
+                [
+                  0.800000011920929,
+                  0.800000011920929,
+                  0.0
+                ]
+              ],
+              [
+                [
+                  0.800000011920929,
+                  0.800000011920929,
+                  0.0
+                ]
+              ],
+              [
+                [
+                  0.800000011920929,
+                  0.800000011920929,
+                  0.0
+                ]
+              ]
+            ]
+          },
+          "getter_static_all_envs": [
+            0.800000011920929,
+            0.800000011920929,
+            0.800000011920929,
+            0.800000011920929
+          ],
+          "getter_dynamic_all_envs": [
+            0.800000011920929,
+            0.800000011920929,
+            0.800000011920929,
+            0.800000011920929
+          ],
+          "getter_static_target": 0.800000011920929,
+          "getter_dynamic_target": 0.800000011920929,
+          "requested_static_all_envs": [
+            null,
+            null,
+            null,
+            null
+          ],
+          "requested_dynamic_all_envs": [
+            null,
+            null,
+            null,
+            null
+          ],
+          "actual_static_buffer_all_envs": [
+            null,
+            null,
+            null,
+            null
+          ],
+          "actual_dynamic_buffer_all_envs": [
+            null,
+            null,
+            null,
+            null
+          ],
+          "actual_static_buffer_target": null,
+          "actual_dynamic_buffer_target": null,
+          "physics_step_count": 0,
+          "simulation_time": 0.0,
+          "environment_sim_step_counter": 0,
+          "common_step_counter": 0
+        },
+        "after": {
+          "env_ids": {
+            "shape": [
+              1
+            ],
+            "dtype": "torch.int64",
+            "device": "cuda:0",
+            "values": [
+              2
+            ]
+          },
+          "material_tensor": {
+            "shape": [
+              4,
+              1,
+              3
+            ],
+            "dtype": "torch.float32",
+            "device": "cuda:0",
+            "values": [
+              [
+                [
+                  0.800000011920929,
+                  0.800000011920929,
+                  0.0
+                ]
+              ],
+              [
+                [
+                  0.800000011920929,
+                  0.800000011920929,
+                  0.0
+                ]
+              ],
+              [
+                [
+                  0.44999998807907104,
+                  0.44999998807907104,
+                  0.0
+                ]
+              ],
+              [
+                [
+                  0.800000011920929,
+                  0.800000011920929,
+                  0.0
+                ]
+              ]
+            ]
+          },
+          "getter_static_all_envs": [
+            0.800000011920929,
+            0.800000011920929,
+            0.44999998807907104,
+            0.800000011920929
+          ],
+          "getter_dynamic_all_envs": [
+            0.800000011920929,
+            0.800000011920929,
+            0.44999998807907104,
+            0.800000011920929
+          ],
+          "getter_static_target": 0.44999998807907104,
+          "getter_dynamic_target": 0.44999998807907104,
+          "requested_static_all_envs": [
+            0.800000011920929,
+            0.800000011920929,
+            0.44999998807907104,
+            0.800000011920929
+          ],
+          "requested_dynamic_all_envs": [
+            0.800000011920929,
+            0.800000011920929,
+            0.44999998807907104,
+            0.800000011920929
+          ],
+          "actual_static_buffer_all_envs": [
+            0.800000011920929,
+            0.800000011920929,
+            0.44999998807907104,
+            0.800000011920929
+          ],
+          "actual_dynamic_buffer_all_envs": [
+            0.800000011920929,
+            0.800000011920929,
+            0.44999998807907104,
+            0.800000011920929
+          ],
+          "actual_static_buffer_target": 0.44999998807907104,
+          "actual_dynamic_buffer_target": 0.44999998807907104,
+          "physics_step_count": 0,
+          "simulation_time": 0.0,
+          "environment_sim_step_counter": 0,
+          "common_step_counter": 0
+        }
+      },
+      "write": {
+        "requested": 0.45,
+        "env_ids": {
+          "shape": [
+            1
+          ],
+          "dtype": "torch.int64",
+          "device": "cuda:0",
+          "values": [
+            2
+          ]
+        },
+        "before": {
+          "env_ids": {
+            "shape": [
+              1
+            ],
+            "dtype": "torch.int64",
+            "device": "cuda:0",
+            "values": [
+              2
+            ]
+          },
+          "material_tensor": {
+            "shape": [
+              4,
+              1,
+              3
+            ],
+            "dtype": "torch.float32",
+            "device": "cuda:0",
+            "values": [
+              [
+                [
+                  0.800000011920929,
+                  0.800000011920929,
+                  0.0
+                ]
+              ],
+              [
+                [
+                  0.800000011920929,
+                  0.800000011920929,
+                  0.0
+                ]
+              ],
+              [
+                [
+                  0.44999998807907104,
+                  0.44999998807907104,
+                  0.0
+                ]
+              ],
+              [
+                [
+                  0.800000011920929,
+                  0.800000011920929,
+                  0.0
+                ]
+              ]
+            ]
+          },
+          "getter_static_all_envs": [
+            0.800000011920929,
+            0.800000011920929,
+            0.44999998807907104,
+            0.800000011920929
+          ],
+          "getter_dynamic_all_envs": [
+            0.800000011920929,
+            0.800000011920929,
+            0.44999998807907104,
+            0.800000011920929
+          ],
+          "getter_static_target": 0.44999998807907104,
+          "getter_dynamic_target": 0.44999998807907104,
+          "requested_static_all_envs": [
+            0.800000011920929,
+            0.800000011920929,
+            0.44999998807907104,
+            0.800000011920929
+          ],
+          "requested_dynamic_all_envs": [
+            0.800000011920929,
+            0.800000011920929,
+            0.44999998807907104,
+            0.800000011920929
+          ],
+          "actual_static_buffer_all_envs": [
+            0.800000011920929,
+            0.800000011920929,
+            0.44999998807907104,
+            0.800000011920929
+          ],
+          "actual_dynamic_buffer_all_envs": [
+            0.800000011920929,
+            0.800000011920929,
+            0.44999998807907104,
+            0.800000011920929
+          ],
+          "actual_static_buffer_target": 0.44999998807907104,
+          "actual_dynamic_buffer_target": 0.44999998807907104,
+          "physics_step_count": 0,
+          "simulation_time": 0.0,
+          "environment_sim_step_counter": 0,
+          "common_step_counter": 0
+        },
+        "after_setter": {
+          "env_ids": {
+            "shape": [
+              1
+            ],
+            "dtype": "torch.int64",
+            "device": "cuda:0",
+            "values": [
+              2
+            ]
+          },
+          "material_tensor": {
+            "shape": [
+              4,
+              1,
+              3
+            ],
+            "dtype": "torch.float32",
+            "device": "cuda:0",
+            "values": [
+              [
+                [
+                  0.800000011920929,
+                  0.800000011920929,
+                  0.0
+                ]
+              ],
+              [
+                [
+                  0.800000011920929,
+                  0.800000011920929,
+                  0.0
+                ]
+              ],
+              [
+                [
+                  0.44999998807907104,
+                  0.44999998807907104,
+                  0.0
+                ]
+              ],
+              [
+                [
+                  0.800000011920929,
+                  0.800000011920929,
+                  0.0
+                ]
+              ]
+            ]
+          },
+          "getter_static_all_envs": [
+            0.800000011920929,
+            0.800000011920929,
+            0.44999998807907104,
+            0.800000011920929
+          ],
+          "getter_dynamic_all_envs": [
+            0.800000011920929,
+            0.800000011920929,
+            0.44999998807907104,
+            0.800000011920929
+          ],
+          "getter_static_target": 0.44999998807907104,
+          "getter_dynamic_target": 0.44999998807907104,
+          "requested_static_all_envs": [
+            0.800000011920929,
+            0.800000011920929,
+            0.44999998807907104,
+            0.800000011920929
+          ],
+          "requested_dynamic_all_envs": [
+            0.800000011920929,
+            0.800000011920929,
+            0.44999998807907104,
+            0.800000011920929
+          ],
+          "actual_static_buffer_all_envs": [
+            0.800000011920929,
+            0.800000011920929,
+            0.44999998807907104,
+            0.800000011920929
+          ],
+          "actual_dynamic_buffer_all_envs": [
+            0.800000011920929,
+            0.800000011920929,
+            0.44999998807907104,
+            0.800000011920929
+          ],
+          "actual_static_buffer_target": 0.44999998807907104,
+          "actual_dynamic_buffer_target": 0.44999998807907104,
+          "physics_step_count": 0,
+          "simulation_time": 0.0,
+          "environment_sim_step_counter": 0,
+          "common_step_counter": 0
+        }
+      },
+      "observation": {
+        "requested": 0.45,
+        "getter": 0.44999998807907104,
+        "buffer": 0.44999998807907104,
+        "getter_match": true,
+        "buffer_match": true,
+        "match": true,
+        "state": {
+          "env_ids": {
+            "shape": [
+              1
+            ],
+            "dtype": "torch.int64",
+            "device": "cuda:0",
+            "values": [
+              2
+            ]
+          },
+          "material_tensor": {
+            "shape": [
+              4,
+              1,
+              3
+            ],
+            "dtype": "torch.float32",
+            "device": "cuda:0",
+            "values": [
+              [
+                [
+                  0.800000011920929,
+                  0.800000011920929,
+                  0.0
+                ]
+              ],
+              [
+                [
+                  0.800000011920929,
+                  0.800000011920929,
+                  0.0
+                ]
+              ],
+              [
+                [
+                  0.44999998807907104,
+                  0.44999998807907104,
+                  0.0
+                ]
+              ],
+              [
+                [
+                  0.800000011920929,
+                  0.800000011920929,
+                  0.0
+                ]
+              ]
+            ]
+          },
+          "getter_static_all_envs": [
+            0.800000011920929,
+            0.800000011920929,
+            0.44999998807907104,
+            0.800000011920929
+          ],
+          "getter_dynamic_all_envs": [
+            0.800000011920929,
+            0.800000011920929,
+            0.44999998807907104,
+            0.800000011920929
+          ],
+          "getter_static_target": 0.44999998807907104,
+          "getter_dynamic_target": 0.44999998807907104,
+          "requested_static_all_envs": [
+            0.800000011920929,
+            0.800000011920929,
+            0.44999998807907104,
+            0.800000011920929
+          ],
+          "requested_dynamic_all_envs": [
+            0.800000011920929,
+            0.800000011920929,
+            0.44999998807907104,
+            0.800000011920929
+          ],
+          "actual_static_buffer_all_envs": [
+            0.800000011920929,
+            0.800000011920929,
+            0.44999998807907104,
+            0.800000011920929
+          ],
+          "actual_dynamic_buffer_all_envs": [
+            0.800000011920929,
+            0.800000011920929,
+            0.44999998807907104,
+            0.800000011920929
+          ],
+          "actual_static_buffer_target": 0.44999998807907104,
+          "actual_dynamic_buffer_target": 0.44999998807907104,
+          "physics_step_count": 0,
+          "simulation_time": 0.0,
+          "environment_sim_step_counter": 0,
+          "common_step_counter": 0
+        }
+      },
+      "pass": true,
+      "post_reset_write_match": true
+    },
+    "history_c": {
+      "lifecycle_id": "history_history_c",
+      "process_id": 48692,
+      "with_history": true,
+      "initial_reset": {
+        "pass": true,
+        "error": null,
+        "before": {
+          "env_ids": {
+            "shape": [
+              1
+            ],
+            "dtype": "torch.int64",
+            "device": "cuda:0",
+            "values": [
+              2
+            ]
+          },
+          "material_tensor": {
+            "shape": [
+              4,
+              1,
+              3
+            ],
+            "dtype": "torch.float32",
+            "device": "cuda:0",
+            "values": [
+              [
+                [
+                  0.800000011920929,
+                  0.800000011920929,
+                  0.0
+                ]
+              ],
+              [
+                [
+                  0.800000011920929,
+                  0.800000011920929,
+                  0.0
+                ]
+              ],
+              [
+                [
+                  0.800000011920929,
+                  0.800000011920929,
+                  0.0
+                ]
+              ],
+              [
+                [
+                  0.800000011920929,
+                  0.800000011920929,
+                  0.0
+                ]
+              ]
+            ]
+          },
+          "getter_static_all_envs": [
+            0.800000011920929,
+            0.800000011920929,
+            0.800000011920929,
+            0.800000011920929
+          ],
+          "getter_dynamic_all_envs": [
+            0.800000011920929,
+            0.800000011920929,
+            0.800000011920929,
+            0.800000011920929
+          ],
+          "getter_static_target": 0.800000011920929,
+          "getter_dynamic_target": 0.800000011920929,
+          "requested_static_all_envs": [
+            null,
+            null,
+            null,
+            null
+          ],
+          "requested_dynamic_all_envs": [
+            null,
+            null,
+            null,
+            null
+          ],
+          "actual_static_buffer_all_envs": [
+            null,
+            null,
+            null,
+            null
+          ],
+          "actual_dynamic_buffer_all_envs": [
+            null,
+            null,
+            null,
+            null
+          ],
+          "actual_static_buffer_target": null,
+          "actual_dynamic_buffer_target": null,
+          "physics_step_count": 0,
+          "simulation_time": 0.0,
+          "environment_sim_step_counter": 0,
+          "common_step_counter": 0
+        },
+        "after": {
+          "env_ids": {
+            "shape": [
+              1
+            ],
+            "dtype": "torch.int64",
+            "device": "cuda:0",
+            "values": [
+              2
+            ]
+          },
+          "material_tensor": {
+            "shape": [
+              4,
+              1,
+              3
+            ],
+            "dtype": "torch.float32",
+            "device": "cuda:0",
+            "values": [
+              [
+                [
+                  0.800000011920929,
+                  0.800000011920929,
+                  0.0
+                ]
+              ],
+              [
+                [
+                  0.800000011920929,
+                  0.800000011920929,
+                  0.0
+                ]
+              ],
+              [
+                [
+                  0.44999998807907104,
+                  0.44999998807907104,
+                  0.0
+                ]
+              ],
+              [
+                [
+                  0.800000011920929,
+                  0.800000011920929,
+                  0.0
+                ]
+              ]
+            ]
+          },
+          "getter_static_all_envs": [
+            0.800000011920929,
+            0.800000011920929,
+            0.44999998807907104,
+            0.800000011920929
+          ],
+          "getter_dynamic_all_envs": [
+            0.800000011920929,
+            0.800000011920929,
+            0.44999998807907104,
+            0.800000011920929
+          ],
+          "getter_static_target": 0.44999998807907104,
+          "getter_dynamic_target": 0.44999998807907104,
+          "requested_static_all_envs": [
+            0.800000011920929,
+            0.800000011920929,
+            0.44999998807907104,
+            0.800000011920929
+          ],
+          "requested_dynamic_all_envs": [
+            0.800000011920929,
+            0.800000011920929,
+            0.44999998807907104,
+            0.800000011920929
+          ],
+          "actual_static_buffer_all_envs": [
+            0.800000011920929,
+            0.800000011920929,
+            0.44999998807907104,
+            0.800000011920929
+          ],
+          "actual_dynamic_buffer_all_envs": [
+            0.800000011920929,
+            0.800000011920929,
+            0.44999998807907104,
+            0.800000011920929
+          ],
+          "actual_static_buffer_target": 0.44999998807907104,
+          "actual_dynamic_buffer_target": 0.44999998807907104,
+          "physics_step_count": 0,
+          "simulation_time": 0.0,
+          "environment_sim_step_counter": 0,
+          "common_step_counter": 0
+        }
+      },
+      "history_write": {
+        "requested": 0.35,
+        "env_ids": {
+          "shape": [
+            1
+          ],
+          "dtype": "torch.int64",
+          "device": "cuda:0",
+          "values": [
+            2
+          ]
+        },
+        "before": {
+          "env_ids": {
+            "shape": [
+              1
+            ],
+            "dtype": "torch.int64",
+            "device": "cuda:0",
+            "values": [
+              2
+            ]
+          },
+          "material_tensor": {
+            "shape": [
+              4,
+              1,
+              3
+            ],
+            "dtype": "torch.float32",
+            "device": "cuda:0",
+            "values": [
+              [
+                [
+                  0.800000011920929,
+                  0.800000011920929,
+                  0.0
+                ]
+              ],
+              [
+                [
+                  0.800000011920929,
+                  0.800000011920929,
+                  0.0
+                ]
+              ],
+              [
+                [
+                  0.44999998807907104,
+                  0.44999998807907104,
+                  0.0
+                ]
+              ],
+              [
+                [
+                  0.800000011920929,
+                  0.800000011920929,
+                  0.0
+                ]
+              ]
+            ]
+          },
+          "getter_static_all_envs": [
+            0.800000011920929,
+            0.800000011920929,
+            0.44999998807907104,
+            0.800000011920929
+          ],
+          "getter_dynamic_all_envs": [
+            0.800000011920929,
+            0.800000011920929,
+            0.44999998807907104,
+            0.800000011920929
+          ],
+          "getter_static_target": 0.44999998807907104,
+          "getter_dynamic_target": 0.44999998807907104,
+          "requested_static_all_envs": [
+            0.800000011920929,
+            0.800000011920929,
+            0.44999998807907104,
+            0.800000011920929
+          ],
+          "requested_dynamic_all_envs": [
+            0.800000011920929,
+            0.800000011920929,
+            0.44999998807907104,
+            0.800000011920929
+          ],
+          "actual_static_buffer_all_envs": [
+            0.800000011920929,
+            0.800000011920929,
+            0.44999998807907104,
+            0.800000011920929
+          ],
+          "actual_dynamic_buffer_all_envs": [
+            0.800000011920929,
+            0.800000011920929,
+            0.44999998807907104,
+            0.800000011920929
+          ],
+          "actual_static_buffer_target": 0.44999998807907104,
+          "actual_dynamic_buffer_target": 0.44999998807907104,
+          "physics_step_count": 0,
+          "simulation_time": 0.0,
+          "environment_sim_step_counter": 0,
+          "common_step_counter": 0
+        },
+        "after_setter": {
+          "env_ids": {
+            "shape": [
+              1
+            ],
+            "dtype": "torch.int64",
+            "device": "cuda:0",
+            "values": [
+              2
+            ]
+          },
+          "material_tensor": {
+            "shape": [
+              4,
+              1,
+              3
+            ],
+            "dtype": "torch.float32",
+            "device": "cuda:0",
+            "values": [
+              [
+                [
+                  0.800000011920929,
+                  0.800000011920929,
+                  0.0
+                ]
+              ],
+              [
+                [
+                  0.800000011920929,
+                  0.800000011920929,
+                  0.0
+                ]
+              ],
+              [
+                [
+                  0.3499999940395355,
+                  0.3499999940395355,
+                  0.0
+                ]
+              ],
+              [
+                [
+                  0.800000011920929,
+                  0.800000011920929,
+                  0.0
+                ]
+              ]
+            ]
+          },
+          "getter_static_all_envs": [
+            0.800000011920929,
+            0.800000011920929,
+            0.3499999940395355,
+            0.800000011920929
+          ],
+          "getter_dynamic_all_envs": [
+            0.800000011920929,
+            0.800000011920929,
+            0.3499999940395355,
+            0.800000011920929
+          ],
+          "getter_static_target": 0.3499999940395355,
+          "getter_dynamic_target": 0.3499999940395355,
+          "requested_static_all_envs": [
+            0.800000011920929,
+            0.800000011920929,
+            0.44999998807907104,
+            0.800000011920929
+          ],
+          "requested_dynamic_all_envs": [
+            0.800000011920929,
+            0.800000011920929,
+            0.44999998807907104,
+            0.800000011920929
+          ],
+          "actual_static_buffer_all_envs": [
+            0.800000011920929,
+            0.800000011920929,
+            0.44999998807907104,
+            0.800000011920929
+          ],
+          "actual_dynamic_buffer_all_envs": [
+            0.800000011920929,
+            0.800000011920929,
+            0.44999998807907104,
+            0.800000011920929
+          ],
+          "actual_static_buffer_target": 0.44999998807907104,
+          "actual_dynamic_buffer_target": 0.44999998807907104,
+          "physics_step_count": 0,
+          "simulation_time": 0.0,
+          "environment_sim_step_counter": 0,
+          "common_step_counter": 0
+        }
+      },
+      "history_readback": {
+        "env_ids": {
+          "shape": [
+            1
+          ],
+          "dtype": "torch.int64",
+          "device": "cuda:0",
+          "values": [
+            2
+          ]
+        },
+        "material_tensor": {
+          "shape": [
+            4,
+            1,
+            3
+          ],
+          "dtype": "torch.float32",
+          "device": "cuda:0",
+          "values": [
+            [
+              [
+                0.800000011920929,
+                0.800000011920929,
+                0.0
+              ]
+            ],
+            [
+              [
+                0.800000011920929,
+                0.800000011920929,
+                0.0
+              ]
+            ],
+            [
+              [
+                0.3499999940395355,
+                0.3499999940395355,
+                0.0
+              ]
+            ],
+            [
+              [
+                0.800000011920929,
+                0.800000011920929,
+                0.0
+              ]
+            ]
+          ]
+        },
+        "getter_static_all_envs": [
+          0.800000011920929,
+          0.800000011920929,
+          0.3499999940395355,
+          0.800000011920929
+        ],
+        "getter_dynamic_all_envs": [
+          0.800000011920929,
+          0.800000011920929,
+          0.3499999940395355,
+          0.800000011920929
+        ],
+        "getter_static_target": 0.3499999940395355,
+        "getter_dynamic_target": 0.3499999940395355,
+        "requested_static_all_envs": [
+          0.800000011920929,
+          0.800000011920929,
+          0.44999998807907104,
+          0.800000011920929
+        ],
+        "requested_dynamic_all_envs": [
+          0.800000011920929,
+          0.800000011920929,
+          0.44999998807907104,
+          0.800000011920929
+        ],
+        "actual_static_buffer_all_envs": [
+          0.800000011920929,
+          0.800000011920929,
+          0.3499999940395355,
+          0.800000011920929
+        ],
+        "actual_dynamic_buffer_all_envs": [
+          0.800000011920929,
+          0.800000011920929,
+          0.3499999940395355,
+          0.800000011920929
+        ],
+        "actual_static_buffer_target": 0.3499999940395355,
+        "actual_dynamic_buffer_target": 0.3499999940395355,
+        "physics_step_count": 0,
+        "simulation_time": 0.0,
+        "environment_sim_step_counter": 0,
+        "common_step_counter": 0
+      },
+      "tested_reset": {
+        "pass": true,
+        "error": null,
+        "before": {
+          "env_ids": {
+            "shape": [
+              1
+            ],
+            "dtype": "torch.int64",
+            "device": "cuda:0",
+            "values": [
+              2
+            ]
+          },
+          "material_tensor": {
+            "shape": [
+              4,
+              1,
+              3
+            ],
+            "dtype": "torch.float32",
+            "device": "cuda:0",
+            "values": [
+              [
+                [
+                  0.800000011920929,
+                  0.800000011920929,
+                  0.0
+                ]
+              ],
+              [
+                [
+                  0.800000011920929,
+                  0.800000011920929,
+                  0.0
+                ]
+              ],
+              [
+                [
+                  0.3499999940395355,
+                  0.3499999940395355,
+                  0.0
+                ]
+              ],
+              [
+                [
+                  0.800000011920929,
+                  0.800000011920929,
+                  0.0
+                ]
+              ]
+            ]
+          },
+          "getter_static_all_envs": [
+            0.800000011920929,
+            0.800000011920929,
+            0.3499999940395355,
+            0.800000011920929
+          ],
+          "getter_dynamic_all_envs": [
+            0.800000011920929,
+            0.800000011920929,
+            0.3499999940395355,
+            0.800000011920929
+          ],
+          "getter_static_target": 0.3499999940395355,
+          "getter_dynamic_target": 0.3499999940395355,
+          "requested_static_all_envs": [
+            0.800000011920929,
+            0.800000011920929,
+            0.44999998807907104,
+            0.800000011920929
+          ],
+          "requested_dynamic_all_envs": [
+            0.800000011920929,
+            0.800000011920929,
+            0.44999998807907104,
+            0.800000011920929
+          ],
+          "actual_static_buffer_all_envs": [
+            0.800000011920929,
+            0.800000011920929,
+            0.3499999940395355,
+            0.800000011920929
+          ],
+          "actual_dynamic_buffer_all_envs": [
+            0.800000011920929,
+            0.800000011920929,
+            0.3499999940395355,
+            0.800000011920929
+          ],
+          "actual_static_buffer_target": 0.3499999940395355,
+          "actual_dynamic_buffer_target": 0.3499999940395355,
+          "physics_step_count": 0,
+          "simulation_time": 0.0,
+          "environment_sim_step_counter": 0,
+          "common_step_counter": 0
+        },
+        "after": {
+          "env_ids": {
+            "shape": [
+              1
+            ],
+            "dtype": "torch.int64",
+            "device": "cuda:0",
+            "values": [
+              2
+            ]
+          },
+          "material_tensor": {
+            "shape": [
+              4,
+              1,
+              3
+            ],
+            "dtype": "torch.float32",
+            "device": "cuda:0",
+            "values": [
+              [
+                [
+                  0.800000011920929,
+                  0.800000011920929,
+                  0.0
+                ]
+              ],
+              [
+                [
+                  0.800000011920929,
+                  0.800000011920929,
+                  0.0
+                ]
+              ],
+              [
+                [
+                  0.44999998807907104,
+                  0.44999998807907104,
+                  0.0
+                ]
+              ],
+              [
+                [
+                  0.800000011920929,
+                  0.800000011920929,
+                  0.0
+                ]
+              ]
+            ]
+          },
+          "getter_static_all_envs": [
+            0.800000011920929,
+            0.800000011920929,
+            0.44999998807907104,
+            0.800000011920929
+          ],
+          "getter_dynamic_all_envs": [
+            0.800000011920929,
+            0.800000011920929,
+            0.44999998807907104,
+            0.800000011920929
+          ],
+          "getter_static_target": 0.44999998807907104,
+          "getter_dynamic_target": 0.44999998807907104,
+          "requested_static_all_envs": [
+            0.800000011920929,
+            0.800000011920929,
+            0.44999998807907104,
+            0.800000011920929
+          ],
+          "requested_dynamic_all_envs": [
+            0.800000011920929,
+            0.800000011920929,
+            0.44999998807907104,
+            0.800000011920929
+          ],
+          "actual_static_buffer_all_envs": [
+            0.800000011920929,
+            0.800000011920929,
+            0.44999998807907104,
+            0.800000011920929
+          ],
+          "actual_dynamic_buffer_all_envs": [
+            0.800000011920929,
+            0.800000011920929,
+            0.44999998807907104,
+            0.800000011920929
+          ],
+          "actual_static_buffer_target": 0.44999998807907104,
+          "actual_dynamic_buffer_target": 0.44999998807907104,
+          "physics_step_count": 0,
+          "simulation_time": 0.0,
+          "environment_sim_step_counter": 0,
+          "common_step_counter": 0
+        }
+      },
+      "write": {
+        "requested": 0.45,
+        "env_ids": {
+          "shape": [
+            1
+          ],
+          "dtype": "torch.int64",
+          "device": "cuda:0",
+          "values": [
+            2
+          ]
+        },
+        "before": {
+          "env_ids": {
+            "shape": [
+              1
+            ],
+            "dtype": "torch.int64",
+            "device": "cuda:0",
+            "values": [
+              2
+            ]
+          },
+          "material_tensor": {
+            "shape": [
+              4,
+              1,
+              3
+            ],
+            "dtype": "torch.float32",
+            "device": "cuda:0",
+            "values": [
+              [
+                [
+                  0.800000011920929,
+                  0.800000011920929,
+                  0.0
+                ]
+              ],
+              [
+                [
+                  0.800000011920929,
+                  0.800000011920929,
+                  0.0
+                ]
+              ],
+              [
+                [
+                  0.44999998807907104,
+                  0.44999998807907104,
+                  0.0
+                ]
+              ],
+              [
+                [
+                  0.800000011920929,
+                  0.800000011920929,
+                  0.0
+                ]
+              ]
+            ]
+          },
+          "getter_static_all_envs": [
+            0.800000011920929,
+            0.800000011920929,
+            0.44999998807907104,
+            0.800000011920929
+          ],
+          "getter_dynamic_all_envs": [
+            0.800000011920929,
+            0.800000011920929,
+            0.44999998807907104,
+            0.800000011920929
+          ],
+          "getter_static_target": 0.44999998807907104,
+          "getter_dynamic_target": 0.44999998807907104,
+          "requested_static_all_envs": [
+            0.800000011920929,
+            0.800000011920929,
+            0.44999998807907104,
+            0.800000011920929
+          ],
+          "requested_dynamic_all_envs": [
+            0.800000011920929,
+            0.800000011920929,
+            0.44999998807907104,
+            0.800000011920929
+          ],
+          "actual_static_buffer_all_envs": [
+            0.800000011920929,
+            0.800000011920929,
+            0.44999998807907104,
+            0.800000011920929
+          ],
+          "actual_dynamic_buffer_all_envs": [
+            0.800000011920929,
+            0.800000011920929,
+            0.44999998807907104,
+            0.800000011920929
+          ],
+          "actual_static_buffer_target": 0.44999998807907104,
+          "actual_dynamic_buffer_target": 0.44999998807907104,
+          "physics_step_count": 0,
+          "simulation_time": 0.0,
+          "environment_sim_step_counter": 0,
+          "common_step_counter": 0
+        },
+        "after_setter": {
+          "env_ids": {
+            "shape": [
+              1
+            ],
+            "dtype": "torch.int64",
+            "device": "cuda:0",
+            "values": [
+              2
+            ]
+          },
+          "material_tensor": {
+            "shape": [
+              4,
+              1,
+              3
+            ],
+            "dtype": "torch.float32",
+            "device": "cuda:0",
+            "values": [
+              [
+                [
+                  0.800000011920929,
+                  0.800000011920929,
+                  0.0
+                ]
+              ],
+              [
+                [
+                  0.800000011920929,
+                  0.800000011920929,
+                  0.0
+                ]
+              ],
+              [
+                [
+                  0.44999998807907104,
+                  0.44999998807907104,
+                  0.0
+                ]
+              ],
+              [
+                [
+                  0.800000011920929,
+                  0.800000011920929,
+                  0.0
+                ]
+              ]
+            ]
+          },
+          "getter_static_all_envs": [
+            0.800000011920929,
+            0.800000011920929,
+            0.44999998807907104,
+            0.800000011920929
+          ],
+          "getter_dynamic_all_envs": [
+            0.800000011920929,
+            0.800000011920929,
+            0.44999998807907104,
+            0.800000011920929
+          ],
+          "getter_static_target": 0.44999998807907104,
+          "getter_dynamic_target": 0.44999998807907104,
+          "requested_static_all_envs": [
+            0.800000011920929,
+            0.800000011920929,
+            0.44999998807907104,
+            0.800000011920929
+          ],
+          "requested_dynamic_all_envs": [
+            0.800000011920929,
+            0.800000011920929,
+            0.44999998807907104,
+            0.800000011920929
+          ],
+          "actual_static_buffer_all_envs": [
+            0.800000011920929,
+            0.800000011920929,
+            0.44999998807907104,
+            0.800000011920929
+          ],
+          "actual_dynamic_buffer_all_envs": [
+            0.800000011920929,
+            0.800000011920929,
+            0.44999998807907104,
+            0.800000011920929
+          ],
+          "actual_static_buffer_target": 0.44999998807907104,
+          "actual_dynamic_buffer_target": 0.44999998807907104,
+          "physics_step_count": 0,
+          "simulation_time": 0.0,
+          "environment_sim_step_counter": 0,
+          "common_step_counter": 0
+        }
+      },
+      "observation": {
+        "requested": 0.45,
+        "getter": 0.44999998807907104,
+        "buffer": 0.44999998807907104,
+        "getter_match": true,
+        "buffer_match": true,
+        "match": true,
+        "state": {
+          "env_ids": {
+            "shape": [
+              1
+            ],
+            "dtype": "torch.int64",
+            "device": "cuda:0",
+            "values": [
+              2
+            ]
+          },
+          "material_tensor": {
+            "shape": [
+              4,
+              1,
+              3
+            ],
+            "dtype": "torch.float32",
+            "device": "cuda:0",
+            "values": [
+              [
+                [
+                  0.800000011920929,
+                  0.800000011920929,
+                  0.0
+                ]
+              ],
+              [
+                [
+                  0.800000011920929,
+                  0.800000011920929,
+                  0.0
+                ]
+              ],
+              [
+                [
+                  0.44999998807907104,
+                  0.44999998807907104,
+                  0.0
+                ]
+              ],
+              [
+                [
+                  0.800000011920929,
+                  0.800000011920929,
+                  0.0
+                ]
+              ]
+            ]
+          },
+          "getter_static_all_envs": [
+            0.800000011920929,
+            0.800000011920929,
+            0.44999998807907104,
+            0.800000011920929
+          ],
+          "getter_dynamic_all_envs": [
+            0.800000011920929,
+            0.800000011920929,
+            0.44999998807907104,
+            0.800000011920929
+          ],
+          "getter_static_target": 0.44999998807907104,
+          "getter_dynamic_target": 0.44999998807907104,
+          "requested_static_all_envs": [
+            0.800000011920929,
+            0.800000011920929,
+            0.44999998807907104,
+            0.800000011920929
+          ],
+          "requested_dynamic_all_envs": [
+            0.800000011920929,
+            0.800000011920929,
+            0.44999998807907104,
+            0.800000011920929
+          ],
+          "actual_static_buffer_all_envs": [
+            0.800000011920929,
+            0.800000011920929,
+            0.44999998807907104,
+            0.800000011920929
+          ],
+          "actual_dynamic_buffer_all_envs": [
+            0.800000011920929,
+            0.800000011920929,
+            0.44999998807907104,
+            0.800000011920929
+          ],
+          "actual_static_buffer_target": 0.44999998807907104,
+          "actual_dynamic_buffer_target": 0.44999998807907104,
+          "physics_step_count": 0,
+          "simulation_time": 0.0,
+          "environment_sim_step_counter": 0,
+          "common_step_counter": 0
+        }
+      },
+      "pass": true,
+      "post_reset_write_match": true
+    },
+    "fresh_run_pass_history_run_fail": false,
+    "independent_environment_lifecycles": true
+  },
+  "root_cause_classification": "ROOT_CAUSE_UNRESOLVED",
+  "root_cause_reason": "observations do not satisfy another frozen classification rule",
+  "fatal_error": null,
+  "git_branch": "chd-dev",
+  "git_commit": "b40b30ba684e2e1e244242739deb0be5cc0dcf45",
+  "script_sha256": "c41cf3b41df77bf29cc78e0264f34f69e6e9cc77455831286cf5f6e8ad613d55",
+  "protected_hashes_before": {
+    "scripts/p0_physics_validation.py": "876a3b3f02ea5a085c21dea0647599d11051a6ac951eab3330abe18e9f2e703f",
+    "scripts/p0_timing_audit.py": "8a35888d370e4716b2557eaa0148486219a91fddd80290d3ea67ad4b34c5db47",
+    "scripts/p0_friction_coupling_diagnosis.py": "d12c4f374be43ae27b5d594fee056559c9fd617dd1ce5ccb9a82d61205622de3",
+    "scripts/p0_friction_material_diagnosis.py": "83f649e8f3c0ba681feee341abeadd795716cfa01af3f813aacbbb53bff10b85",
+    "source/LEAP_Isaaclab/LEAP_Isaaclab/tasks/leap_hand_reorient/leap_hand_env_cfg.py": "1ffe106bd5cae70f457651c82ccddf311fc463e7c437e6c3de325c9c494fe18b",
+    "source/LEAP_Isaaclab/LEAP_Isaaclab/tasks/leap_hand_reorient/reorientation_env.py": "5f44dfab7620c3ade7dcf73469290f3b8ed7ac95b2b31db861fa2289352b09ce",
+    "source/LEAP_Isaaclab/LEAP_Isaaclab/tasks/leap_hand_reorient_cri/factor_conditions.py": "1255b2fdb391394c2235ffa17a164ccc52c97ab51525b22aa6285006ba4ed714",
+    "source/LEAP_Isaaclab/LEAP_Isaaclab/tasks/leap_hand_reorient_cri/leap_hand_cri_env_cfg.py": "e25b6087f81a958cfe1e237a7275b8619050597c52ad1adadaaf9eba5120d901",
+    "source/LEAP_Isaaclab/LEAP_Isaaclab/tasks/leap_hand_reorient_cri/reorientation_cri_env.py": "9550176ffaff5a672c2bf285dd37e1fb93411bfec2b295e04330047047be2fae",
+    "source/LEAP_Isaaclab/LEAP_Isaaclab/tasks/leap_hand_reorient/agents/rl_games_ppo_cfg.yaml": "cefe853eb766f40ce6120a16b58d076ba0655f9cde608b9efe21df43745398ba",
+    "logs/rl_games/leap_hand_reorient/pretrained/nn/leap_hand_reorient.pth": "46675eecc4e51372ec2c336d9637ef588a61b80e24aeb796de263bd1e75ce364"
+  },
+  "protected_hashes_after": {
+    "scripts/p0_physics_validation.py": "876a3b3f02ea5a085c21dea0647599d11051a6ac951eab3330abe18e9f2e703f",
+    "scripts/p0_timing_audit.py": "8a35888d370e4716b2557eaa0148486219a91fddd80290d3ea67ad4b34c5db47",
+    "scripts/p0_friction_coupling_diagnosis.py": "d12c4f374be43ae27b5d594fee056559c9fd617dd1ce5ccb9a82d61205622de3",
+    "scripts/p0_friction_material_diagnosis.py": "83f649e8f3c0ba681feee341abeadd795716cfa01af3f813aacbbb53bff10b85",
+    "source/LEAP_Isaaclab/LEAP_Isaaclab/tasks/leap_hand_reorient/leap_hand_env_cfg.py": "1ffe106bd5cae70f457651c82ccddf311fc463e7c437e6c3de325c9c494fe18b",
+    "source/LEAP_Isaaclab/LEAP_Isaaclab/tasks/leap_hand_reorient/reorientation_env.py": "5f44dfab7620c3ade7dcf73469290f3b8ed7ac95b2b31db861fa2289352b09ce",
+    "source/LEAP_Isaaclab/LEAP_Isaaclab/tasks/leap_hand_reorient_cri/factor_conditions.py": "1255b2fdb391394c2235ffa17a164ccc52c97ab51525b22aa6285006ba4ed714",
+    "source/LEAP_Isaaclab/LEAP_Isaaclab/tasks/leap_hand_reorient_cri/leap_hand_cri_env_cfg.py": "e25b6087f81a958cfe1e237a7275b8619050597c52ad1adadaaf9eba5120d901",
+    "source/LEAP_Isaaclab/LEAP_Isaaclab/tasks/leap_hand_reorient_cri/reorientation_cri_env.py": "9550176ffaff5a672c2bf285dd37e1fb93411bfec2b295e04330047047be2fae",
+    "source/LEAP_Isaaclab/LEAP_Isaaclab/tasks/leap_hand_reorient/agents/rl_games_ppo_cfg.yaml": "cefe853eb766f40ce6120a16b58d076ba0655f9cde608b9efe21df43745398ba",
+    "logs/rl_games/leap_hand_reorient/pretrained/nn/leap_hand_reorient.pth": "46675eecc4e51372ec2c336d9637ef588a61b80e24aeb796de263bd1e75ce364"
+  },
+  "protected_unchanged": true
+}

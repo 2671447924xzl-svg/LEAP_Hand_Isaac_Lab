@@ -1,0 +1,979 @@
+{
+  "overall_status": "FAIL",
+  "execution_error": null,
+  "run_id": "20260901_210345_474375",
+  "protocol_id": "UNIFIED_P0_PHYSICS_VALIDATION",
+  "requested_protocol": "all",
+  "task_id": "Isaac-Reorient-Cube-Leap-CRI",
+  "factor_schema_version": "CRI_FACTOR_SCHEMA_V1",
+  "seed": 42,
+  "repeats": 3,
+  "num_envs": 4,
+  "factor_codes": [
+    "000",
+    "100",
+    "010",
+    "001"
+  ],
+  "events": null,
+  "adr_enabled": false,
+  "ppo_used": false,
+  "checkpoint_used": false,
+  "measurement_semantics": {
+    "mass_inertia_material_effort_limits": "direct PhysX/USD read-back",
+    "derived_pair_friction": "derived from two direct material read-backs with verified combine=min; not a directly measured contact-pair coefficient",
+    "applied_effort": "unavailable from the implicit-drive API used by this task; raw CSV stores NaN and no commanded/computed torque substitute is used"
+  },
+  "physics_dt": 0.008333333333333333,
+  "decimation": 4,
+  "frozen_protocol": {
+    "mass": {
+      "force_x_n": 1.0,
+      "torque_z_nm": 0.001,
+      "steps": 24,
+      "isolation_height_m": 5.0,
+      "object_orientation_xyzw": [
+        0.0,
+        0.0,
+        0.0,
+        1.0
+      ],
+      "linear_ratio_range": [
+        0.68,
+        0.82
+      ]
+    },
+    "friction": {
+      "settle_steps": 120,
+      "force_range_n": [
+        0.0,
+        2.2
+      ],
+      "force_step_n": 0.01,
+      "hold_physics_steps": 8,
+      "complete_range_executed": true,
+      "velocity_threshold_mps": 0.01,
+      "displacement_threshold_m": 0.0005,
+      "consecutive_steps_within_plateau": 5,
+      "onset_ratio_max": 0.75,
+      "material_readback_scope": "protocol_start_direct_readback"
+    },
+    "motor": {
+      "joint_name": "a_0",
+      "negative_control": {
+        "action": 0.05,
+        "control_steps": 12
+      },
+      "stress": {
+        "action": 1.0,
+        "drive_control_steps": 4,
+        "hold_zero_control_steps": 16
+      },
+      "joint_limit_tolerance_rad": 1e-06,
+      "minimum_auc_gap": 0.05,
+      "support_numerical_tolerance": 1e-06
+    }
+  },
+  "checks": {
+    "explicit_factor_assignment": {
+      "status": "PASS",
+      "evidence": "('000', '100', '010', '001')"
+    },
+    "events_and_adr_disabled": {
+      "status": "PASS",
+      "evidence": "events=None; adr=False"
+    },
+    "baseline_lifecycle_reset_state": {
+      "status": "PASS",
+      "evidence": "observation_shape=(4, 96)"
+    },
+    "baseline_lifecycle_reset_bookkeeping": {
+      "status": "PASS",
+      "evidence": "[0, 0, 0, 0]"
+    },
+    "baseline_lifecycle_step_outputs": {
+      "status": "PASS",
+      "evidence": "terminated=[False, False, False, False], truncated=[False, False, False, False]"
+    },
+    "baseline_lifecycle_step_bookkeeping": {
+      "status": "PASS",
+      "evidence": "[1, 1, 1, 1]"
+    },
+    "direct_factor_readback_available": {
+      "status": "PASS",
+      "evidence": "all actual availability buffers true"
+    },
+    "requested_matches_direct_actual": {
+      "status": "PASS",
+      "evidence": "mass/inertia/friction/effort requested tensors match independent getters"
+    },
+    "factor_assignment_buffer_frozen": {
+      "status": "PASS",
+      "evidence": "('000', '100', '010', '001')"
+    },
+    "mass_single_factor_isolation": {
+      "status": "PASS",
+      "evidence": "changed=['actual_object_mass', 'actual_object_inertia']; unexpected=[]; missing=[]"
+    },
+    "friction_single_factor_isolation": {
+      "status": "PASS",
+      "evidence": "changed=['actual_object_static_friction', 'actual_object_dynamic_friction']; unexpected=[]; missing=[]"
+    },
+    "motor_single_factor_isolation": {
+      "status": "PASS",
+      "evidence": "changed=['actual_effort_limit']; unexpected=[]; missing=[]"
+    },
+    "no_ppo_or_checkpoint_loaded": {
+      "status": "PASS",
+      "evidence": "rl_games_loaded=False"
+    },
+    "MASS-P1-direct_mass_readback": {
+      "status": "PASS",
+      "evidence": "actual=(2.160000056028e-01,2.916000187397e-01), ratio=1.350000051740369, requested_actual=True"
+    },
+    "MASS-P2-inertia_scales_with_mass": {
+      "status": "PASS",
+      "evidence": "ratios=[1.3500000194938464, 1.3500000194938464, 1.3500000194938464], requested_actual=True"
+    },
+    "MASS-P3-linear_response_ratio": {
+      "status": "PASS",
+      "evidence": "ratios=[0.7407408742551995, 0.7407408742551995, 0.7407408742551995]"
+    },
+    "MASS-P4-angular_response_direction": {
+      "status": "PASS",
+      "evidence": "results=[{'repeat': 0, 'delta_v': {'0': 0.9259258508682, '1': 0.6858711242676}, 'delta_omega': {'0': 1.066109061241, '1': 0.7897099852562}, 'linear_response_ratio_100_over_000': 0.7407408742551995, 'angular_response_ratio_100_over_000': 0.7407403369566535}, {'repeat': 1, 'delta_v': {'0': 0.9259258508682, '1': 0.6858711242676}, 'delta_omega': {'0': 1.066109061241, '1': 0.7897099852562}, 'linear_response_ratio_100_over_000': 0.7407408742551995, 'angular_response_ratio_100_over_000': 0.7407403369566535}, {'repeat': 2, 'delta_v': {'0': 0.9259258508682, '1': 0.6858711242676}, 'delta_omega': {'0': 1.066109061241, '1': 0.7897099852562}, 'linear_response_ratio_100_over_000': 0.7407408742551995, 'angular_response_ratio_100_over_000': 0.7407403369566535}]"
+    },
+    "MASS-P5-repeat_direction_consistency": {
+      "status": "PASS",
+      "evidence": "results=[{'repeat': 0, 'delta_v': {'0': 0.9259258508682, '1': 0.6858711242676}, 'delta_omega': {'0': 1.066109061241, '1': 0.7897099852562}, 'linear_response_ratio_100_over_000': 0.7407408742551995, 'angular_response_ratio_100_over_000': 0.7407403369566535}, {'repeat': 1, 'delta_v': {'0': 0.9259258508682, '1': 0.6858711242676}, 'delta_omega': {'0': 1.066109061241, '1': 0.7897099852562}, 'linear_response_ratio_100_over_000': 0.7407408742551995, 'angular_response_ratio_100_over_000': 0.7407403369566535}, {'repeat': 2, 'delta_v': {'0': 0.9259258508682, '1': 0.6858711242676}, 'delta_omega': {'0': 1.066109061241, '1': 0.7897099852562}, 'linear_response_ratio_100_over_000': 0.7407408742551995, 'angular_response_ratio_100_over_000': 0.7407403369566535}]"
+    },
+    "friction_probe_binding_restored": {
+      "status": "PASS",
+      "evidence": "{\"probe_path\": \"/World/ground\", \"collider_path\": \"/World/ground/GroundPlane/CollisionPlane\", \"temporary_material_path\": \"/World/P0_5_audit_ground_material\", \"prior_material_path\": \"/World/ground/physicsMaterial\", \"prior_binding_strength\": \"strongerThanDescendants\", \"restored\": true, \"restored_strength\": true, \"temporary_material_removed\": true, \"actual_static_friction\": 0.800000011920929, \"actual_dynamic_friction\": 0.800000011920929, \"actual_combine_mode\": \"min\", \"cube_local_bounds\": {\"prim_path\": \"/World/envs/env_0/object\", \"minimum\": [-0.036000001430511575, -0.13600000292062764, 0.5240000009536743], \"maximum\": [0.03600000143051135, -0.06400000005960466, 0.5960000038146973], \"size\": [0.07200000286102293, 0.07200000286102298, 0.07200000286102304], \"half_height_m\": 0.03600000143051152}, \"restored_material_path\": \"/World/ground/physicsMaterial\", \"restored_binding_strength\": \"strongerThanDescendants\"}"
+    },
+    "FRIC-P1-direct_material_and_combine_readback": {
+      "status": "PASS",
+      "evidence": "requested/actual object values, probe=0.80, combine=min, scope=protocol_start; absolute_ok=True"
+    },
+    "FRIC-P2-low_onset_exists_and_is_lower": {
+      "status": "PASS",
+      "evidence": "results=[{'repeat': 0, 'onset_000_n': 1.28, 'onset_010_n': 1.04, 'onset_ratio_010_over_000': 0.8125, 'mu_hat_000': 0.6040699054244644, 'mu_hat_010': 0.4908067981573774}, {'repeat': 1, 'onset_000_n': 1.28, 'onset_010_n': 1.04, 'onset_ratio_010_over_000': 0.8125, 'mu_hat_000': 0.6040699054244644, 'mu_hat_010': 0.4908067981573774}, {'repeat': 2, 'onset_000_n': 1.28, 'onset_010_n': 1.04, 'onset_ratio_010_over_000': 0.8125, 'mu_hat_000': 0.6040699054244644, 'mu_hat_010': 0.4908067981573774}]"
+    },
+    "FRIC-P3-onset_ratio": {
+      "status": "FAIL",
+      "evidence": "results=[{'repeat': 0, 'onset_000_n': 1.28, 'onset_010_n': 1.04, 'onset_ratio_010_over_000': 0.8125, 'mu_hat_000': 0.6040699054244644, 'mu_hat_010': 0.4908067981573774}, {'repeat': 1, 'onset_000_n': 1.28, 'onset_010_n': 1.04, 'onset_ratio_010_over_000': 0.8125, 'mu_hat_000': 0.6040699054244644, 'mu_hat_010': 0.4908067981573774}, {'repeat': 2, 'onset_000_n': 1.28, 'onset_010_n': 1.04, 'onset_ratio_010_over_000': 0.8125, 'mu_hat_000': 0.6040699054244644, 'mu_hat_010': 0.4908067981573774}]"
+    },
+    "FRIC-P4-repeat_direction_consistency": {
+      "status": "PASS",
+      "evidence": "results=[{'repeat': 0, 'onset_000_n': 1.28, 'onset_010_n': 1.04, 'onset_ratio_010_over_000': 0.8125, 'mu_hat_000': 0.6040699054244644, 'mu_hat_010': 0.4908067981573774}, {'repeat': 1, 'onset_000_n': 1.28, 'onset_010_n': 1.04, 'onset_ratio_010_over_000': 0.8125, 'mu_hat_000': 0.6040699054244644, 'mu_hat_010': 0.4908067981573774}, {'repeat': 2, 'onset_000_n': 1.28, 'onset_010_n': 1.04, 'onset_ratio_010_over_000': 0.8125, 'mu_hat_000': 0.6040699054244644, 'mu_hat_010': 0.4908067981573774}]"
+    },
+    "FRIC-P5_thresholds_not_identical": {
+      "status": "PASS",
+      "evidence": "results=[{'repeat': 0, 'onset_000_n': 1.28, 'onset_010_n': 1.04, 'onset_ratio_010_over_000': 0.8125, 'mu_hat_000': 0.6040699054244644, 'mu_hat_010': 0.4908067981573774}, {'repeat': 1, 'onset_000_n': 1.28, 'onset_010_n': 1.04, 'onset_ratio_010_over_000': 0.8125, 'mu_hat_000': 0.6040699054244644, 'mu_hat_010': 0.4908067981573774}, {'repeat': 2, 'onset_000_n': 1.28, 'onset_010_n': 1.04, 'onset_ratio_010_over_000': 0.8125, 'mu_hat_000': 0.6040699054244644, 'mu_hat_010': 0.4908067981573774}]"
+    },
+    "motor_joint_limit_guard": {
+      "status": "PASS",
+      "evidence": "{\"joint_name\": \"a_0\", \"joint_index\": 4, \"decimation\": 4, \"act_moving_average\": 0.041666666666666664, \"recurrence_count\": 16, \"nominal_excursion_rad\": 0.6666666666666666, \"tolerance_rad\": 1e-06, \"per_env\": {\"0\": {\"factor_code\": \"000\", \"initial_q_rad\": -0.75, \"lower_limit_rad\": -1.0470000505447388, \"upper_limit_rad\": 1.0470000505447388, \"planned_final_target_rad\": -0.08333333333333348, \"minimum_limit_margin_rad\": 0.3386667172114054, \"confounded\": false}, \"3\": {\"factor_code\": \"001\", \"initial_q_rad\": -0.75, \"lower_limit_rad\": -1.0470000505447388, \"upper_limit_rad\": 1.0470000505447388, \"planned_final_target_rad\": -0.08333333333333348, \"minimum_limit_margin_rad\": 0.3386667172114054, \"confounded\": false}}, \"status\": \"PASS\", \"action_index\": 4, \"control_invariants\": {\"action_type\": \"relative\", \"act_moving_average\": 0.041666666666666664, \"physics_dt\": 0.008333333333333333, \"decimation\": 4, \"per_env\": {\"0\": {\"factor_code\": \"000\", \"actual_kp\": 3.0, \"actual_kd\": 0.10000000149011612}, \"3\": {\"factor_code\": \"001\", \"actual_kp\": 3.0, \"actual_kd\": 0.10000000149011612}}}, \"audit_only_termination_suppression\": true, \"termination_method_restored\": true}"
+    },
+    "MOTOR-P1-direct_effort_limit_readback": {
+      "status": "PASS",
+      "evidence": "requested={0: {0.5}, 3: {0.4}}, actual={0: {0.5}, 3: {0.4}}"
+    },
+    "MOTOR-P2-control_invariants": {
+      "status": "PASS",
+      "evidence": "invariants={'action_type': 'relative', 'act_moving_average': 0.041666666666666664, 'physics_dt': 0.008333333333333333, 'decimation': 4, 'per_env': {'0': {'factor_code': '000', 'actual_kp': 3.0, 'actual_kd': 0.10000000149011612}, '3': {'factor_code': '001', 'actual_kp': 3.0, 'actual_kd': 0.10000000149011612}}}, counts={'nc': 288, 'stress': 480}, expected={'nc': 288, 'stress': 480}, order=True, target_chain=True"
+    },
+    "motor_trace_integrity": {
+      "status": "PASS",
+      "evidence": "counts={'nc': 288, 'stress': 480}, expected={'nc': 288, 'stress': 480}, order=True, target_chain=True"
+    },
+    "MOTOR-P3-stress_residual_auc": {
+      "status": "FAIL",
+      "evidence": "results=[{'repeat': 0, 'auc_000': 0.024501717090606466, 'auc_001': 0.024501720381279724, 'auc_ratio_001_over_000': 1.0000001343037814, 'final_excursion_000': 0.6568061709404001, 'final_excursion_001': 0.65680616348982, 'max_abs_qdot_000': 4.685127735138, 'max_abs_qdot_001': 4.685128211975, 'D_pair_NC': 2.1895287256165505e-07, 'D_pair_stress': 8.169945484436075e-09, 'NC_bound': 0.02}, {'repeat': 1, 'auc_000': 0.024501717090606466, 'auc_001': 0.024501720381279724, 'auc_ratio_001_over_000': 1.0000001343037814, 'final_excursion_000': 0.6568061709404001, 'final_excursion_001': 0.65680616348982, 'max_abs_qdot_000': 4.685127735138, 'max_abs_qdot_001': 4.685128211975, 'D_pair_NC': 2.1895287256165505e-07, 'D_pair_stress': 8.169945484436075e-09, 'NC_bound': 0.02}, {'repeat': 2, 'auc_000': 0.024501717090606466, 'auc_001': 0.024501720381279724, 'auc_ratio_001_over_000': 1.0000001343037814, 'final_excursion_000': 0.6568061709404001, 'final_excursion_001': 0.65680616348982, 'max_abs_qdot_000': 4.685127735138, 'max_abs_qdot_001': 4.685128211975, 'D_pair_NC': 2.1895287256165505e-07, 'D_pair_stress': 8.169945484436075e-09, 'NC_bound': 0.02}]"
+    },
+    "MOTOR-P4-weaker_supporting_response": {
+      "status": "FAIL",
+      "evidence": "results=[{'repeat': 0, 'auc_000': 0.024501717090606466, 'auc_001': 0.024501720381279724, 'auc_ratio_001_over_000': 1.0000001343037814, 'final_excursion_000': 0.6568061709404001, 'final_excursion_001': 0.65680616348982, 'max_abs_qdot_000': 4.685127735138, 'max_abs_qdot_001': 4.685128211975, 'D_pair_NC': 2.1895287256165505e-07, 'D_pair_stress': 8.169945484436075e-09, 'NC_bound': 0.02}, {'repeat': 1, 'auc_000': 0.024501717090606466, 'auc_001': 0.024501720381279724, 'auc_ratio_001_over_000': 1.0000001343037814, 'final_excursion_000': 0.6568061709404001, 'final_excursion_001': 0.65680616348982, 'max_abs_qdot_000': 4.685127735138, 'max_abs_qdot_001': 4.685128211975, 'D_pair_NC': 2.1895287256165505e-07, 'D_pair_stress': 8.169945484436075e-09, 'NC_bound': 0.02}, {'repeat': 2, 'auc_000': 0.024501717090606466, 'auc_001': 0.024501720381279724, 'auc_ratio_001_over_000': 1.0000001343037814, 'final_excursion_000': 0.6568061709404001, 'final_excursion_001': 0.65680616348982, 'max_abs_qdot_000': 4.685127735138, 'max_abs_qdot_001': 4.685128211975, 'D_pair_NC': 2.1895287256165505e-07, 'D_pair_stress': 8.169945484436075e-09, 'NC_bound': 0.02}]"
+    },
+    "MOTOR-P5-negative_control": {
+      "status": "PASS",
+      "evidence": "results=[{'repeat': 0, 'auc_000': 0.024501717090606466, 'auc_001': 0.024501720381279724, 'auc_ratio_001_over_000': 1.0000001343037814, 'final_excursion_000': 0.6568061709404001, 'final_excursion_001': 0.65680616348982, 'max_abs_qdot_000': 4.685127735138, 'max_abs_qdot_001': 4.685128211975, 'D_pair_NC': 2.1895287256165505e-07, 'D_pair_stress': 8.169945484436075e-09, 'NC_bound': 0.02}, {'repeat': 1, 'auc_000': 0.024501717090606466, 'auc_001': 0.024501720381279724, 'auc_ratio_001_over_000': 1.0000001343037814, 'final_excursion_000': 0.6568061709404001, 'final_excursion_001': 0.65680616348982, 'max_abs_qdot_000': 4.685127735138, 'max_abs_qdot_001': 4.685128211975, 'D_pair_NC': 2.1895287256165505e-07, 'D_pair_stress': 8.169945484436075e-09, 'NC_bound': 0.02}, {'repeat': 2, 'auc_000': 0.024501717090606466, 'auc_001': 0.024501720381279724, 'auc_ratio_001_over_000': 1.0000001343037814, 'final_excursion_000': 0.6568061709404001, 'final_excursion_001': 0.65680616348982, 'max_abs_qdot_000': 4.685127735138, 'max_abs_qdot_001': 4.685128211975, 'D_pair_NC': 2.1895287256165505e-07, 'D_pair_stress': 8.169945484436075e-09, 'NC_bound': 0.02}]"
+    },
+    "MOTOR-P6-repeat_direction_consistency": {
+      "status": "PASS",
+      "evidence": "results=[{'repeat': 0, 'auc_000': 0.024501717090606466, 'auc_001': 0.024501720381279724, 'auc_ratio_001_over_000': 1.0000001343037814, 'final_excursion_000': 0.6568061709404001, 'final_excursion_001': 0.65680616348982, 'max_abs_qdot_000': 4.685127735138, 'max_abs_qdot_001': 4.685128211975, 'D_pair_NC': 2.1895287256165505e-07, 'D_pair_stress': 8.169945484436075e-09, 'NC_bound': 0.02}, {'repeat': 1, 'auc_000': 0.024501717090606466, 'auc_001': 0.024501720381279724, 'auc_ratio_001_over_000': 1.0000001343037814, 'final_excursion_000': 0.6568061709404001, 'final_excursion_001': 0.65680616348982, 'max_abs_qdot_000': 4.685127735138, 'max_abs_qdot_001': 4.685128211975, 'D_pair_NC': 2.1895287256165505e-07, 'D_pair_stress': 8.169945484436075e-09, 'NC_bound': 0.02}, {'repeat': 2, 'auc_000': 0.024501717090606466, 'auc_001': 0.024501720381279724, 'auc_ratio_001_over_000': 1.0000001343037814, 'final_excursion_000': 0.6568061709404001, 'final_excursion_001': 0.65680616348982, 'max_abs_qdot_000': 4.685127735138, 'max_abs_qdot_001': 4.685128211975, 'D_pair_NC': 2.1895287256165505e-07, 'D_pair_stress': 8.169945484436075e-09, 'NC_bound': 0.02}]"
+    },
+    "protected_bytes_unchanged": {
+      "status": "PASS",
+      "evidence": "pre/post SHA-256 maps match"
+    },
+    "authoritative_code_identity_unchanged_during_run": {
+      "status": "PASS",
+      "evidence": "script_before=876a3b3f02ea5a085c21dea0647599d11051a6ac951eab3330abe18e9f2e703f; script_after=876a3b3f02ea5a085c21dea0647599d11051a6ac951eab3330abe18e9f2e703f; commit_before=b40b30ba684e2e1e244242739deb0be5cc0dcf45; commit_after=b40b30ba684e2e1e244242739deb0be5cc0dcf45"
+    }
+  },
+  "protocol_results": {
+    "mass": {
+      "mass_ratio": 1.350000051740369,
+      "inertia_ratios": [
+        1.3500000194938464,
+        1.3500000194938464,
+        1.3500000194938464
+      ],
+      "repeats": [
+        {
+          "repeat": 0,
+          "delta_v": {
+            "0": 0.9259258508682,
+            "1": 0.6858711242676
+          },
+          "delta_omega": {
+            "0": 1.066109061241,
+            "1": 0.7897099852562
+          },
+          "linear_response_ratio_100_over_000": 0.7407408742551995,
+          "angular_response_ratio_100_over_000": 0.7407403369566535
+        },
+        {
+          "repeat": 1,
+          "delta_v": {
+            "0": 0.9259258508682,
+            "1": 0.6858711242676
+          },
+          "delta_omega": {
+            "0": 1.066109061241,
+            "1": 0.7897099852562
+          },
+          "linear_response_ratio_100_over_000": 0.7407408742551995,
+          "angular_response_ratio_100_over_000": 0.7407403369566535
+        },
+        {
+          "repeat": 2,
+          "delta_v": {
+            "0": 0.9259258508682,
+            "1": 0.6858711242676
+          },
+          "delta_omega": {
+            "0": 1.066109061241,
+            "1": 0.7897099852562
+          },
+          "linear_response_ratio_100_over_000": 0.7407408742551995,
+          "angular_response_ratio_100_over_000": 0.7407403369566535
+        }
+      ]
+    },
+    "friction": {
+      "onset_complete": true,
+      "repeats": [
+        {
+          "repeat": 0,
+          "onset_000_n": 1.28,
+          "onset_010_n": 1.04,
+          "onset_ratio_010_over_000": 0.8125,
+          "mu_hat_000": 0.6040699054244644,
+          "mu_hat_010": 0.4908067981573774
+        },
+        {
+          "repeat": 1,
+          "onset_000_n": 1.28,
+          "onset_010_n": 1.04,
+          "onset_ratio_010_over_000": 0.8125,
+          "mu_hat_000": 0.6040699054244644,
+          "mu_hat_010": 0.4908067981573774
+        },
+        {
+          "repeat": 2,
+          "onset_000_n": 1.28,
+          "onset_010_n": 1.04,
+          "onset_ratio_010_over_000": 0.8125,
+          "mu_hat_000": 0.6040699054244644,
+          "mu_hat_010": 0.4908067981573774
+        }
+      ],
+      "onset_count": 6
+    },
+    "motor": {
+      "status": "TEST_NOT_EXCITING_CAPACITY",
+      "complete": true,
+      "protocol_validity_ok": true,
+      "repeats": [
+        {
+          "repeat": 0,
+          "auc_000": 0.024501717090606466,
+          "auc_001": 0.024501720381279724,
+          "auc_ratio_001_over_000": 1.0000001343037814,
+          "final_excursion_000": 0.6568061709404001,
+          "final_excursion_001": 0.65680616348982,
+          "max_abs_qdot_000": 4.685127735138,
+          "max_abs_qdot_001": 4.685128211975,
+          "D_pair_NC": 2.1895287256165505e-07,
+          "D_pair_stress": 8.169945484436075e-09,
+          "NC_bound": 0.02
+        },
+        {
+          "repeat": 1,
+          "auc_000": 0.024501717090606466,
+          "auc_001": 0.024501720381279724,
+          "auc_ratio_001_over_000": 1.0000001343037814,
+          "final_excursion_000": 0.6568061709404001,
+          "final_excursion_001": 0.65680616348982,
+          "max_abs_qdot_000": 4.685127735138,
+          "max_abs_qdot_001": 4.685128211975,
+          "D_pair_NC": 2.1895287256165505e-07,
+          "D_pair_stress": 8.169945484436075e-09,
+          "NC_bound": 0.02
+        },
+        {
+          "repeat": 2,
+          "auc_000": 0.024501717090606466,
+          "auc_001": 0.024501720381279724,
+          "auc_ratio_001_over_000": 1.0000001343037814,
+          "final_excursion_000": 0.6568061709404001,
+          "final_excursion_001": 0.65680616348982,
+          "max_abs_qdot_000": 4.685127735138,
+          "max_abs_qdot_001": 4.685128211975,
+          "D_pair_NC": 2.1895287256165505e-07,
+          "D_pair_stress": 8.169945484436075e-09,
+          "NC_bound": 0.02
+        }
+      ],
+      "actual_counts": {
+        "nc": 288,
+        "stress": 480
+      },
+      "expected_counts": {
+        "nc": 288,
+        "stress": 480
+      }
+    }
+  },
+  "lifecycle": {
+    "reset_extras_keys": [
+      "log"
+    ],
+    "step_extras_keys": [
+      "log"
+    ],
+    "observation_shape": [
+      4,
+      96
+    ],
+    "terminated": [
+      false,
+      false,
+      false,
+      false
+    ],
+    "truncated": [
+      false,
+      false,
+      false,
+      false
+    ],
+    "episode_length_after_step": [
+      1,
+      1,
+      1,
+      1
+    ]
+  },
+  "factor_snapshot": {
+    "task_id": "Isaac-Reorient-Cube-Leap-CRI",
+    "protocol_id": "CRI_RESEARCH_TASK_CORE_IMPLEMENTATION",
+    "factor_schema_version": "CRI_FACTOR_SCHEMA_V1",
+    "factor_codes": [
+      "000",
+      "100",
+      "010",
+      "001"
+    ],
+    "factor_code_bits": [
+      [
+        0,
+        0,
+        0
+      ],
+      [
+        1,
+        0,
+        0
+      ],
+      [
+        0,
+        1,
+        0
+      ],
+      [
+        0,
+        0,
+        1
+      ]
+    ],
+    "friction_conditions": [
+      "nominal",
+      "nominal",
+      "low",
+      "nominal"
+    ],
+    "mass_scale": [
+      1.0,
+      1.350000023841858,
+      1.0,
+      1.0
+    ],
+    "motor_capacity_scale": [
+      1.0,
+      1.0,
+      1.0,
+      0.800000011920929
+    ],
+    "requested_object_mass": [
+      [
+        0.2160000056028366
+      ],
+      [
+        0.2916000187397003
+      ],
+      [
+        0.2160000056028366
+      ],
+      [
+        0.2160000056028366
+      ]
+    ],
+    "actual_object_mass": [
+      [
+        0.2160000056028366
+      ],
+      [
+        0.2916000187397003
+      ],
+      [
+        0.2160000056028366
+      ],
+      [
+        0.2160000056028366
+      ]
+    ],
+    "requested_object_inertia": [
+      [
+        [
+          0.0001866240199888125,
+          0.0,
+          0.0,
+          0.0,
+          0.0001866240199888125,
+          0.0,
+          0.0,
+          0.0,
+          0.0001866240199888125
+        ]
+      ],
+      [
+        [
+          0.0002519424306228757,
+          0.0,
+          0.0,
+          0.0,
+          0.0002519424306228757,
+          0.0,
+          0.0,
+          0.0,
+          0.0002519424306228757
+        ]
+      ],
+      [
+        [
+          0.0001866240199888125,
+          0.0,
+          0.0,
+          0.0,
+          0.0001866240199888125,
+          0.0,
+          0.0,
+          0.0,
+          0.0001866240199888125
+        ]
+      ],
+      [
+        [
+          0.0001866240199888125,
+          0.0,
+          0.0,
+          0.0,
+          0.0001866240199888125,
+          0.0,
+          0.0,
+          0.0,
+          0.0001866240199888125
+        ]
+      ]
+    ],
+    "actual_object_inertia": [
+      [
+        [
+          0.0001866240199888125,
+          0.0,
+          0.0,
+          0.0,
+          0.0001866240199888125,
+          0.0,
+          0.0,
+          0.0,
+          0.0001866240199888125
+        ]
+      ],
+      [
+        [
+          0.0002519424306228757,
+          0.0,
+          0.0,
+          0.0,
+          0.0002519424306228757,
+          0.0,
+          0.0,
+          0.0,
+          0.0002519424306228757
+        ]
+      ],
+      [
+        [
+          0.0001866240199888125,
+          0.0,
+          0.0,
+          0.0,
+          0.0001866240199888125,
+          0.0,
+          0.0,
+          0.0,
+          0.0001866240199888125
+        ]
+      ],
+      [
+        [
+          0.0001866240199888125,
+          0.0,
+          0.0,
+          0.0,
+          0.0001866240199888125,
+          0.0,
+          0.0,
+          0.0,
+          0.0001866240199888125
+        ]
+      ]
+    ],
+    "requested_object_static_friction": [
+      0.800000011920929,
+      0.800000011920929,
+      0.44999998807907104,
+      0.800000011920929
+    ],
+    "actual_object_static_friction": [
+      0.800000011920929,
+      0.800000011920929,
+      0.44999998807907104,
+      0.800000011920929
+    ],
+    "requested_object_dynamic_friction": [
+      0.800000011920929,
+      0.800000011920929,
+      0.44999998807907104,
+      0.800000011920929
+    ],
+    "actual_object_dynamic_friction": [
+      0.800000011920929,
+      0.800000011920929,
+      0.44999998807907104,
+      0.800000011920929
+    ],
+    "actual_hand_static_friction": [
+      0.800000011920929,
+      0.800000011920929,
+      0.800000011920929,
+      0.800000011920929
+    ],
+    "actual_hand_dynamic_friction": [
+      0.800000011920929,
+      0.800000011920929,
+      0.800000011920929,
+      0.800000011920929
+    ],
+    "requested_effort_limit": [
+      [
+        0.5,
+        0.5,
+        0.5,
+        0.5,
+        0.5,
+        0.5,
+        0.5,
+        0.5,
+        0.5,
+        0.5,
+        0.5,
+        0.5,
+        0.5,
+        0.5,
+        0.5,
+        0.5
+      ],
+      [
+        0.5,
+        0.5,
+        0.5,
+        0.5,
+        0.5,
+        0.5,
+        0.5,
+        0.5,
+        0.5,
+        0.5,
+        0.5,
+        0.5,
+        0.5,
+        0.5,
+        0.5,
+        0.5
+      ],
+      [
+        0.5,
+        0.5,
+        0.5,
+        0.5,
+        0.5,
+        0.5,
+        0.5,
+        0.5,
+        0.5,
+        0.5,
+        0.5,
+        0.5,
+        0.5,
+        0.5,
+        0.5,
+        0.5
+      ],
+      [
+        0.4000000059604645,
+        0.4000000059604645,
+        0.4000000059604645,
+        0.4000000059604645,
+        0.4000000059604645,
+        0.4000000059604645,
+        0.4000000059604645,
+        0.4000000059604645,
+        0.4000000059604645,
+        0.4000000059604645,
+        0.4000000059604645,
+        0.4000000059604645,
+        0.4000000059604645,
+        0.4000000059604645,
+        0.4000000059604645,
+        0.4000000059604645
+      ]
+    ],
+    "actual_effort_limit": [
+      [
+        0.5,
+        0.5,
+        0.5,
+        0.5,
+        0.5,
+        0.5,
+        0.5,
+        0.5,
+        0.5,
+        0.5,
+        0.5,
+        0.5,
+        0.5,
+        0.5,
+        0.5,
+        0.5
+      ],
+      [
+        0.5,
+        0.5,
+        0.5,
+        0.5,
+        0.5,
+        0.5,
+        0.5,
+        0.5,
+        0.5,
+        0.5,
+        0.5,
+        0.5,
+        0.5,
+        0.5,
+        0.5,
+        0.5
+      ],
+      [
+        0.5,
+        0.5,
+        0.5,
+        0.5,
+        0.5,
+        0.5,
+        0.5,
+        0.5,
+        0.5,
+        0.5,
+        0.5,
+        0.5,
+        0.5,
+        0.5,
+        0.5,
+        0.5
+      ],
+      [
+        0.4000000059604645,
+        0.4000000059604645,
+        0.4000000059604645,
+        0.4000000059604645,
+        0.4000000059604645,
+        0.4000000059604645,
+        0.4000000059604645,
+        0.4000000059604645,
+        0.4000000059604645,
+        0.4000000059604645,
+        0.4000000059604645,
+        0.4000000059604645,
+        0.4000000059604645,
+        0.4000000059604645,
+        0.4000000059604645,
+        0.4000000059604645
+      ]
+    ],
+    "actual_hand_combine_mode": [
+      "min",
+      "min",
+      "min",
+      "min"
+    ],
+    "actual_object_combine_mode": [
+      "min",
+      "min",
+      "min",
+      "min"
+    ],
+    "actual_availability": {
+      "mass": [
+        true,
+        true,
+        true,
+        true
+      ],
+      "inertia": [
+        true,
+        true,
+        true,
+        true
+      ],
+      "object_material": [
+        true,
+        true,
+        true,
+        true
+      ],
+      "hand_material": [
+        true,
+        true,
+        true,
+        true
+      ],
+      "effort_limit": [
+        true,
+        true,
+        true,
+        true
+      ],
+      "combine_mode": [
+        true,
+        true,
+        true,
+        true
+      ]
+    },
+    "episode_id": [
+      1,
+      1,
+      1,
+      1
+    ],
+    "reset_count": [
+      2,
+      2,
+      2,
+      2
+    ]
+  },
+  "probe_metadata": {
+    "probe_path": "/World/ground",
+    "collider_path": "/World/ground/GroundPlane/CollisionPlane",
+    "temporary_material_path": "/World/P0_5_audit_ground_material",
+    "prior_material_path": "/World/ground/physicsMaterial",
+    "prior_binding_strength": "strongerThanDescendants",
+    "restored": true,
+    "restored_strength": true,
+    "temporary_material_removed": true,
+    "actual_static_friction": 0.800000011920929,
+    "actual_dynamic_friction": 0.800000011920929,
+    "actual_combine_mode": "min",
+    "cube_local_bounds": {
+      "prim_path": "/World/envs/env_0/object",
+      "minimum": [
+        -0.036000001430511575,
+        -0.13600000292062764,
+        0.5240000009536743
+      ],
+      "maximum": [
+        0.03600000143051135,
+        -0.06400000005960466,
+        0.5960000038146973
+      ],
+      "size": [
+        0.07200000286102293,
+        0.07200000286102298,
+        0.07200000286102304
+      ],
+      "half_height_m": 0.03600000143051152
+    },
+    "restored_material_path": "/World/ground/physicsMaterial",
+    "restored_binding_strength": "strongerThanDescendants"
+  },
+  "motor_joint_limit_guard": {
+    "joint_name": "a_0",
+    "joint_index": 4,
+    "decimation": 4,
+    "act_moving_average": 0.041666666666666664,
+    "recurrence_count": 16,
+    "nominal_excursion_rad": 0.6666666666666666,
+    "tolerance_rad": 1e-06,
+    "per_env": {
+      "0": {
+        "factor_code": "000",
+        "initial_q_rad": -0.75,
+        "lower_limit_rad": -1.0470000505447388,
+        "upper_limit_rad": 1.0470000505447388,
+        "planned_final_target_rad": -0.08333333333333348,
+        "minimum_limit_margin_rad": 0.3386667172114054,
+        "confounded": false
+      },
+      "3": {
+        "factor_code": "001",
+        "initial_q_rad": -0.75,
+        "lower_limit_rad": -1.0470000505447388,
+        "upper_limit_rad": 1.0470000505447388,
+        "planned_final_target_rad": -0.08333333333333348,
+        "minimum_limit_margin_rad": 0.3386667172114054,
+        "confounded": false
+      }
+    },
+    "status": "PASS",
+    "action_index": 4,
+    "control_invariants": {
+      "action_type": "relative",
+      "act_moving_average": 0.041666666666666664,
+      "physics_dt": 0.008333333333333333,
+      "decimation": 4,
+      "per_env": {
+        "0": {
+          "factor_code": "000",
+          "actual_kp": 3.0,
+          "actual_kd": 0.10000000149011612
+        },
+        "3": {
+          "factor_code": "001",
+          "actual_kp": 3.0,
+          "actual_kd": 0.10000000149011612
+        }
+      }
+    },
+    "audit_only_termination_suppression": true,
+    "termination_method_restored": true
+  },
+  "versions": {
+    "isaac_sim_version": "6.0.1",
+    "isaac_lab_package_version": "6.1.14",
+    "isaac_lab_source_file": "D:\\Isaac\\IsaacLab_LEAP\\source\\isaaclab\\isaaclab\\__init__.py",
+    "isaac_lab_release_version_file": "3.0.0",
+    "physics_backend": "PhysX",
+    "physx_extension_version": "110.1.13",
+    "physx_sdk_version": null
+  },
+  "git": {
+    "branch": "chd-dev",
+    "commit": "b40b30ba684e2e1e244242739deb0be5cc0dcf45",
+    "commit_after": "b40b30ba684e2e1e244242739deb0be5cc0dcf45",
+    "status_before": [
+      " M source/LEAP_Isaaclab/LEAP_Isaaclab/tasks/leap_hand_reorient/agents/rl_games_ppo_cfg.yaml",
+      "?? scripts/p0_timing_audit.py"
+    ],
+    "status_after": [
+      " M source/LEAP_Isaaclab/LEAP_Isaaclab/tasks/leap_hand_reorient/agents/rl_games_ppo_cfg.yaml",
+      "?? logs/p0_physics_validation/20260901_210345_474375/p0_physics_friction.png",
+      "?? logs/p0_physics_validation/20260901_210345_474375/p0_physics_friction_raw.csv",
+      "?? logs/p0_physics_validation/20260901_210345_474375/p0_physics_mass.png",
+      "?? logs/p0_physics_validation/20260901_210345_474375/p0_physics_mass_raw.csv",
+      "?? logs/p0_physics_validation/20260901_210345_474375/p0_physics_motor.png",
+      "?? logs/p0_physics_validation/20260901_210345_474375/p0_physics_motor_raw.csv",
+      "?? scripts/p0_timing_audit.py"
+    ],
+    "dirty_state_before": {
+      "sha256": "ef74fa46297e041d8b8e67a838e027017a514627ca6db3bc9d4ad07b37ac6651",
+      "untracked_manifest": {
+        "scripts/p0_timing_audit.py": "8a35888d370e4716b2557eaa0148486219a91fddd80290d3ea67ad4b34c5db47"
+      }
+    },
+    "dirty_state_after": {
+      "sha256": "41463737b845488fa468124e29ad0ed7168e658c5e019ba84ece98dc9b6318c0",
+      "untracked_manifest": {
+        "logs/p0_physics_validation/20260901_210345_474375/p0_physics_friction.png": "98b4e7e0d121d341dc5a4d5d80bff6f732c89dfd2929bff4695e1735c35714db",
+        "logs/p0_physics_validation/20260901_210345_474375/p0_physics_friction_raw.csv": "7cc61c0e44e0571649fd064a16b2cc114654f3d808fbf980ea9462b34e0e3872",
+        "logs/p0_physics_validation/20260901_210345_474375/p0_physics_mass.png": "4f037b11378d0432024f78e934382e2fed955c82370f7aa7b628d82805f62032",
+        "logs/p0_physics_validation/20260901_210345_474375/p0_physics_mass_raw.csv": "d3d52f0918b16871aa0fa14f0552dd0741894bba401ca5b89f306c8079791526",
+        "logs/p0_physics_validation/20260901_210345_474375/p0_physics_motor.png": "62ef1c9fa6ba62f9c1bc06ccf0a48d042d7b8524d7a8ece73a61c131e0e4286e",
+        "logs/p0_physics_validation/20260901_210345_474375/p0_physics_motor_raw.csv": "39027ca68658d3419f63a38c2ad39d75548f08b9031d6c474bd59a45de8778c4",
+        "scripts/p0_timing_audit.py": "8a35888d370e4716b2557eaa0148486219a91fddd80290d3ea67ad4b34c5db47"
+      }
+    },
+    "validation_script_sha256": "876a3b3f02ea5a085c21dea0647599d11051a6ac951eab3330abe18e9f2e703f",
+    "validation_script_sha256_after": "876a3b3f02ea5a085c21dea0647599d11051a6ac951eab3330abe18e9f2e703f",
+    "dirty_diff_hash": "6381b067d7dc46d6eddaf440ac146b6abe66fce4829182de89533670accc6678"
+  },
+  "protected_hashes_before": {
+    "source/LEAP_Isaaclab/LEAP_Isaaclab/tasks/leap_hand_reorient/__init__.py": "173d628e2e41de08a4621288c6c2aedc2ed348c5c2e78a0818fe66a6c69200e2",
+    "source/LEAP_Isaaclab/LEAP_Isaaclab/tasks/leap_hand_reorient/leap_hand_env_cfg.py": "1ffe106bd5cae70f457651c82ccddf311fc463e7c437e6c3de325c9c494fe18b",
+    "source/LEAP_Isaaclab/LEAP_Isaaclab/tasks/leap_hand_reorient/reorientation_env.py": "5f44dfab7620c3ade7dcf73469290f3b8ed7ac95b2b31db861fa2289352b09ce",
+    "source/LEAP_Isaaclab/LEAP_Isaaclab/assets/leap.py": "525ba721463ba0e202e1400ea53c18e655e9d8f886cff1fb5a41d22228b091d0",
+    "source/LEAP_Isaaclab/LEAP_Isaaclab/tasks/leap_hand_reorient_cri/factor_conditions.py": "1255b2fdb391394c2235ffa17a164ccc52c97ab51525b22aa6285006ba4ed714",
+    "source/LEAP_Isaaclab/LEAP_Isaaclab/tasks/leap_hand_reorient_cri/leap_hand_cri_env_cfg.py": "e25b6087f81a958cfe1e237a7275b8619050597c52ad1adadaaf9eba5120d901",
+    "source/LEAP_Isaaclab/LEAP_Isaaclab/tasks/leap_hand_reorient_cri/reorientation_cri_env.py": "9550176ffaff5a672c2bf285dd37e1fb93411bfec2b295e04330047047be2fae",
+    "source/LEAP_Isaaclab/LEAP_Isaaclab/tasks/leap_hand_reorient/agents/rl_games_ppo_cfg.yaml": "cefe853eb766f40ce6120a16b58d076ba0655f9cde608b9efe21df43745398ba",
+    "scripts/p0_timing_audit.py": "8a35888d370e4716b2557eaa0148486219a91fddd80290d3ea67ad4b34c5db47",
+    "logs/rl_games/leap_hand_reorient/pretrained/nn/leap_hand_reorient.pth": "46675eecc4e51372ec2c336d9637ef588a61b80e24aeb796de263bd1e75ce364"
+  },
+  "protected_hashes_after": {
+    "source/LEAP_Isaaclab/LEAP_Isaaclab/tasks/leap_hand_reorient/__init__.py": "173d628e2e41de08a4621288c6c2aedc2ed348c5c2e78a0818fe66a6c69200e2",
+    "source/LEAP_Isaaclab/LEAP_Isaaclab/tasks/leap_hand_reorient/leap_hand_env_cfg.py": "1ffe106bd5cae70f457651c82ccddf311fc463e7c437e6c3de325c9c494fe18b",
+    "source/LEAP_Isaaclab/LEAP_Isaaclab/tasks/leap_hand_reorient/reorientation_env.py": "5f44dfab7620c3ade7dcf73469290f3b8ed7ac95b2b31db861fa2289352b09ce",
+    "source/LEAP_Isaaclab/LEAP_Isaaclab/assets/leap.py": "525ba721463ba0e202e1400ea53c18e655e9d8f886cff1fb5a41d22228b091d0",
+    "source/LEAP_Isaaclab/LEAP_Isaaclab/tasks/leap_hand_reorient_cri/factor_conditions.py": "1255b2fdb391394c2235ffa17a164ccc52c97ab51525b22aa6285006ba4ed714",
+    "source/LEAP_Isaaclab/LEAP_Isaaclab/tasks/leap_hand_reorient_cri/leap_hand_cri_env_cfg.py": "e25b6087f81a958cfe1e237a7275b8619050597c52ad1adadaaf9eba5120d901",
+    "source/LEAP_Isaaclab/LEAP_Isaaclab/tasks/leap_hand_reorient_cri/reorientation_cri_env.py": "9550176ffaff5a672c2bf285dd37e1fb93411bfec2b295e04330047047be2fae",
+    "source/LEAP_Isaaclab/LEAP_Isaaclab/tasks/leap_hand_reorient/agents/rl_games_ppo_cfg.yaml": "cefe853eb766f40ce6120a16b58d076ba0655f9cde608b9efe21df43745398ba",
+    "scripts/p0_timing_audit.py": "8a35888d370e4716b2557eaa0148486219a91fddd80290d3ea67ad4b34c5db47",
+    "logs/rl_games/leap_hand_reorient/pretrained/nn/leap_hand_reorient.pth": "46675eecc4e51372ec2c336d9637ef588a61b80e24aeb796de263bd1e75ce364"
+  },
+  "artifacts": {
+    "mass_csv": "D:\\Research\\LEAP\\LEAP_Hand_Isaac_Lab\\logs\\p0_physics_validation\\20260901_210345_474375\\p0_physics_mass_raw.csv",
+    "friction_csv": "D:\\Research\\LEAP\\LEAP_Hand_Isaac_Lab\\logs\\p0_physics_validation\\20260901_210345_474375\\p0_physics_friction_raw.csv",
+    "motor_csv": "D:\\Research\\LEAP\\LEAP_Hand_Isaac_Lab\\logs\\p0_physics_validation\\20260901_210345_474375\\p0_physics_motor_raw.csv",
+    "mass_plot": "D:\\Research\\LEAP\\LEAP_Hand_Isaac_Lab\\logs\\p0_physics_validation\\20260901_210345_474375\\p0_physics_mass.png",
+    "friction_plot": "D:\\Research\\LEAP\\LEAP_Hand_Isaac_Lab\\logs\\p0_physics_validation\\20260901_210345_474375\\p0_physics_friction.png",
+    "motor_plot": "D:\\Research\\LEAP\\LEAP_Hand_Isaac_Lab\\logs\\p0_physics_validation\\20260901_210345_474375\\p0_physics_motor.png"
+  }
+}
