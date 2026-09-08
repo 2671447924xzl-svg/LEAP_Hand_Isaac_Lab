@@ -1,0 +1,64 @@
+﻿schema_version: 1
+
+config_type: VERIFIED_REAL_HARDWARE
+verification_status: NOT_VERIFIED
+
+hand:
+  revision: NEEDS_VERIFICATION
+  serial_or_unit_id: NEEDS_VERIFICATION
+
+communication:
+  adapter: NEEDS_VERIFICATION
+  protocol: NEEDS_VERIFICATION
+  port: NEEDS_VERIFICATION
+  baudrate: NEEDS_VERIFICATION
+
+power:
+  psu_model: NEEDS_VERIFICATION
+  nominal_voltage_v: NEEDS_VERIFICATION
+  continuous_current_a: NEEDS_VERIFICATION
+  polarity: NEEDS_VERIFICATION
+  protection: NEEDS_VERIFICATION
+
+motors:
+  model: NEEDS_VERIFICATION
+  count: NEEDS_VERIFICATION
+  verified_ids: NEEDS_VERIFICATION
+
+joint_mapping:
+  motor_ids: NEEDS_VERIFICATION
+  joint_order: NEEDS_VERIFICATION
+  direction_sign: NEEDS_VERIFICATION
+
+calibration:
+  hardware_zero_rad: NEEDS_VERIFICATION
+  simulation_zero_rad: NEEDS_VERIFICATION
+  offset_rad: NEEDS_VERIFICATION
+
+limits:
+  mechanical_min_rad: NEEDS_VERIFICATION
+  mechanical_max_rad: NEEDS_VERIFICATION
+  deployment_min_rad: NEEDS_VERIFICATION
+  deployment_max_rad: NEEDS_VERIFICATION
+
+control:
+  operating_mode: NEEDS_VERIFICATION
+  kp: NEEDS_VERIFICATION
+  ki: NEEDS_VERIFICATION
+  kd: NEEDS_VERIFICATION
+  current_limit: NEEDS_VERIFICATION
+
+timing:
+  target_control_frequency_hz: 30
+  measured_frequency_hz: NEEDS_VERIFICATION
+  communication_latency_ms: NEEDS_VERIFICATION
+  loop_jitter_ms: NEEDS_VERIFICATION
+
+status:
+  hardware_identity: NOT_TESTED
+  mechanical_assembly: NOT_TESTED
+  electrical_qualification: NOT_TESTED
+  communication: NOT_TESTED
+  joint_mapping: NOT_TESTED
+  calibration: NOT_TESTED
+  policy_deployment: NOT_TESTED

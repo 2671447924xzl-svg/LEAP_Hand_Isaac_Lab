@@ -1,0 +1,84 @@
+﻿schema_version: 1
+
+config_type: OFFICIAL_EXPECTED
+verification_status: REFERENCE_ONLY
+
+hand:
+  name: LEAP_Hand
+  revision: V1
+  dof: 16
+  fingers:
+    - index
+    - middle
+    - ring
+    - thumb
+
+official_api:
+  root: D:/Research/LEAP/LEAP_Hand_API
+  python_root: D:/Research/LEAP/LEAP_Hand_API/python
+
+communication:
+  interface_expected: U2D2
+  protocol_expected: DYNAMIXEL_PROTOCOL_2
+  port: NEEDS_VERIFICATION
+  baudrate_expected: 4000000
+
+motors:
+  count_expected: 16
+  exact_model: NEEDS_VERIFICATION
+  expected_ids:
+    - 0
+    - 1
+    - 2
+    - 3
+    - 4
+    - 5
+    - 6
+    - 7
+    - 8
+    - 9
+    - 10
+    - 11
+    - 12
+    - 13
+    - 14
+    - 15
+
+joint_map_expected:
+  index:  [0, 1, 2, 3]
+  middle: [4, 5, 6, 7]
+  ring:   [8, 9, 10, 11]
+  thumb:  [12, 13, 14, 15]
+
+joint_roles:
+  - MCP_SIDE
+  - MCP_FORWARD
+  - PIP
+  - DIP
+
+control_reference:
+  operating_mode: CURRENT_BASED_POSITION_REFERENCE
+  kp: 600
+  ki: 0
+  kd: 200
+  current_limit: NEEDS_VERIFICATION
+
+policy_interface:
+  action_dim: 16
+  observation_dim: 96
+  history_frames: 3
+  frame_dim: 32
+  joint_position_dim: 16
+  commanded_target_dim: 16
+  control_frequency_hz: 30
+
+safety:
+  real_joint_limits: NEEDS_VERIFICATION
+  mechanical_limits: NEEDS_VERIFICATION
+  action_delta_limit: NEEDS_VERIFICATION
+  current_limit: NEEDS_VERIFICATION
+  temperature_limit: NEEDS_VERIFICATION
+
+notes:
+  - DO_NOT_USE_AS_VERIFIED_HARDWARE_CONFIGURATION
+  - DO_NOT_ENABLE_TORQUE_FROM_THIS_CONFIG
